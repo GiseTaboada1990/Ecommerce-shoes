@@ -12,8 +12,9 @@ const stock = require ("./stock");
 const paymants = require ("./payments")
 const order = require ("./order")
 const inactives = require("./inactives")
-
+const authGoogle = require("./authGoogle")
 //--------------------------ROUTES
+router.use("/auth", authGoogle)
 router.use("/inactives", inactives)
 router.use("/payments", paymants)
 router.use("/order", order)

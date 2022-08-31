@@ -1,0 +1,11 @@
+.icon{
+    text-decoration: none; 
+}
+.logout_button {
+    padding: 10px;
+}
+.containerLogout {
+    display: flex;
+    align-items: center;
+    text-align: center;
+}
