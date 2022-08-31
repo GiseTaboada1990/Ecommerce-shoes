@@ -102,21 +102,8 @@ async function getBySize(size) {
 
 async function getAll() {
     try {
-        let result =  await Product.findAll({where:{isActive:true},
-          include: [
-            { model: Size, where:{isActive:true}},
-            { model: Brand },
-            { model: Category },
-          ]
-        })
-         if(result.length){
-           return result
-        }
-          else{
              let data =await getAllProducts()
              return data
-          }
-
       } catch (error) {
         throw error
       }
