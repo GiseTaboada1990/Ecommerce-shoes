@@ -1,0 +1,87 @@
+.ellipsis {
+  text-overflow: ellipsis ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+}
+.short {
+  width: 400px;
+}
+.containerFav {
+  max-height: 11%;
+}
+.botonFav {
+  display: flex;
+  justify-content: end;
+  align-items: flex-end;
+  flex: auto;
+}
+.botonFav button {
+  border: none;
+  background-color: white;
+}
+.botonFav button:focus {
+  background-color: wheat;
+}
+
+.title {
+  font-size: 12px;
+  font-family: "Fugaz One";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16.5258px;
+  text-transform: uppercase;
+  text-decoration: none;
+  color: black;
+}
+
+.price {
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16.5258px;
+  /* line-height: 100%; */
+  color: black;
+}
+
+.container {
+  background: #f87d2d;
+  padding-bottom: 18%;
+  height: 117px;
+  padding: 0.5rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.cardImg {
+  /* width: 100%; */
+  max-width: 100%;
+  max-height: 80%;
+  /* height: 80%; */
+}
+.containerImg {
+  display: flex;
+  justify-content: center;
+  text-align: center;
+  align-items: center;
+  padding: none;
+  /* margin: 2rem; */
+}
+
+.infoContainer {
+  display: flex;
+  flex-direction: column;
+  /* justify-content: space-between; */
+  height: 100%;
+  align-items: baseline;
+  display: flex;
+  justify-content: center;
+  text-align: center;
+  align-items: center;
+  cursor: pointer;
+}
+
+.allContainer{
+  height: 341px;
+}
+

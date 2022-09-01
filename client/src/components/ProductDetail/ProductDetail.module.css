@@ -1,0 +1,173 @@
+.divContent {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  width: 100%;
+  justify-content: space-around;
+  align-items: flex-end;
+  border-style: solid;
+  height: 270px;
+  border-radius: 10px;
+  border-color: #f87d2d;
+  margin-top: 20px;
+  width: 400px;
+  border-color: #000000;
+  border-width: 2px;
+  height: 320px;
+}
+
+.divCard h5 {
+  color: white;
+}
+
+.cart {
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 600;
+  font-size: 20px;
+  line-height: 100%;
+  text-transform: uppercase;
+  background: #f87d2d;
+  border-radius: 41.4179px;
+  border: none;
+  margin-right: 10px;
+  height: 27px;
+}
+
+.title {
+  position: relative;
+  font-family: "Fugaz One";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 2rem;
+  line-height: 100%;
+  padding-left: 5px;
+  text-transform: uppercase;
+  color: white;
+}
+
+.imagen {
+  left: 2rem;
+  border-radius: 10px;
+  width: 400px;
+  height: 210px;
+}
+
+.select {
+  position: relative;
+  border: 1px solid #ccc;
+  width: 5rem;
+  overflow: hidden;
+  background-color: #fff;
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 700;
+  font-size: 32px;
+  line-height: 100%;
+  border-radius: 10px;
+}
+
+.select:before {
+  content: "";
+  position: absolute;
+  right: 5px;
+  top: 7px;
+  width: 0;
+  height: 0;
+  border-style: solid;
+  border-width: 7px 5px 0 5px;
+  border-color: #000000 transparent transparent transparent;
+  z-index: 5;
+  pointer-events: none;
+}
+
+.select select {
+  padding: 5px 8px;
+  width: 130%;
+  border: none;
+  box-shadow: none;
+  background-color: transparent;
+  background-image: none;
+  appearance: none;
+}
+
+.price {
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 600;
+  font-size: 30.0714px;
+  line-height: 100%;
+  padding-right: 15px;
+}
+
+.size {
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 700;
+  font-size: 30px;
+  line-height: 100%;
+  margin-right: 10px;
+}
+
+.sizeContainer{
+  display: flex;
+  flex-direction: column;
+  align-self: flex-start;
+  padding-left: 5px;
+}
+
+.sizePriceCont{
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  align-items: flex-end;
+  color: white;
+}
+
+.buttons {
+  padding-bottom: 5px;
+}
+
+.selectSize{
+  border: none;
+  border-bottom-style: solid;
+  margin-right: 10px;
+  outline: 0px;
+  width: 40px;
+  background: #212121;
+  color: white;
+  height: 36px;
+}
+
+.sizeYSelect{
+  display: flex;
+}
+
+.talleDetails{
+  display: flex;
+}
+
+.tallesContainer{
+  display: flex;
+  flex-direction: column;
+  width: 396px;
+  height: 120px;
+  justify-content: space-between;
+}
+
+.cantYPrecio{
+  display: flex;
+  justify-content: space-between;
+}
+
+.selectedSize{
+  border-style: solid;
+  border-width: 1px;
+  margin-right: 10px;
+  height: 26px;
+  width: 26px;
+  padding-left: 3px;
+  margin-top: 4px;
+  cursor: pointer;
+}
+

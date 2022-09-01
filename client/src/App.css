@@ -36,3 +36,63 @@
     transform: rotate(360deg);
   }
 }
+
+#root{
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  background: #212121;
+}
+
+select{
+  cursor: pointer;
+}
+
+Body{
+  background: #212121;
+}
+
+.react-chatbot-kit-chat-input {
+  display: none;
+}
+
+.react-chatbot-kit-chat-btn-send {
+  display: none;
+}
+
+.react-chatbot-kit-chat-header{
+  display: none;
+}
+
+.react-chatbot-kit-chat-bot-message {
+  font-size: 20px;
+}
+
+.react-chatbot-kit-chat-bot-message-container {
+  margin-bottom: 16px;
+}
+
+div::-webkit-scrollbar{
+  width: 8px;     
+}
+
+div::-webkit-scrollbar-thumb {
+  background: #fd7e14;
+  border-radius: 4px;
+}
+div::-webkit-scrollbar-thumb:hover {
+  background: #b3b3b3;
+  box-shadow: 0 0 2px 1px rgba(0, 0, 0, 0.2);
+  margin-left: 575px;
+  margin-top: 60px;
+  width: 700px;
+  border-width: 2px;
+}
+
+#outlined-basic-label{
+  color: white;
+}
+
+#outlined-basic{
+  color: white;
+}
