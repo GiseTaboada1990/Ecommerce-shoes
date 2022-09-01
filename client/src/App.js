@@ -1,9 +1,10 @@
 import axios from "axios"
 import { useAuth0 } from "@auth0/auth0-react";
 import { useEffect } from "react";
-import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route} from "react-router-dom";
 import './App.css';
-import Navbar from "./components/NavBar/Navbar";
+import HomePage from "./components/Home/Home";
+import ProductDetail from "./components/ProductDetail/ProductDetail";
 
 function App() {
 
@@ -41,7 +42,8 @@ function App() {
   return (
     <Router>
       <Routes>
-        <Route exact path="/" element={<Navbar/>}/>
+        <Route exact path="/" element={<HomePage />} />
+        <Route exact path="/shoes/:id" element={<ProductDetail />} />
       </Routes>
     </Router>
   );

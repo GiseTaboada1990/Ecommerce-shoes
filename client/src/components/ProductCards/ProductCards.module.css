@@ -1,0 +1,38 @@
+.container {
+  width: 100%;
+  max-width: 1200px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  margin: auto;
+}
+
+.container .card {
+  width: 250px;
+  border-radius: 8px;
+  overflow: hidden;
+  margin: 20px;
+  text-align: left;
+  height: 340px;
+  background-color: white;
+}
+.sinFiltro{
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 22%;
+}
+.sinFiltro h1{
+  color: #fd7e14;
+  text-align:left;
+}
+
+
+.Link {
+  text-decoration: none;
+}
+
+.container .card:hover{
+  box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2);
+}

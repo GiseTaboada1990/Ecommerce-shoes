@@ -316,7 +316,7 @@ function getAllFilters({ priceMax, priceMin, category, brand, name, size }) {
         ]
       }
     }
-    console.log(options)
+   
     return options
   }
   module.exports={getAllFilters}

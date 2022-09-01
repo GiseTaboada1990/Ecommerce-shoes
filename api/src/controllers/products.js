@@ -102,8 +102,18 @@ async function getBySize(size) {
 
 async function getAll() {
     try {
-             let data =await getAllProducts()
-             return data
+      let result =  await Product.findAll({
+        include: [
+          { all: true }
+        ]
+      })
+       if(result.length){
+         return result
+      }
+        else{
+           let data =await getAllProducts()
+           return data
+        }
       } catch (error) {
         throw error
       }
