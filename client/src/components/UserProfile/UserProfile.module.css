@@ -1,0 +1,87 @@
+.container {
+  margin: 1rem;
+  padding: 1rem;
+  border: 2px solid #ccc;
+  /* IMPORTANTE */
+  margin-top: 100px;
+  width: 825px;
+  margin-left: 551px;
+  border-color: black;
+  border-radius: 10px;
+  height: 766px;
+  overflow-y: scroll;
+  margin-bottom: 38px;
+}
+
+.img {
+  max-width: 100%;
+  height: 150px;
+  background-repeat: no-repeat;
+  background-position: 50%;
+  border-radius: 50%;
+  background-size: 100% auto;
+  margin-left: 325px;
+  background: white;
+}
+
+.userName{
+  color: #f87d2d;
+  margin-top: 0;
+  margin-bottom: -4px;
+  margin-left: 1px;
+}
+
+.nameContainer{
+  margin-top: 10px;
+  color: white;
+  padding-bottom: 15px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.userData{
+  color: white;
+}
+
+.compras{
+  font-size: 20px;
+  color: #f87d2d;
+  padding: 10px;
+}
+
+.divHistorial {
+  border: 15px;
+  border-color: #f87d2d;
+}
+
+.historial{
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  border-width: 1px;
+  padding: 10px;
+  border-bottom-style: solid;
+  border-bottom-color: #fd7e14;
+  width: 620px;
+}
+
+
+.historialContainer{
+  border-style: solid;
+  border-color: #f87d2d;
+  border-width: 2px;
+  border-radius: 7px;
+  height: 222px;
+  overflow-y: scroll;
+}
+
+.editBtn{
+  margin-left: 700px;
+  border-radius: 10px;
+  width: 84px;
+  height: 39px;
+  font-size: 20px;
+  background: #fd7e14;
+  font-family: 'Inter';
+}

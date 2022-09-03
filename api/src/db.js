@@ -63,10 +63,7 @@ const { Category, Product, Order, User, Brand, Role, Size, Review } = sequelize.
 // Relations of models
 // here -->
 
-Category.belongsToMany(Product, {
-  through: "category_product",
-  timestamps: false,
-});
+Category.belongsToMany(Product, {through: "category_product",timestamps: false});
 Product.belongsTo(Category);
 
 Brand.belongsToMany(Product, { through: "brand_product", timestamps: false });
@@ -83,8 +80,6 @@ Order.belongsTo(User);
 
 Product.belongsToMany(Order, { through: "order_product", timestamps: false });
 Order.belongsToMany(Product, { through: "order_product", timestamps: false });
-
-Role.belongsToMany(User, { through: "user_role", timestamps: false });
 
 Product.belongsToMany(Size, { through: "size_product", timestamps: false });
 Size.belongsToMany(Product, { through: "size_product", timestamps: false });

@@ -6,7 +6,8 @@ function getAllFilters({ priceMax, priceMin, category, brand, name, size }) {
     let options = {}
     if (priceMax && priceMin && category && brand && name && size) {
       options = {
-        where: {          
+        where: {    
+          isActive:true,      
           title: { [Op.iLike]: `%${name}%` },
           price: {
             [Op.and]: [
@@ -16,7 +17,7 @@ function getAllFilters({ priceMax, priceMin, category, brand, name, size }) {
           }
         },
         include: [
-          { model: Size, where: { number: size}},
+          { model: Size, where:{[Op.and]:[{ number: size },{isActive:true}]}},
           { model: Brand, where: { name: { [Op.iLike]: `%${brand}%` } } },
           { model: Category, where: { name: { [Op.iLike]: `%${category}%` } } },
         ]
@@ -25,7 +26,7 @@ function getAllFilters({ priceMax, priceMin, category, brand, name, size }) {
     else if (priceMax && priceMin && brand && name && size) {
       options = {
         where: {
-          
+          isActive:true,
           title: { [Op.iLike]: `%${name}%` },
           price: {
             [Op.and]: [
@@ -35,7 +36,7 @@ function getAllFilters({ priceMax, priceMin, category, brand, name, size }) {
           }
         },
         include: [
-          { model: Size, where: { number: size}},
+          { model: Size, where:{[Op.and]:[{ number: size },{isActive:true}]}},
           { model: Brand, where: { name: { [Op.iLike]: `%${brand}%` } } },
           { model: Category},
         ]
@@ -45,6 +46,7 @@ function getAllFilters({ priceMax, priceMin, category, brand, name, size }) {
       options = {
         where: {
           title: { [Op.iLike]: `%${name}%` },
+          isActive:true,
           price: {
             [Op.and]: [
               { [Op.gte]: priceMin ? priceMin : 0 }, // Precio sea mayor o igual a precio minimo
@@ -53,7 +55,7 @@ function getAllFilters({ priceMax, priceMin, category, brand, name, size }) {
           }
         },
         include: [
-          { model: Size},
+          { model: Size, where:{isActive:true}},
           { model: Brand, where: { name: { [Op.iLike]: `%${brand}%` } } },
           { model: Category, where: { name: { [Op.iLike]: `%${category}%` } } },
         ]
@@ -62,7 +64,7 @@ function getAllFilters({ priceMax, priceMin, category, brand, name, size }) {
     else if(category && brand && priceMax && priceMin && size){
       options = {
         where: {
-          
+          isActive:true,
           price: {
             [Op.and]: [
               { [Op.gte]: priceMin ? priceMin : 0 }, // Precio sea mayor o igual a precio minimo
@@ -71,7 +73,7 @@ function getAllFilters({ priceMax, priceMin, category, brand, name, size }) {
           }
         },
         include: [
-          { model: Size, where: { number: size}},
+          { model: Size, where:{[Op.and]:[{ number: size },{isActive:true}]}},
           { model: Brand, where: { name: { [Op.iLike]: `%${brand}%` } } },
           { model: Category, where: { name: { [Op.iLike]: `%${category}%` } }},
         ]
@@ -80,6 +82,7 @@ function getAllFilters({ priceMax, priceMin, category, brand, name, size }) {
     else if(name && brand && priceMax && priceMin){
       options = {
         where: {
+          isActive:true,
           title: { [Op.iLike]: `%${name}%` },
           price: {
             [Op.and]: [
@@ -89,7 +92,7 @@ function getAllFilters({ priceMax, priceMin, category, brand, name, size }) {
           }
         },
         include: [
-          { model: Size},
+          { model: Size, where:{isActive:true}},
           { model: Brand, where: { name: { [Op.iLike]: `%${brand}%` } } },
           { model: Category},
         ]
@@ -98,6 +101,7 @@ function getAllFilters({ priceMax, priceMin, category, brand, name, size }) {
     else if(category && brand && priceMax && priceMin){
       options = {
         where: {
+          isActive:true,
           price: {
             [Op.and]: [
               { [Op.gte]: priceMin ? priceMin : 0 }, // Precio sea mayor o igual a precio minimo
@@ -106,7 +110,7 @@ function getAllFilters({ priceMax, priceMin, category, brand, name, size }) {
           }
         },
         include: [
-          { model: Size},
+          { model: Size, where:{isActive:true}},
           { model: Brand, where: { name: { [Op.iLike]: `%${brand}%` } } },
           { model: Category, where: { name: { [Op.iLike]: `%${category}%` } } },
         ]
@@ -115,6 +119,7 @@ function getAllFilters({ priceMax, priceMin, category, brand, name, size }) {
     else if(category && name && priceMax && priceMin){
       options = {
         where: {
+          isActive:true,
           title: { [Op.iLike]: `%${name}%` },
           price: {
             [Op.and]: [
@@ -124,7 +129,7 @@ function getAllFilters({ priceMax, priceMin, category, brand, name, size }) {
           }
         },
         include: [
-          { model: Size},
+          { model: Size, where:{isActive:true}},
           { model: Brand},
           { model: Category, where: { name: { [Op.iLike]: `%${category}%` } } },
         ]
@@ -133,7 +138,7 @@ function getAllFilters({ priceMax, priceMin, category, brand, name, size }) {
     else if(size && brand && priceMax && priceMin){
       options = {
         where: {
-          
+          isActive:true,
           price: {
             [Op.and]: [
               { [Op.gte]: priceMin ? priceMin : 0 }, // Precio sea mayor o igual a precio minimo
@@ -142,7 +147,7 @@ function getAllFilters({ priceMax, priceMin, category, brand, name, size }) {
           }
         },
         include: [
-          { model: Size, where: { number: size}},
+          { model: Size, where:{[Op.and]:[{ number: size },{isActive:true}]}},
           { model: Brand, where: { name: { [Op.iLike]: `%${brand}%` } } },
           { model: Category},
         ]
@@ -151,11 +156,11 @@ function getAllFilters({ priceMax, priceMin, category, brand, name, size }) {
     else if(category && brand && name && size){
       options = {
         where: {
-          
+          isActive:true,
           title: { [Op.iLike]: `%${name}%` },
         },
         include: [
-          { model: Size, where: { number: size}},
+          { model: Size, where:{[Op.and]:[{ number: size },{isActive:true}]}},
           { model: Brand, where: { name: { [Op.iLike]: `%${brand}%` } } },
           { model: Category, where: { name: { [Op.iLike]: `%${category}%` } } },
         ]
@@ -164,10 +169,11 @@ function getAllFilters({ priceMax, priceMin, category, brand, name, size }) {
     else if(category && brand && name){
       options = {
         where: {
+          isActive:true,
           title: { [Op.iLike]: `%${name}%` },
         },
         include: [
-          { model: Size},
+          { model: Size, where:{isActive:true}},
           { model: Brand, where: { name: { [Op.iLike]: `%${brand}%` } } },
           { model: Category, where: { name: { [Op.iLike]: `%${category}%` } } },
         ]
@@ -176,6 +182,7 @@ function getAllFilters({ priceMax, priceMin, category, brand, name, size }) {
     else if(brand && priceMax && priceMin){
       options = {
         where: {
+          isActive:true,
           price: {
             [Op.and]: [
               { [Op.gte]: priceMin ? priceMin : 0 }, // Precio sea mayor o igual a precio minimo
@@ -184,7 +191,7 @@ function getAllFilters({ priceMax, priceMin, category, brand, name, size }) {
           }
         },
         include: [
-          { model: Size},
+          { model: Size, where:{isActive:true}},
           { model: Brand, where: { name: { [Op.iLike]: `%${brand}%` } } },
           { model: Category},
         ]
@@ -193,6 +200,7 @@ function getAllFilters({ priceMax, priceMin, category, brand, name, size }) {
     else if(priceMax && priceMin && category){
       options = {
         where: {
+          isActive:true,
           price: {
             [Op.and]: [
               { [Op.gte]: priceMin ? priceMin : 0 }, // Precio sea mayor o igual a precio minimo
@@ -201,7 +209,7 @@ function getAllFilters({ priceMax, priceMin, category, brand, name, size }) {
           }
         },
         include: [
-          { model: Size},
+          { model: Size, where:{isActive:true}},
           { model: Brand},
           { model: Category, where: { name: { [Op.iLike]: `%${category}%` } } },
         ]
@@ -210,6 +218,7 @@ function getAllFilters({ priceMax, priceMin, category, brand, name, size }) {
     else if( name && priceMax && priceMin){
       options = {
         where: {
+          isActive:true,
           title: { [Op.iLike]: `%${name}%` },
           price: {
             [Op.and]: [
@@ -219,7 +228,7 @@ function getAllFilters({ priceMax, priceMin, category, brand, name, size }) {
           }
         },
         include: [
-          { model: Size},
+          { model: Size, where:{isActive:true}},
           { model: Brand},
           { model: Category},
         ]
@@ -228,7 +237,7 @@ function getAllFilters({ priceMax, priceMin, category, brand, name, size }) {
     else if(size && priceMax && priceMin){
       options = {
         where: {
-          
+          isActive:true,
           price: {
             [Op.and]: [
               { [Op.gte]: priceMin ? priceMin : 0 }, // Precio sea mayor o igual a precio minimo
@@ -237,7 +246,7 @@ function getAllFilters({ priceMax, priceMin, category, brand, name, size }) {
           }
         },
         include: [
-          { model: Size, where: { number: size}},
+          { model: Size, where:{[Op.and]:[{ number: size },{isActive:true}]}},
           { model: Brand},
           { model: Category},
         ]
@@ -245,8 +254,9 @@ function getAllFilters({ priceMax, priceMin, category, brand, name, size }) {
     }
     else if(size && category && brand){
       options = {
+        where:{isActive:true},
           include: [
-          { model: Size, where: { number: size}},
+          { model: Size, where:{[Op.and]:[{ number: size },{isActive:true}]}},
           { model: Brand, where: { name: { [Op.iLike]: `%${brand}%` } }},
           { model: Category, where: { name: { [Op.iLike]: `%${category}%` } }},
         ]
@@ -254,11 +264,12 @@ function getAllFilters({ priceMax, priceMin, category, brand, name, size }) {
     }
     else if(name && brand){
       options = {
+        isActive:true,
         where: {
           title: { [Op.iLike]: `%${name}%` },
         },
         include: [
-          { model: Size},
+          { model: Size, where:{[Op.and]:[{ number: size },{isActive:true}]}},
           { model: Brand, where: { name: { [Op.iLike]: `%${brand}%` } } },
           { model: Category},
         ]
@@ -267,10 +278,11 @@ function getAllFilters({ priceMax, priceMin, category, brand, name, size }) {
     else if(category && name){
       options = {
         where: {
+          isActive:true,
           title: { [Op.iLike]: `%${name}%` },
         },
         include: [
-          { model: Size},
+          { model: Size, where:{isActive:true}},
           { model: Brand},
           { model: Category, where: { name: { [Op.iLike]: `%${category}%` } } },
         ]
@@ -278,8 +290,9 @@ function getAllFilters({ priceMax, priceMin, category, brand, name, size }) {
     }
     else if(category && brand){
       options = {
+        where:{isActive:true},
         include: [
-          { model: Size},
+          { model: Size , where:{isActive:true}},
           { model: Brand, where: { name: { [Op.iLike]: `%${brand}%` } } },
           { model: Category, where: { name: { [Op.iLike]: `%${category}%` } } },
         ]
@@ -288,7 +301,7 @@ function getAllFilters({ priceMax, priceMin, category, brand, name, size }) {
     else if(size && brand){
       options = {
           include: [
-          { model: Size, where: { number: size}},
+          { model: Size, where:{[Op.and]:[{ number: size },{isActive:true}]} },
           { model: Brand, where: { name: { [Op.iLike]: `%${brand}%` } } },
           { model: Category},
         ]
@@ -297,7 +310,7 @@ function getAllFilters({ priceMax, priceMin, category, brand, name, size }) {
     else if(size && category){
       options = {
           include: [
-          { model: Size, where: { number: size}},
+          { model: Size, where:{[Op.and]:[{ number: size },{isActive:true}]}},
           { model: Brand},
           { model: Category, where: { name: { [Op.iLike]: `%${category}%` } }},
         ]
@@ -306,11 +319,11 @@ function getAllFilters({ priceMax, priceMin, category, brand, name, size }) {
     else if(size && name){
       options = {
         where: {
-          
+          isActive:true,
           title: { [Op.iLike]: `%${name}%` },
         },
         include: [
-          { model: Size, where: { number: size}},
+          { model: Size, where:{[Op.and]:[{ number: size },{isActive:true}]}},
           { model: Brand},
           { model: Category},
         ]

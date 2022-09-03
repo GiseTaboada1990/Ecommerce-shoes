@@ -74,7 +74,11 @@ router.get("/:id", async (req, res) => {
     const { id } = req.params;
     if (id) {
       const foundProduct = await Product.findByPk(id, {
-        include: [{ all: true }],
+        include:[
+          { model: Brand },
+          { model: Category },
+          { model: Size, where:{isActive:true}},
+        ],
       });
 
       if (foundProduct) {

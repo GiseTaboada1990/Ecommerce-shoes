@@ -4,16 +4,18 @@
     text-decoration-color: grey;
 }
 
-.yourShoes{
+.yourShoes.yourShoes{
     font-family: 'Anton';
-    font-style: normal;
-    font-weight: 400;
-    font-size: 2rem;
-    line-height: 100%;
-    text-transform: uppercase;
-    /* or 60px */
-    letter-spacing: 0.04em;
-    color: white;
+font-style: normal;
+font-weight: 400;
+font-size: 2rem;
+line-height: 100%;
+text-transform: uppercase;
+/* or 60px */
+
+letter-spacing: 0.04em;
+
+color: white;
 }
 
 .yourShoes span{
@@ -25,11 +27,13 @@
     
 }
 
-.navbar{
-    background-color: #404040;
+.navbar.navbar{
+    background: #212121;
     width: 100%;
     position:fixed;
-    z-index: 100;
+    top: 0;
+    left: 0;
+    position: fixed;
 }
 
 .resetButton{
@@ -56,30 +60,25 @@
     color: black;
     padding-left: 20px;
     padding-right: 20px;
-    margin-left: 31px;
-    margin-top: 8px;
-    height: 33px;
 }
 
 .link{
     color:black;
     text-transform: uppercase;
     font-family: Inter;
-    font-size: 12px;
-    margin-top: 6px;
+}
+
+.img {   
+    height: 49px;
+    background-repeat: no-repeat;
+    background-position: 50%;
+    border-radius: 50%;
+    background-size: 100% auto;
+    background: white;
 }
 
 .containerLogout {
     display: flex;
     align-items: center;
     text-align: center;
-}
-
-.img {
-  height: 49px;
-  background-repeat: no-repeat;
-  background-position: 50%;
-  border-radius: 50%;
-  background-size: 100% auto;
-  background: white;
 }

@@ -31,7 +31,7 @@ const cargoalDB =async()=>{
   
   const getAllApi1  =await setDataApi()
   const data =getAllApi1.flat().map((e) => {
-    e.size = [{id:1, number: 35, stock:0, solds:0}, {id:2, number:36, stock:5, solds:0},{id:3, number:37, stock:5, solds:0},{id:4, number:38, stock:5, solds:0},{id: 5, number:39, stock:5, solds:0},{id:6, number:40, stock:5, solds:0},{id:7, number:41, stock:5, solds:0},{id:8, number:42, stock:5, solds:0},{id:9, number:43, stock:5, solds:0},{id:10, number:44, stock:5, solds:0},{id:11, number:45, stock:5, solds:0}]
+    e.size = [{id:1, number: 35, stock:0, solds:0}, {id:2, number:36, stock:0, solds:0},{id:3, number:37, stock:1, solds:0},{id:4, number:38, stock:1, solds:0},{id: 5, number:39, stock:1, solds:0},{id:6, number:40, stock:1, solds:0},{id:7, number:41, stock:1, solds:0},{id:8, number:42, stock:1, solds:0},{id:9, number:43, stock:1, solds:0},{id:10, number:44, stock:1, solds:0},{id:11, number:45, stock:1, solds:0}]
    
     return ({
       id: e.id,
@@ -72,7 +72,9 @@ const cargoalDB =async()=>{
        return newProduct;
      })
    );
-   let dataDb = await Product.findAll({ include:  [
+   let dataDb = await Product.findAll({
+    where:{isActive:true},
+        include:  [
     { model: Size, where:{isActive:true}},
     { model: Brand },
     { model: Category },

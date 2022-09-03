@@ -1,0 +1,96 @@
+.container {
+  justify-content: center;
+  text-align: center;
+  align-items: center;
+  flex-direction: column;
+  gap: 0.5rem;
+  border-radius: 8px;
+  border: solid black;
+  margin: 2%;
+  margin-left: 607px;
+  margin-top: 107px;
+  border-width: 2px;
+  width: 720px;
+  height: 525px;
+  overflow-y: scroll;
+}
+.container::-webkit-scrollbar{
+  width: 8px;     
+}
+.container::-webkit-scrollbar-thumb {
+  background: #fd7e14;
+  border-radius: 4px;
+}
+.container::-webkit-scrollbar-thumb:hover {
+  background: #b3b3b3;
+  box-shadow: 0 0 2px 1px rgba(0, 0, 0, 0.2);
+  margin-left: 575px;
+  margin-top: 60px;
+  width: 700px;
+  border-width: 2px;
+}
+.favoritosTitle {
+  /* IMPORTANTE */
+  /* width: 200px; */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  margin-left: auto;
+  margin-right: auto;
+}
+.favoritosTitle2 {
+  display: flex;
+  align-items: center;
+  text-align: center;
+  font-family: Anton;
+  font-size: 2rem;
+  text-transform: uppercase;
+  color: #fd7e14;
+  margin-top: 10px;
+}
+/* .containerCards{
+.favoritosTitle2{
+    margin-top: 50px;
+    display: flex;
+  justify-content: center;
+  text-align: center;
+  align-items: center;
+  flex-direction: column;
+} */
+.yourShoes {
+  font-family: "Anton";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 2rem;
+  line-height: 100%;
+  text-transform: uppercase;
+  margin-top: 10px;
+  /* or 60px */
+
+  letter-spacing: 0.04em;
+
+  color: #000000;
+}
+
+.yourShoes span {
+  color: #f87d2d;
+}
+
+.yourShoes:hover {
+  text-decoration: none;
+}
+
+
+.alertaFavs{
+  color: white
+}
+
+.userName{
+  color: white
+}
+
+.mensaje{
+  color: white
+}
+

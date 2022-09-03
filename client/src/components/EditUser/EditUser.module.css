@@ -1,0 +1,125 @@
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&display=swap');
+
+
+
+.contenedor {
+	
+	display: flex;
+	align-items: flex-start;
+	justify-content: center;
+    margin-top: 0px;
+    /* background: linear-gradient(90deg, rgb(185, 134, 69) 0%, rgb(195, 97, 33) 35%, rgb(216, 90, 6) 95%); */
+    /* background: linear-gradient(90deg, rgb(216, 90, 6) 0%, rgb(195, 97, 33) 35%, rgb(185, 134, 69) 95%); */
+    
+    height: 900px;
+   
+    
+}
+
+.yourShoes{
+    font-family: 'Anton';
+font-style: normal;
+font-weight: 400;
+font-size: 2rem;
+line-height: 100%;
+text-transform: uppercase;
+display: flex;
+align-items: flex-start;
+justify-content: center;
+/* or 60px */
+
+letter-spacing: 0.04em;
+
+color: #faeeee;
+}
+
+.yourShoes span{
+    color:#F87D2D
+}
+
+.formulario {
+	min-width: 500px;
+    min-height: 100px;
+	margin-top: 15px;
+    background: content-box;
+	border-radius: 5px;
+	padding: 20px;
+	box-shadow: 2px 4px 10px 1px rgb(201 201 201 / 47%);
+	margin-top: 100px;
+}
+
+.formulario > div {
+	margin-bottom: 5px;
+}
+
+.formulario label {
+	display: block;
+	font-weight: 600;
+	font-size: 14px;
+	margin-bottom: 5px;
+	color: #f2e7e7;
+}
+
+.formulario input,
+.formulario textarea {
+	font-family: 'Open Sans', sans-serif;
+	width: 100%;
+	border-radius: 5px;
+	border: 2px solid #e2e2e2;
+	font-size: 18px;
+	padding: 0px;
+	margin-bottom: 5px;
+	color: #201e1e;
+}
+
+.formulario input:focus {
+	outline: none;
+	border: 2px solid #0085FF;
+}
+
+.formulario .error {
+	color: #ff1014;
+font-weight: 600;
+	font-size: 12px;
+}
+
+.formulario button[type="submit"] {
+	display: block;
+	background: #f87d2d;
+	font-weight: 600;
+	font-family: 'Open Sans', sans-serif;
+	border: none;
+	cursor: pointer;
+	width: 100%;
+	padding: 10px;
+	border-radius: 5px;
+	color: #fff;
+	font-size: 16px;
+	transition: .3s ease all;
+}
+
+.formulario button[type="submit"]:hover {
+	background: #ba740a;
+}
+
+.formulario .exito {
+	text-align: center;
+	font-size: 14px;
+	padding-top: 20px;
+	color: #02a802;
+	display: none;
+}
+
+.formulario input[type="radio"] {
+	width: auto;
+}
+
+.link {
+    text-decoration: none;
+    font-size: 20px;
+	color: #f9efef;
+}
+
+.backBtn{
+	margin-top: 10px;
+}

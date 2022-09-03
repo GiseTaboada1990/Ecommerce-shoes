@@ -1,11 +1,13 @@
-import React, { memo } from "react";
+import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react";
 import { getAllBrands, getAllCategories, getAllShoes, getAllSizes } from "../../redux/actions";
 import Pagination from "../Pagination/Pagination";
-import Navbar from "../NavBar/Navbar";
 import ProductCards from "../ProductCards/ProductCards";
 import styles from "./Home.module.css";
+import NavBar from "../NavBar/NavBar";
+import Filters from "../Filters/Filters";
+
 
 
 export default function HomePage() {
@@ -22,7 +24,7 @@ export default function HomePage() {
    
   //Paginado//
   const [currentPage, setCurrentPage] = useState(1);
-  const [shoesPerPage, setShoesPerPage] = useState(12);
+  const [shoesPerPage, /* setShoesPerPage */] = useState(12);
   const indexOfLastShoe = currentPage * shoesPerPage;
   const indexOfFirstShoe = indexOfLastShoe - shoesPerPage;
   const currentShoes =
@@ -44,7 +46,7 @@ export default function HomePage() {
 
   return(
     <div>
-        <Navbar/>
+        <NavBar/>
         <Pagination
         shoesPerPage={shoesPerPage}
         allProducts={allProducts && allProducts.length}
@@ -53,6 +55,7 @@ export default function HomePage() {
         prevPageButton={prevPageButton}
         currentPage={currentPage}
       />
+        <Filters setCurrentPage={setCurrentPage}/>
       <div className={styles.cardContainer}>
       <div>
           {currentShoes ? (

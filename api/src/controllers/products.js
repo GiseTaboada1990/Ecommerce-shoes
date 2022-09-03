@@ -92,7 +92,6 @@ async function getBySize(size) {
         { model: Size, where:{[Op.and]:[{ number: size },{isActive:true}]}},
       ]
     })
-    console.log(all)
     return all
 
   } catch (error) {
@@ -103,8 +102,11 @@ async function getBySize(size) {
 async function getAll() {
     try {
       let result =  await Product.findAll({
+        where:{isActive:true},
         include: [
-          { all: true }
+          { model: Brand },
+          { model: Category },
+          { model: Size, where:{isActive:true}},
         ]
       })
        if(result.length){

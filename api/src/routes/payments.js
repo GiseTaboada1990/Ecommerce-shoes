@@ -26,10 +26,6 @@ router.post("/", async (req, res) => {
   },500);
   await timeout(5000)
   clearInterval(idInterval)
-  console.log(orden,"orden")
-  console.log(idInterval)
-  console.log(contador)
- 
   try {
     const items_ml = as.map((p) => ({
       name: p.title,

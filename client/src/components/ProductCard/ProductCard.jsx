@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import styles from "./ProductCard.module.css";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch} from "react-redux";
 import { FaHeart } from "react-icons/fa";
 import { addOneToFav } from "../../redux/actions";
 import { useEffect } from "react";
