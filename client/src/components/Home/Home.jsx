@@ -5,7 +5,7 @@ import { getAllBrands, getAllCategories, getAllShoes, getAllSizes } from "../../
 import Pagination from "../Pagination/Pagination";
 import ProductCards from "../ProductCards/ProductCards";
 import styles from "./Home.module.css";
-import NavBar from "../NavBar/NavBar";
+import NavBar from "../NavBar/Navbar";
 import Filters from "../Filters/Filters";
 import Modal from "react-modal";
 import Chatbot from "react-chatbot-kit";

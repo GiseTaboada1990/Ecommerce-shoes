@@ -99,7 +99,7 @@ router.put('/:id', async (req, res) => {
           id: id
         }
       })
-      console.log(db)
+
       if (db) {
         await db.update({status: order })
         res.status(200).send("Orden actualizada")

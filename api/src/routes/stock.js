@@ -4,6 +4,7 @@ const {Op} = require("sequelize")
 const router = Router();
 
 router.put("/", async (req, res) => {
+
   try{
     const idAll = req.body.cart;
     let productId = [];
@@ -13,13 +14,12 @@ router.put("/", async (req, res) => {
     for (let i = 0; i < idAll.length; i++) {
       sizeId=idAll[i].sizeNumber;
       productId.push(idAll[i].id)
-      console.log(sizeId)
   }
 
   for (let i = 0; i < productId.length; i++) {
      const productCopy = await Product.findOne({
       where: { id: productId[i] },include:[{model:Size, where:{number:{[Op.or]:sizeId.map(e=>e)}}}]})
-     console.log(productCopy.sizes.map(e=>e))
+
       const data = productCopy.sizes.map(s=>s.id)
      
     productCopy.removeSizes(data)
@@ -31,7 +31,7 @@ router.put("/", async (req, res) => {
             solds: productCopy.sizes[j].solds +1,
             isActive: productCopy.sizes[j].stock -1 === 0? false:true
         })
-        console.log(newSizes)
+
       await productCopy.addSize(newSizes)
       }
       await productCopy.save();

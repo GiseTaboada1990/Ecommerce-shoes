@@ -67,7 +67,8 @@ export default function Cart() {
     localStorage.setItem("products", JSON.stringify(cartProducts));
   }, [cartProducts]);
 
-  const cart = JSON.parse(localStorage.getItem('cart'))
+  // const cart = JSON.parse(localStorage.getItem('cart'))
+  const { cart } = useSelector(state => state)
   const user = JSON.parse(localStorage.getItem('user'))
 
   const handlePayment = () => {

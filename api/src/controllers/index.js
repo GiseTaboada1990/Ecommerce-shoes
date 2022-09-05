@@ -97,7 +97,7 @@ const getDbBrand = async () => {
   }
 }
 const getDbSize = async () => {
-  const foundSize = await Size.findAll({ include: { all: true } });
+  const foundSize = await Size.findAll({ order:[['number',"ASC"]], include: { all: true } });
   return foundSize;
 };
 

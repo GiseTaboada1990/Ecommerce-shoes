@@ -9,10 +9,19 @@ mercadopago.configure({
   access_token: ACCESS_TOKEN,
 });
 
+const mandarCart = (ordenId, cart) => {
+  axios.put(`http://localhost:3001/stock`,{cart})
+  .then(res => console.log('put a stock'))
+  
+  return `http://localhost:3001/payments/success/${ordenId}`
+}
+
 router.post("/", async (req, res) => {
   const { cart, userId } = req.body;
 
   const orden = (await axios.post(`http://localhost:3001/order`, { cart, userId })).data
+
+  console.log(mandarCart(orden.id, cart))
 
   try {
     const items_ml = cart.map((p) => ({
@@ -34,7 +43,7 @@ router.post("/", async (req, res) => {
       back_urls: {
         failure: `http://localhost:3001/payments/failure/${orden.id}`,
         pending: `http://localhost:3001/payments/pending/${orden.id}`,
-        success: `http://localhost:3001/payments/success/${orden.id}`,
+        success: mandarCart(orden.id, cart),
       },
     };
 
@@ -58,9 +67,6 @@ router.get("/success/:id", async (req, res) => {
 
   const { id } = req.params;
   try {
-    const orden = await Order.findOne({ where: { id }, include:[{ all: true }] })
-    console.log('orden', orden)
-
     await axios.put(`http://localhost:3001/order/${id}`, { order: "realizada" })
     // await axios.put(`http://localhost:3001/stock`,{})
     res.redirect("http://localhost:3000");

@@ -7,7 +7,7 @@ import s from "./Checkout.module.css";
 function MercadoPago() {
   const { idPayment } = useSelector(state => state)
 
-  const cart = JSON.parse(localStorage.getItem('cart'))
+  const { cart } = useSelector(state => state)
 
   useEffect(() => {
     let script = document.createElement("script");
