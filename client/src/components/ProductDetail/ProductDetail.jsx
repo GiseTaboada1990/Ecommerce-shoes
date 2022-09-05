@@ -1,11 +1,13 @@
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
-import { cleanDetails, getDetails } from '../../redux/actions';
+import { addOneToCart, cleanDetails, getDetails } from '../../redux/actions';
+import { ToastContainer, toast } from "react-toastify";
 import styles from "./ProductDetail.module.css";
 
-function ProductDetail({id}) {
+
+function ProductDetail({ id }) {
     const myShoes = useSelector((state) => state.details);
-    console.log(myShoes)
+    console.log('myshoes -->',myShoes)
     const dispatch = useDispatch();
     useEffect(() => {
         dispatch(getDetails(id));
@@ -16,9 +18,11 @@ function ProductDetail({id}) {
 
     const [size, setSize] = useState([]);
     const shoesAdd = {
-      id: id,
-      size: size.map((e) => parseInt(e)),
-      quantity: size.length,
+        id: id,
+        title: myShoes.title,
+        size: size.map((e) => parseInt(e)),
+        price: myShoes.price,
+        quantity: size.length,
     };
 
     const handleOnChangeSize = (e) => {
@@ -29,6 +33,27 @@ function ProductDetail({id}) {
         e.preventDefault();
         setSize(size.filter((en) => en !== el));
     };
+
+    const addToCart = () => {
+        if (size.length === 0) {
+            toast.error("Debes elegir al menos 1 talle!", {
+                className: "cart-toast",
+                draggable: true,
+                position: toast.POSITION.TOP_CENTER,
+            })
+        } else {
+            dispatch(addOneToCart(shoesAdd));
+            localStorage.setItem('cart' ,JSON.stringify([shoesAdd]))
+
+            toast.success("Tu producto fue agregado al carrito!", {
+                className: "cart-toast",
+                draggable: true,
+                position: toast.POSITION.TOP_CENTER,
+            });
+            setSize([]);
+        }
+    };
+
     return (
         <div>
             {myShoes ? (
@@ -85,6 +110,7 @@ function ProductDetail({id}) {
                         <div className={styles.buttons}>
                             <button
                                 className={styles.cart}
+                                onClick={addToCart}
                                 id={myShoes.id}
                             >
                                 Añadir al carro

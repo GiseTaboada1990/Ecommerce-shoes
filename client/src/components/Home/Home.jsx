@@ -94,7 +94,7 @@ export default function HomePage() {
       />
         <Filters setCurrentPage={setCurrentPage}/>
       <div className={styles.cardContainer}>
-      <div>
+        <div>
           {currentShoes ? (
             <ProductCards allProducts={currentShoes} />
           ) : (

@@ -1,0 +1,121 @@
+
+
+.container {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  background: #212121;
+  height: 100vh;
+}
+.container2 {
+  border: solid 5px black;
+  background-color: black;
+  border-radius: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  width: 80vh;
+  overflow: -moz-hidden-unscrollable;
+  overflow-x: hidden;
+  /* border-radius: 10px; */
+}
+
+.container2::-webkit-scrollbar {
+  width: 10px;
+  /* border-radius: 10px; */
+}
+
+.Link {
+  text-decoration: none;
+}
+.contenedor {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  width: 605px;
+  gap: 0.2rem;
+  border-style: solid;
+  border-color: black;
+  height: 430px;
+  border-radius: 10px;
+  border-width: 2px;
+  margin-left: -565px;
+  overflow-y: scroll;
+}
+.contenedor::-webkit-scrollbar{
+  width: 8px;
+}
+.contenedor::-webkit-scrollbar-thumb{
+  background: #fd7e14;
+  border-radius: 4px;
+}
+.contenedor::-webkit-scrollbar-thumb:hover {
+  background: #b3b3b3;
+  box-shadow: 0 0 2px 1px rgba(0, 0, 0, 0.2);
+  margin-left: 575px;
+  margin-top: 60px;
+  width: 700px;
+  border-width: 2px;
+}
+
+.yourshoes {
+  background: none;
+  color: inherit;
+  border: none;
+  padding: 0;
+  font: inherit;
+  cursor: pointer;
+  outline: inherit;
+  font-family: "Anton";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 2rem;
+  line-height: 100%;
+  /* or 60px */
+  letter-spacing: 0.04em;
+  color: #000000;
+}
+.shoes {
+  color: #f87d2d;
+}
+.containerSinDato h4,
+h5,
+h2 {
+  display: flex;
+  justify-content: center;
+  color: white;
+}
+
+.buttonsContainer {
+  border-style: hidden;
+  justify-content: flex-end;
+  border-radius: 8px;
+  transition: 0.45s;
+  background-color:#f87d2d;
+  font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
+  padding: 5px;
+}
+.buttonsContainer:hover {
+  opacity: 0.75;
+  transform: scale(102%);
+}
+
+.mpLinkBtn{
+  padding-right: 10px;
+}
+
+.carrito{
+  position: absolute;
+  background: transparent;
+  margin-left: 1163px;
+  width: 400px;
+  height: 130px;
+  border-style: solid;
+  border-color: black;
+  border-width: 2px;
+  border-radius: 10px;
+}

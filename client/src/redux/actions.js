@@ -36,69 +36,74 @@ export const COMBINATION_FILTERS15 = 'COMBINATION_FILTERS15'
 export const COMBINATION_FILTERS16 = 'COMBINATION_FILTERS16'
 export const COMBINATION_FILTERS17 = 'COMBINATION_FILTERS17'
 export const COMBINATION_FILTERS18 = 'COMBINATION_FILTERS18'
+export const ADD_ONE_TO_CART = 'ADD_ONE_TO_CART'
+export const DELETE_ONE_FROM_CART = 'DELETE_ONE_FROM_CART'
+export const REMOVER_TODO = "REMOVER_TODO"
+export const ID_PAYMENT = "ID_PAYMENT"
 
 
 export const URL = process.env.REACT_APP_URL;
 
 export const cleanDetails = () => {
   return ({
-      type: CLEAN_DETAILS,
-      payload: []
+    type: CLEAN_DETAILS,
+    payload: []
   })
 }
-export const getAllShoes = ()=> {
-    return async (dispatch)=> {
-      const results = await axios(`${URL}/shoes`);
-      console.log(results)
-      return dispatch({
-        type: GET_ALL_SHOES,
-        payload: results.data,
-      });
-    };
-  }
-  export const getDetails = (id)=> {
-    return async(dispatch)=> {
-      const res = await axios(`${URL}/shoes/${id}`);
-      return dispatch({
-        type: GET_DETAILS,
-        payload: res.data,
-      });
-    };
-  }
-  export const getAllSizes = ()=>{
-    return async (dispatch)=> {
-      const results = await axios(`${URL}/size`);
-      return dispatch({
-        type: GET_ALL_SIZES,
-        payload: results.data,
-      });
-    };
-  }
-  export const getAllBrands = ()=> {
-    return async(dispatch)=>{
-      const results = await axios(`${URL}/brands`);
-      return dispatch({
-        type: GET_ALL_BRANDS,
-        payload: results.data,
-      });
-    };
-  }
-  
-  export const getAllCategories = ()=> {
-    return async(dispatch)=>{
-      const results = await axios(`${URL}/categories`);
-      return dispatch({
-        type: GET_ALL_CATEGORIES,
-        payload: results.data,
-      });
-    };
-  }
-  export const addOneToFav = (payload)=>{
-    return {
-      type: ADD_ONE_TO_FAV,
-      payload,
-    };
-  }
+export const getAllShoes = () => {
+  return async (dispatch) => {
+    const results = await axios(`${URL}/shoes`);
+
+    return dispatch({
+      type: GET_ALL_SHOES,
+      payload: results.data,
+    });
+  };
+}
+export const getDetails = (id) => {
+  return async (dispatch) => {
+    const res = await axios(`${URL}/shoes/${id}`);
+    return dispatch({
+      type: GET_DETAILS,
+      payload: res.data,
+    });
+  };
+}
+export const getAllSizes = () => {
+  return async (dispatch) => {
+    const results = await axios(`${URL}/size`);
+    return dispatch({
+      type: GET_ALL_SIZES,
+      payload: results.data,
+    });
+  };
+}
+export const getAllBrands = () => {
+  return async (dispatch) => {
+    const results = await axios(`${URL}/brands`);
+    return dispatch({
+      type: GET_ALL_BRANDS,
+      payload: results.data,
+    });
+  };
+}
+
+export const getAllCategories = () => {
+  return async (dispatch) => {
+    const results = await axios(`${URL}/categories`);
+    return dispatch({
+      type: GET_ALL_CATEGORIES,
+      payload: results.data,
+    });
+  };
+}
+
+export const addOneToFav = (payload) => {
+  return {
+    type: ADD_ONE_TO_FAV,
+    payload,
+  };
+}
   export const deleteOneToFav = (payload)=>{
     return {
       type: DELETE_ONE_FROM_FAV,
@@ -529,3 +534,29 @@ export const getAllShoes = ()=> {
       }
     };
   }
+
+export const addOneToCart = (payload) => {
+  return {
+    type: ADD_ONE_TO_CART,
+    payload,
+  };
+}
+
+export const deleteOneToCart = (payload) => {
+  return {
+    type: DELETE_ONE_FROM_CART,
+    payload: payload,
+  };
+}
+
+export const removerTodo = () => {
+  return {
+    type: REMOVER_TODO,
+  };
+}
+
+export const getIdPayment = (id) => {
+  return {
+    type: ID_PAYMENT, payload: id
+  };
+}
