@@ -5,6 +5,8 @@ import { BrowserRouter as Router, Routes, Route} from "react-router-dom";
 import './App.css';
 import HomePage from "./components/Home/Home";
 import ProductDetail from "./components/ProductDetail/ProductDetail";
+import MercadoPago from "./components/MercadoPago/MercadoPago";
+import Cart from "./components/Cart/Cart";
 
 function App() {
 
@@ -26,9 +28,7 @@ function App() {
     if(user) {
       axios.post(`${process.env.REACT_APP_URL}/auth`, userToBackend)
       .then( res => {
-        console.log(res)
         localStorage.setItem("user", JSON.stringify(res.data));
-        
       })
     } 
 
@@ -44,6 +44,8 @@ function App() {
       <Routes>
         <Route exact path="/" element={<HomePage />} />
         <Route exact path="/shoes/:id" element={<ProductDetail />} />
+        <Route exact path="/cart" element={<Cart />} />
+        <Route exact path="/mercadopago" element={<MercadoPago />} />
       </Routes>
     </Router>
   );

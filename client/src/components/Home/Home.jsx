@@ -11,15 +11,16 @@ import styles from "./Home.module.css";
 export default function HomePage() {
   const dispatch = useDispatch();
   const allProducts = useSelector((state) => state.products);
-  console.log(allProducts)
-  
-    useEffect(() => {
-      dispatch(getAllSizes())
-      dispatch(getAllBrands())
-      dispatch(getAllCategories())
-      dispatch(getAllShoes()); 
-    }, [dispatch]);
-   
+
+  console.log('home')
+
+  useEffect(() => {
+    dispatch(getAllSizes())
+    dispatch(getAllBrands())
+    dispatch(getAllCategories())
+    dispatch(getAllShoes());
+  }, [dispatch]);
+
   //Paginado//
   const [currentPage, setCurrentPage] = useState(1);
   const [shoesPerPage, setShoesPerPage] = useState(12);
@@ -42,10 +43,10 @@ export default function HomePage() {
   };
   //Paginado//
 
-  return(
+  return (
     <div>
-        <Navbar/>
-        <Pagination
+      <Navbar />
+      <Pagination
         shoesPerPage={shoesPerPage}
         allProducts={allProducts && allProducts.length}
         pagination={pagination}
@@ -54,7 +55,7 @@ export default function HomePage() {
         currentPage={currentPage}
       />
       <div className={styles.cardContainer}>
-      <div>
+        <div>
           {currentShoes ? (
             <ProductCards allProducts={currentShoes} />
           ) : (

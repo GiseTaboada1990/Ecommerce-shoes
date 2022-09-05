@@ -3,7 +3,7 @@ import { useAuth0 } from '@auth0/auth0-react'
 import { FaUserAlt } from "react-icons/fa";
 import { BiLogOut } from "react-icons/bi";
 import { Nav } from 'react-bootstrap';
-import styles from "../NavBar/NavBar.module.css";
+import styles from "../NavBar/Navbar.module.css";
 
 export default function User() {
 

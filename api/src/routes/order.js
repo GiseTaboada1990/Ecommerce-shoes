@@ -4,7 +4,7 @@ const router = Router();
 
 //Post Orden Compra
 router.post("/", async (req, res) => {
-  const  idAll  = req.body.as;
+  const  idAll  = req.body.cart;
   
   const userBody = req.body.userId
   
@@ -54,7 +54,6 @@ router.post("/", async (req, res) => {
     await newOrder.setUser(userId.id);
     idAll.map(async (item) => await newOrder.addProduct(item.id));
     await userId.addOrder(newOrder)
-    console.log(newOrder)
     res.status(200).json(newOrder);
    
   } catch (error) {

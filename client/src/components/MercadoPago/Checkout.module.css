@@ -1,0 +1,75 @@
+.container {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  text-align: end;
+  gap: 0.5rem;
+  
+}
+.container h4 {
+  text-align: center;
+}
+
+.hijo {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 0.5rem;
+}
+.hijo2 {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  border-style: solid;
+  border-color: #f87d2d;
+  border-radius: 10px;
+  border-width: 2px;
+  width: 630px;
+}
+.hijo2 img{
+  max-width: 14%;
+  padding: 0.5rem;
+}
+.hijo2 h5 {
+  color: white
+}
+
+.allContainer{
+  border-style: solid;
+  border-color: black;
+  border-radius: 10px;
+  padding: 15px;
+  border-width: 2px;
+  box-shadow: 2px 4px 10px 1px rgb(201 201 201 / 47%);
+  height: 235px;
+  overflow-y: scroll;
+}
+.allContainer::-webkit-scrollbar{
+  width: 8px;     
+}
+.allContainer::-webkit-scrollbar-thumb {
+  background: #fd7e14;
+  border-radius: 4px;
+}
+.allContainer::-webkit-scrollbar-thumb:hover {
+  background: #b3b3b3;
+  box-shadow: 0 0 2px 1px rgba(0, 0, 0, 0.2);
+  margin-left: 575px;
+  margin-top: 60px;
+  width: 700px;
+  border-width: 2px;
+}
+.totalAPagar{
+  color: white;
+}
+.product{
+  color: white;
+}
+.mercadopago-button{
+  position: fixed;
+  margin-left: -342px;
+  margin-top: -72px;
+}

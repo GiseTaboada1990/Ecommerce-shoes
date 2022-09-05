@@ -8,7 +8,7 @@ import { useAuth0 } from "@auth0/auth0-react";
 import LogoutButtonAuth0 from "../authzero/LogoutButtonAuth0";
 import LoginButtonAuth0 from "../authzero/LoginButtonAuth0";
 import Searchbar from "../SearchBar/SearchBar";
-import styles from "./NavBar.module.css";
+import styles from "./Navbar.module.css";
 import User from '../authzero/User';
 
 function NavBar() {
