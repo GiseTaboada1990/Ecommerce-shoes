@@ -8,6 +8,11 @@ import ProductDetail from "./components/ProductDetail/ProductDetail";
 import Favorites from "./components/Favorites/Favorites";
 import UserProfile from "./components/UserProfile/UserProfile";
 import EditUser from "./components/EditUser/EditUser";
+import AboutUs from "./components/About/AboutUs"
+import SocialFollow from "./components/About/SocialFollow";
+import Community from "./components/About/Community";
+import CreateProduct from "./components/CreateProduct/CreateProduct";
+import EditProduct from "./components/EditProduct/EditProduct";
 
 function App() {
 
@@ -29,7 +34,6 @@ function App() {
     if(user) {
       axios.post(`${process.env.REACT_APP_URL}/auth`, userBackend)
       .then( res => {
-        console.log(res)
         localStorage.setItem("user", JSON.stringify(res.data));
         
       })
@@ -50,6 +54,11 @@ function App() {
         <Route exact path="/favorites" element={<Favorites/>} />
         <Route exact path="/datauser" element={<UserProfile/>}/>
         <Route exact path="/edituser" element={<EditUser/>}/>
+        <Route exact path="/aboutUs" element={<AboutUs/>}/>
+        <Route exact path="/contact" element={<SocialFollow/>}/>
+        <Route exact path="/community" element={<Community/>}/>
+        <Route exact path="/post" element={<CreateProduct/>}/>
+        <Route exact path="/edit/:id" element={<EditProduct/>}/>
       </Routes>
     </Router>
   );

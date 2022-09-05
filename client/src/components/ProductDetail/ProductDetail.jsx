@@ -52,7 +52,6 @@ function ProductDetail({id}) {
                                                     handleOnChangeSize(e);
                                                 }}
                                             >
-                                                <option></option>
                                                 {myShoes.sizes &&
                                                     myShoes.sizes.map((s, i) => (
                                                         <option key={i} value={s.number}>

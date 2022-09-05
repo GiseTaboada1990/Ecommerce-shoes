@@ -1,0 +1,104 @@
+@import url('https://fonts.googleapis.com/css2?family=Anton&family=Fugaz+One&family=Inter:wght@400;700&display=swap');
+.allContainer{
+    display: flex;
+    justify-content: center;
+    font-family: Inter;
+    text-transform: uppercase;
+    font-weight: 700;
+}
+
+.form{
+    border-style: solid;
+    width: 519px;
+    height: 519px;
+    background: #F87D2D;
+    border-radius: 20px;
+    box-shadow: rgba(0, 0, 0, 0.833) 0px 1px 4px;
+    border-style: none;
+}
+
+.infoContainer{
+    padding: 10px
+}
+
+.label{
+    padding-right: 10px;
+}
+
+.input{
+    border: none;
+    border-bottom-style: solid;
+    outline: 0px;
+    background-color: transparent;
+}
+
+.error{
+    font-size: 11px;
+    color: #f8f9fa;
+    display: flex;
+}
+
+.createButton{
+    margin-top: 63px;
+    margin-left: 38%;
+    width: 151px;
+    height: 61px;
+    border-radius: 10px;
+    font-size: 20px;
+    background: black;
+    color: white;
+}
+.Container{
+    background: #212121
+}
+
+.homeButton{
+    border-style: none;
+    background-color: transparent;
+    font-family: 'Anton';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 2rem;
+    line-height: 100%;
+    text-transform: uppercase;
+    /* or 60px */
+    letter-spacing: 0.04em;
+    color: #000000;
+    margin-top: 10px;
+}
+
+.shoes{
+    color:#F87D2D
+    
+}
+
+.title{
+    width: 100%;
+    font-family: Anton;
+    text-align: center;
+    text-transform: uppercase;
+    color: white;
+}
+
+.select{
+    border-radius: 10px;
+}
+
+.tallesContainer{
+    padding: 10px;
+    display: flex;
+    align-items: center;
+}
+
+.ulTalles{
+    display: flex;
+}
+
+.liTalle{
+    color: #000000;
+}
+
+.xButton{
+    background: transparent;
+    border-style: none;
+}

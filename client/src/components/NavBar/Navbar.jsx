@@ -9,16 +9,21 @@ import styles from "./NavBar.module.css";
 import { useAuth0 } from "@auth0/auth0-react";
 import LogoutButtonAuth0 from "../authzero/LogoutButtonAuth0";
 import LoginButtonAuth0 from "../authzero/LoginButtonAuth0";
-import Filters from "../Filters/Filters";
+import { useDispatch } from "react-redux";
+import { getAllShoes } from "../../redux/actions";
 
-export default function NavBar({
-  handleReset,
-  setCurrentPage
-}) {
+
+export default function NavBar() {
   
   const user = JSON.parse(localStorage.getItem("user"))
   console.log(user)
   const { isAuthenticated } = useAuth0()
+  const dispatch = useDispatch()
+
+  const handleReset = (e) => {
+    e.preventDefault();
+    dispatch(getAllShoes());
+  };
 
   return (
 

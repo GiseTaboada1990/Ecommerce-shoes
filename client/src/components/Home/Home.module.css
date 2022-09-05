@@ -1,3 +1,26 @@
 .container{
     background-color: #212121;
 }
+.imgChatbot{
+    width: 100px;
+    height: 100px;
+    border-radius: 1000px;
+    position: sticky;
+    background-color: #212121;
+}
+
+.buttonChatbot {
+    border-radius: 50%;
+    
+}
+
+.divChatbot {
+    display: flex;
+    justify-content: flex-end;
+    margin-bottom: 15px;
+    margin-right: 31px;
+    position: fixed;
+    bottom: 32px;
+    right: 0;
+}
+

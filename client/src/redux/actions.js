@@ -38,7 +38,7 @@ export const COMBINATION_FILTERS17 = 'COMBINATION_FILTERS17'
 export const COMBINATION_FILTERS18 = 'COMBINATION_FILTERS18'
 
 
-const URL = process.env.REACT_APP_URL;
+export const URL = process.env.REACT_APP_URL;
 
 export const cleanDetails = () => {
   return ({

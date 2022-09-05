@@ -3,6 +3,7 @@ import {
     GET_ALL_SHOES,
     CLEAN_DETAILS,
     GET_ALL_SIZES,
+    GET_ALL_BRANDS,
     ADD_ONE_TO_FAV,
     DELETE_ONE_FROM_FAV,
     LOGIN_USER,
@@ -37,7 +38,8 @@ const initialState = {
     details: [],
     sizes: [],
     favorites: [],
-    user: []
+    user: [],
+    brands:[],
 };
 
 export default function rootReducer(state = initialState, action) {
@@ -51,6 +53,11 @@ export default function rootReducer(state = initialState, action) {
             return {
                 ...state,
                 details: action.payload
+            }
+        case GET_ALL_BRANDS:
+            return{
+                ...state,
+                brands: action.payload
             }
         case CLEAN_DETAILS:
             return {

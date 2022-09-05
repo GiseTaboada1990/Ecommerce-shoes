@@ -1,0 +1,31 @@
+a.linkedin:hover {
+    color: #f87d2d;
+  }
+
+  a.github:hover {
+    color: #f87d2d;
+  }
+  a.linkedin {
+    margin-left: 1rem;
+  }
+
+.social-container{
+    color: #f87d2d;
+    border-style: solid;
+    border-radius: 10px;
+    width: 500px;
+    margin-top: 169px;
+    margin-left: 712px;
+    border-color: black;
+}
+
+.name-icon-container{
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    justify-content: space-between;
+}
+
+.icons-container{
+    margin-left: 33px;
+}

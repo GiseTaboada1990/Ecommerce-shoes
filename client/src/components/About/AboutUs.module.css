@@ -1,0 +1,56 @@
+.container {
+  padding: 1rem;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+.hijo {
+  width: 70%;
+  height: 85%;
+  background-color: #2a2a2a;
+  border-radius: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.yourshoes {
+  background: none;
+  color: inherit;
+  border: none;
+  padding: 0;
+  font: inherit;
+  cursor: pointer;
+  outline: inherit;
+  margin-top: 0.9rem;
+  margin-left: 1.1rem;
+  font-family: "Anton";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 2rem;
+  line-height: 100%;
+  /* or 60px */
+  letter-spacing: 0.04em;
+  color: #ffff;
+  background: black;
+  padding: 12px;
+  border-radius: 10px;
+}
+  
+.shoes {
+  color: #f87d2d;
+}
+.p{
+  font-size: 2.5rem;
+  color: white
+}
+
+.henryImg{
+  width: 375px;
+  height: 85px;
+  padding-bottom: 10px;
+  margin-bottom: 41px;
+}

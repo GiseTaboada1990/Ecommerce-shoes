@@ -1,0 +1,83 @@
+.container {
+  max-width: 2000px;
+  margin: auto;
+  padding-left: 25px;
+  padding-right: 25px;
+}
+.row {
+  display: flex;
+  /* align-items: center; */
+  flex-wrap: wrap;
+  justify-content: space-around;
+}
+
+.footer {
+  background-color: #000;
+  color: #8a8a8a;
+  font-size: 14px;
+  padding: 60px 0 20px;
+  margin-top: auto;
+  bottom: 0px;
+  width: 100%;
+  font-family: Anton;
+  letter-spacing: 0.1rem;
+  transition: none;
+}
+.footer p {
+  color: #8a8a8a;
+}
+.footer h3 {
+  color:#f87d2d;
+  margin-bottom: 20px;
+  margin-top: auto;
+}
+.footer_col{
+  display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.footer_col2{
+  margin-top: 0px;
+}
+.footer_col3 {
+  min-width: 250px;
+  margin-bottom: 20px;
+}
+
+.footer_col2 {
+  flex: 0.5;
+  text-align: center;
+  margin-left: 68px;
+}
+.footer_col3,
+.footer_col4 {
+  flex-basis: 12%;
+  text-align: center;
+}
+.app_logo {
+  margin-top: 20px;
+}
+.footer_col ul, li, a{
+  font-size: 16px;
+  text-transform: capitalize;
+  text-decoration: none;
+  /* font-weight: 300; */
+  /* display: block; */
+  color:grey;
+  
+  list-style: none;
+}
+.boton:hover{
+  transition: none;
+  color: #f87d2d;
+  transition: all 0.5s ease;
+}
+.msgHenry{
+  font-size: 20px;
+}
+.yourshoesFooter{
+  margin-right: 21px;
+}
+.font{
+  font-size: 11px;
+}

@@ -1,0 +1,14 @@
+.infoContainer{
+    margin-top: 205px;
+    color: white;
+    display: flex;
+    flex-direction: column;
+    align-content: center;
+    border-style: solid;
+    width: 500px;
+    margin-left: 743px;
+    padding: 10px;
+    border-width: 2px;
+    border-color: black;
+    border-radius: 10px;
+}
