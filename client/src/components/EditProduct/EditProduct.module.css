@@ -102,3 +102,18 @@
     background: transparent;
     border-style: none;
 }
+.inputSizeStock{
+    border: none;
+    border-bottom-style: solid;
+    margin-right: 10px;
+    outline: 0px;
+    width: 40px;
+    background: #f87d2d;
+    margin-left: 5px;
+}
+
+.sizeInputsContainer{
+    height: 150px;
+    width: 239px;
+    margin-left: 10px;
+}

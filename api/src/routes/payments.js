@@ -18,12 +18,8 @@ const mandarCart = (ordenId, cart) => {
 
 router.post("/", async (req, res) => {
   const { cart, userId } = req.body;
-
-  const orden = (await axios.post(`http://localhost:3001/order`, { cart, userId })).data
-
-  console.log(mandarCart(orden.id, cart))
-
   try {
+    const orden = (await axios.post(`http://localhost:3001/order`, { cart, userId })).data
     const items_ml = cart.map((p) => ({
       name: p.title,
       quantity: p.quantity,

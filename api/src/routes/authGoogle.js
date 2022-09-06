@@ -6,7 +6,7 @@ router.post('/', async (req, res) => {
     const { name, surname, image, username, email, phone_number, date_of_Birth, address } = req.body
 
     try {
-        const [user, created] = await User.findOrCreate({
+           await User.findOrCreate({
             where: { email },
             defaults: {
                 name,
@@ -19,8 +19,8 @@ router.post('/', async (req, res) => {
                 isAdmin: email === "isAdmin@gmail.com" ? true : false
             }
         })
-
-        res.status(200).json(user)
+        const dataUser= await User.findOne({include:{all:true}})
+        res.status(200).json(dataUser)
     } catch (error) {
         console.log('AUTH_GOOGLE -->',error)
         res.status(500).json(error)

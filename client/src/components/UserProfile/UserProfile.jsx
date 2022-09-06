@@ -6,7 +6,7 @@ import { Link } from "react-router-dom"
 export default function UserProfile() {
 
   const infoUser = JSON.parse(localStorage.getItem("user"))
-  
+  console.log(infoUser)
   return (
     <div className={styles.container}>
       <Navbar2></Navbar2>

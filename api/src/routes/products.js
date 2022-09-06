@@ -142,15 +142,15 @@ router.put("/:id", async (req, res) => {
   try {
     const { title, model, image, price, brand, category, size} = req.body;
     const { id } = req.params;
-
+   
     const productUpdated = await Product.findOne({
       where: { id },
       include: [{ all: true }],
     });
-    const oldBrand = productUpdated.brand.id;
+    const oldBrand = productUpdated.brand !==null && productUpdated.brand.id;
     const oldCategory = productUpdated.category.id;
     const oldSizes = productUpdated.sizes.map(s=>s.id);
-    console.log(oldSizes)
+   
     await productUpdated.update(oldBrand);
     await productUpdated.update(oldCategory);
     await productUpdated.removeSizes(oldSizes)
@@ -186,6 +186,7 @@ router.put("/:id", async (req, res) => {
     res.status(200).send(productUpdated);
   } catch (error) {
     console.log(error);
+    res.status(500).json(error)
   }
 });
 
