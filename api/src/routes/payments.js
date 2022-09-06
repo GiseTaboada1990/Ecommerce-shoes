@@ -5,23 +5,18 @@ const mercadopago = require("mercadopago");
 const { ACCESS_TOKEN } = process.env;
 const { Order } = require('../db')
 
+let cartGlobal = null
+
 mercadopago.configure({
   access_token: ACCESS_TOKEN,
 });
 
-const mandarCart = (ordenId, cart) => {
-  axios.put(`http://localhost:3001/stock`,{cart})
-  .then(res => console.log('put a stock'))
-  
-  return `http://localhost:3001/payments/success/${ordenId}`
-}
-
 router.post("/", async (req, res) => {
   const { cart, userId } = req.body;
 
-  const orden = (await axios.post(`http://localhost:3001/order`, { cart, userId })).data
+  cartGlobal = cart
 
-  console.log(mandarCart(orden.id, cart))
+  const orden = (await axios.post(`http://localhost:3001/order`, { cart, userId })).data
 
   try {
     const items_ml = cart.map((p) => ({
@@ -29,6 +24,7 @@ router.post("/", async (req, res) => {
       quantity: p.quantity,
       unit_price: p.price,
     }));
+
     let preference = {
       items: items_ml,
       external_reference: `${orden.id}`,
@@ -43,7 +39,7 @@ router.post("/", async (req, res) => {
       back_urls: {
         failure: `http://localhost:3001/payments/failure/${orden.id}`,
         pending: `http://localhost:3001/payments/pending/${orden.id}`,
-        success: mandarCart(orden.id, cart),
+        success: `http://localhost:3001/payments/success/${orden.id}`,
       },
     };
 
@@ -65,11 +61,16 @@ router.post("/", async (req, res) => {
 
 router.get("/success/:id", async (req, res) => {
 
-  const { id } = req.params;
+  const { id } = req.params
+
   try {
     await axios.put(`http://localhost:3001/order/${id}`, { order: "realizada" })
-    // await axios.put(`http://localhost:3001/stock`,{})
+    
+    console.log('CART GLOBAL -->', cartGlobal)
+    // await axios.put(`http://localhost:3001/stock`,{cart})
+
     res.redirect("http://localhost:3000");
+
   } catch (error) {
     res.send({ error: error.message });
   }

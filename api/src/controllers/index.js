@@ -53,7 +53,8 @@ const cargoalDB =async()=>{
     });
   })
  
-  const cargoFinal = data.filter(e => e.id !== 'MLA1142122158')
+  const idsConflicts = ['MLA1142122158', 'MLA1120923058', 'MLA1122533893']
+  const cargoFinal = data.filter(e => !idsConflicts.includes(e.id)) // MLA1120923058 MLA1122533893
 
   return cargoFinal
 }
