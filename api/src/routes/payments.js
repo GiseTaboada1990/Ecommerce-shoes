@@ -63,11 +63,16 @@ router.get("/success/:id", async (req, res) => {
 
   const { id } = req.params
 
+  console.log('------------------ REQ DE SUCCES -------------------')
+  console.log(req)
+
   try {
-    await axios.put(`http://localhost:3001/order/${id}`, { order: "realizada" })
+    // await axios.put(`http://localhost:3001/order/${id}`, { order: "realizada" })
+    const order = await Order.findOne({ where: { id } })
+    await order.update({ status: 'realizada' })
     
     console.log('CART GLOBAL -->', cartGlobal)
-    // await axios.put(`http://localhost:3001/stock`,{cart})
+    await axios.put(`http://localhost:3001/stock`,{ idOrden: id })
 
     res.redirect("http://localhost:3000");
 

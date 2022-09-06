@@ -53,8 +53,13 @@ const cargoalDB =async()=>{
     });
   })
  
-  const idsConflicts = ['MLA1142122158', 'MLA1120923058', 'MLA1122533893']
-  const cargoFinal = data.filter(e => !idsConflicts.includes(e.id)) // MLA1120923058 MLA1122533893
+  // const shoesConflicts = ['MLA1142122158', 'MLA1120923058', 'MLA1122533893']
+  const shoesConflicts = [
+    'Zapatillas Downshifter 11 Nike Nike Tienda Oficial',
+    'Zapatillas W React Element 55 Nike Blast Tienda Oficial',
+    'Zapatillas Nike Venture Runner Neg De Hombre'
+  ]
+  const cargoFinal = data.filter(e => !shoesConflicts.includes(e.id))
 
   return cargoFinal
 }

@@ -59,7 +59,7 @@ sequelize.models = Object.fromEntries(capitalizadedEntries);
 
 // Destructuring models from sequelize.models
 // here -->
-const { Category, Product, Order, User, Brand, Role, Size, Review } = sequelize.models;
+const { Category, Product, Order, User, Brand, Role, Size, Review, DetailsOrder } = sequelize.models;
 // Relations of models
 // here -->
 
@@ -83,6 +83,9 @@ Order.belongsToMany(Product, { through: "order_product", timestamps: false });
 
 Product.belongsToMany(Size, { through: "size_product", timestamps: false });
 Size.belongsToMany(Product, { through: "size_product", timestamps: false });
+
+Order.hasMany(DetailsOrder)
+DetailsOrder.belongsTo(Order);
 
 module.exports = {
   ...sequelize.models,

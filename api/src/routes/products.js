@@ -15,9 +15,11 @@ const router = Router();
 router.get("/", async (req, res, next) => {
   const { name, priceMax, priceMin, brand, category, size } = req.query;
   const options = getAllFilters(req.query);
+  
   if (Object.keys(options).length) {
     const resulTs = await Product.findAll(options);
     res.status(200).json(resulTs);
+
   } else if (name) {
     try {
       const results = await getByName(name);

@@ -2,7 +2,6 @@ const { Router } = require("express");
 const { Size } = require("../db");
 const router = Router();
 const { getDbSize, cargoalDB } = require("../controllers/index.js");
-const { default: ProductDetail } = require("../../../client/src/components/ProductDetail/ProductDetail");
 
 router.get("/", async (req, res) => {
   try {

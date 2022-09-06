@@ -1,5 +1,5 @@
 const { Router } = require("express");
-const { Product, Order, User } = require("../db");
+const { Product, Order, User, DetailsOrder } = require("../db");
 const router = Router();
 
 //Post Orden Compra
@@ -19,6 +19,7 @@ router.post("/", async (req, res) => {
     const userId = await User.findOne({
       where: { id: userBody}
     });
+
     for (let i = 0; i < idAll.length; i++) {
       productId.push(idAll[i].id) && quantity1.push(idAll[i].quantity);
     }
@@ -49,6 +50,13 @@ router.post("/", async (req, res) => {
     }
     const date = new Date();
     
+    const detailsOrder = await DetailsOrder.bulkCreate(idAll.map(product => ({
+      productName: product.title,
+      quantity: product.quantity,
+      unit_price: product.price,
+      sizeNumber: product.sizeNumber
+    })))
+
     const newOrder = await Order.create({
       amount: totalTotal,
       address: userId.address,
@@ -56,7 +64,11 @@ router.post("/", async (req, res) => {
       date: date,
       status: ""
     });
+
     await newOrder.setUser(userId.id);
+
+    await newOrder.addDetailsOrders(detailsOrder) // Añado los detalles de la orden.
+
     // Existe una forma para no tener que hacer un bucle, sino que directamente recibe un array de ids
     // para añadirle los productos a esta nueva orden.
     idAll.map(async (item) => await newOrder.addProduct(item.id));

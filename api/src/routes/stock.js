@@ -1,47 +1,51 @@
 const { Router } = require("express");
-const { Product, Size } = require("../db");
-const {Op} = require("sequelize")
+const { Product, Size, Order } = require("../db");
+const { Op } = require("sequelize")
 const router = Router();
 
 router.put("/", async (req, res) => {
+  const { idOrden } = req.body
 
-  try{
+  try {
     const idAll = req.body.cart;
+    const order = await Order.findByPk(idOrden, { include: [{ all: true }] })
+
     let productId = [];
-    let sizeId ;
+    let sizeId;
     let productArray = [];
-    
-    for (let i = 0; i < idAll.length; i++) {
-      sizeId=idAll[i].sizeNumber;
-      productId.push(idAll[i].id)
-  }
 
-  for (let i = 0; i < productId.length; i++) {
-     const productCopy = await Product.findOne({
-      where: { id: productId[i] },include:[{model:Size, where:{number:{[Op.or]:sizeId.map(e=>e)}}}]})
+    for (let i = 0; i < order.products.length; i++) {
+      productId.push(order.products[i].id)
+    }
 
-      const data = productCopy.sizes.map(s=>s.id)
-     
-    productCopy.removeSizes(data)
-   
-    for (let j = 0; j < productCopy.sizes.length; j++) {
-      const newSizes = await  Size.create({
-            number: productCopy.sizes[j].number,
-            stock: productCopy.sizes[j].stock -1,
-            solds: productCopy.sizes[j].solds +1,
-            isActive: productCopy.sizes[j].stock -1 === 0? false:true
+    for (let i = 0; i < productId.length; i++) {
+      const productCopy = await Product.findOne({
+        where: { id: productId[i] }, 
+        include: [{ model: Size, where: { number: { [Op.or]: order.detailsOrders[i].sizeNumber } } }]
+      })
+
+      const idSizes = productCopy.sizes.map(s => s.id)
+
+      productCopy.removeSizes(idSizes)
+
+      for (let j = 0; j < productCopy.sizes.length; j++) {
+        const newSizes = await Size.create({
+          number: productCopy.sizes[j].number,
+          stock: productCopy.sizes[j].stock - 1,
+          solds: productCopy.sizes[j].solds + 1,
+          isActive: productCopy.sizes[j].stock - 1 === 0 ? false : true
         })
 
-      await productCopy.addSize(newSizes)
+        await productCopy.addSize(newSizes)
       }
       await productCopy.save();
-  
-    productArray.push(productCopy);
-   }
 
-   res.status(200).json(productArray)
+      productArray.push(productCopy);
+    }
 
-  } catch(error){
+    res.status(200).json(productArray)
+
+  } catch (error) {
     console.log(error)
     res.status(404).json(error)
   }
@@ -50,4 +54,4 @@ router.put("/", async (req, res) => {
 
 
 
-module.exports= router
+module.exports = router
