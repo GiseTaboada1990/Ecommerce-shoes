@@ -2,6 +2,7 @@ const { Router } = require("express");
 const { Size } = require("../db");
 const router = Router();
 const { getDbSize, cargoalDB } = require("../controllers/index.js");
+const { default: ProductDetail } = require("../../../client/src/components/ProductDetail/ProductDetail");
 
 router.get("/", async (req, res) => {
   try {
@@ -36,5 +37,19 @@ router.get("/", async (req, res) => {
     res.status(404).json(err);
   }
 });
+
+router.get('/:id', async (req, res) => {
+  const { id } = req.params
+
+  try {
+    const sizeDb = await Size.findOne({ include: { model: Product, where: { id } } });
+
+    res.status(200).json(sizeDb);
+    
+    } catch (err) {
+      console.log(err)
+      res.status(404).json(err);
+  }
+})
 
 module.exports = router

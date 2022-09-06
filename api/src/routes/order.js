@@ -22,6 +22,11 @@ router.post("/", async (req, res) => {
     for (let i = 0; i < idAll.length; i++) {
       productId.push(idAll[i].id) && quantity1.push(idAll[i].quantity);
     }
+
+    // VER BIEN COMO REFACTORIZAR ESTE CÓDIGO
+    // Podría hacer una sola consulta a la DB, con el operador Op.or de sequelize
+    // tengo que ver si sequelize me devuelve un array donde cada posicion sea equivalente a 
+    // la posición del array quantity1
     for (let i = 0; i < productId.length; i++) {
       const productCopy1 = await Product.findOne({
         where: { id: productId[i] }
@@ -52,8 +57,11 @@ router.post("/", async (req, res) => {
       status: ""
     });
     await newOrder.setUser(userId.id);
+    // Existe una forma para no tener que hacer un bucle, sino que directamente recibe un array de ids
+    // para añadirle los productos a esta nueva orden.
     idAll.map(async (item) => await newOrder.addProduct(item.id));
     await userId.addOrder(newOrder)
+    
     res.status(200).json(newOrder);
    
   } catch (error) {
