@@ -2,10 +2,8 @@ const { Router } = require("express");
 const router = Router();
 const axios = require("axios");
 const mercadopago = require("mercadopago");
-const { ACCESS_TOKEN } = process.env;
+const { ACCESS_TOKEN, API_URL, CLIENT_URL } = process.env;
 const { Order } = require('../db')
-
-let cartGlobal = null
 
 mercadopago.configure({
   access_token: ACCESS_TOKEN,
@@ -14,9 +12,7 @@ mercadopago.configure({
 router.post("/", async (req, res) => {
   const { cart, userId } = req.body;
 
-  cartGlobal = cart
-
-  const orden = (await axios.post(`http://localhost:3001/order`, { cart, userId })).data
+  const orden = (await axios.post(`${API_URL}/order`, { cart, userId })).data
 
   try {
     const items_ml = cart.map((p) => ({
@@ -37,24 +33,24 @@ router.post("/", async (req, res) => {
         installments: 3,
       },
       back_urls: {
-        failure: `http://localhost:3001/payments/failure/${orden.id}`,
-        pending: `http://localhost:3001/payments/pending/${orden.id}`,
-        success: `http://localhost:3001/payments/success/${orden.id}`,
+        failure: `${API_URL}/payments/failure/${orden.id}`,
+        pending: `${API_URL}/payments/pending/${orden.id}`,
+        success: `${API_URL}/payments/success/${orden.id}`,
       },
     };
 
     mercadopago.preferences
       .create(preference)
       .then((r) => {
-        console.info("respondio");
         (global.id = r.body.id), res.json({ id: global.id });
       })
       .catch((err) => {
-        console.log('preferenias error');
+        console.log('----------------------PREFERENCE ERROR-----------------------')
+        console.log(err)
+        throw err
       })
 
   } catch (error) {
-    // console.log("Entra aca", error);
     res.status(404).json(error);
   }
 });
@@ -63,18 +59,13 @@ router.get("/success/:id", async (req, res) => {
 
   const { id } = req.params
 
-  console.log('------------------ REQ DE SUCCES -------------------')
-  console.log(req)
-
   try {
-    // await axios.put(`http://localhost:3001/order/${id}`, { order: "realizada" })
     const order = await Order.findOne({ where: { id } })
     await order.update({ status: 'realizada' })
     
-    console.log('CART GLOBAL -->', cartGlobal)
-    await axios.put(`http://localhost:3001/stock`,{ idOrden: id })
+    await axios.put(`${API_URL}/stock`,{ idOrden: id })
 
-    res.redirect("http://localhost:3000");
+    res.redirect(`${CLIENT_URL}`);
 
   } catch (error) {
     res.send({ error: error.message });
@@ -86,8 +77,11 @@ router.get("/failure/:id", async (req, res) => {
   const { id } = req.params;
 
   try {
-    await axios.put(`http://localhost:3001/order/${id}`, { order: "cancelada" })
-    res.redirect("http://localhost:3000/");
+    const order = await Order.findOne({ where: { id } })
+    await order.update({ status: 'cancelada' })
+
+    res.redirect(`${CLIENT_URL}`);
+
   } catch (error) {
     res.send({ error: error.message });
   }
@@ -98,8 +92,11 @@ router.get("/pending/:id", async (req, res) => {
   const { id } = req.params;
 
   try {
-    await axios.put(`http://localhost:3001/order/${id}`, { order: "pendiente" })
-    res.redirect("http://localhost:3000/");
+    const order = await Order.findOne({ where: { id } })
+    await order.update({ status: 'pendiente' })
+
+    res.redirect(`${CLIENT_URL}`);
+
   } catch (error) {
     res.send({ error: error.message });
   }
@@ -110,9 +107,9 @@ router.get("/pending/:id", async (req, res) => {
  const body = {
    items: item,
    back_urls: {
-     failure: `http://localhost:3001/payments/failure/${id}`,
-     pending: `http://localhost:3001/payments/pending/${id}`,
-     success: `http://localhost:3001/payments/success/${id}`,
+     failure: `${API_URL}/payments/failure/${id}`,
+     pending: `${API_URL}/payments/pending/${id}`,
+     success: `${API_URL}/payments/success/${id}`,
    }
  };
  const payment = await axios.post(url, body, {
