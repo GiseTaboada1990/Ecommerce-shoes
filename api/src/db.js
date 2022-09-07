@@ -64,16 +64,13 @@ const { Category, Product, Order, User, Brand, Role, Size, Review } = sequelize.
 // here -->
 
 Category.belongsToMany(Product, {through: "category_product",timestamps: false});
-Product.belongsTo(Category);
+Product.belongsToMany(Category, {through: "category_product",timestamps: false});
 
 Brand.belongsToMany(Product, { through: "brand_product", timestamps: false });
-Product.belongsTo(Brand);
+Product.belongsToMany(Brand, { through: "brand_product", timestamps: false });
 
 Review.belongsTo(User, { as: "author", allowNull: false });
 Review.belongsTo(Product, { as: "product", allowNull: false });
-
-Brand.belongsToMany(Product, { through: "brand_product", timestamps: false });
-Product.belongsTo(Brand);
 
 User.belongsToMany(Order, { through: "user_order", timestamps: false });
 Order.belongsTo(User);

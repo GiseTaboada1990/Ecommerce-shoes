@@ -20,6 +20,7 @@ router.post("/", async (req, res) => {
   const { cart, userId } = req.body;
   try {
     const orden = (await axios.post(`http://localhost:3001/order`, { cart, userId })).data
+    //loguearse para comprar
     const items_ml = cart.map((p) => ({
       name: p.title,
       quantity: p.quantity,

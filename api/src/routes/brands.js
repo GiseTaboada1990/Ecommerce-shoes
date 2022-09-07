@@ -1,9 +1,9 @@
 const { Router } = require("express");
-const { Brand } = require("../db");
+const { Brand, Product } = require("../db");
 const router = Router();
 const axios = require("axios");
 const { getDbBrand } = require("../controllers/index.js");
-const { defaults } = require("pg");
+
 
 router.get("/", async (req, res) => {
   try {
@@ -45,10 +45,9 @@ router.get("/", async (req, res) => {
       setBrands.forEach(async (s) => {
         await Brand.findOrCreate({
           where: { id: s.id },
-          defaults: { name: s.brand }
+          defaults: { name: s.brand === null? "YourShoes": s.brand }
         })
       })
-
       res.status(200).send(setBrands)
     } else {
       res.send(dbBrands)
@@ -57,4 +56,17 @@ router.get("/", async (req, res) => {
     console.log(err + " - - Catch en brands");
   }
 });
+
+router.get("/:id", async(req, res)=>{
+  const {id} = req.params
+  try {
+        const brandsId = await Brand.findOne({
+          where:{id},
+          include:[{model: Product}]
+        })
+        res.status(200).json(brandsId)
+  } catch (error) {
+    res.status(500).json(error)
+  }
+})
 module.exports = router

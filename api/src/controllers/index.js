@@ -31,7 +31,7 @@ const cargoalDB =async()=>{
   
   const getAllApi1  =await setDataApi()
   const data =getAllApi1.flat().map((e) => {
-    e.size = [{id:1, number: 35, stock:2, solds:0}, {id:2, number:36, stock:2, solds:0},{id:3, number:37, stock:2, solds:0},{id:4, number:38, stock:1, solds:0},{id: 5, number:39, stock:1, solds:0},{id:6, number:40, stock:1, solds:0},{id:7, number:41, stock:1, solds:0},{id:8, number:42, stock:1, solds:0},{id:9, number:43, stock:1, solds:0},{id:10, number:44, stock:1, solds:0},{id:11, number:45, stock:1, solds:0}]
+    e.size = [{id:1, number: 35, stock:2, solds:0}, {id:2, number:36, stock:2, solds:0},{id:3, number:37, stock:2, solds:0},{id:4, number:38, stock:1, solds:0},{id: 5, number:39, stock:1, solds:0},{id:6, number:40, stock:1, solds:0},{id:7, number:41, stock:1, solds:0},{id:8, number:42, stock:1, solds:0},{id:9, number:43, stock:1, solds:0}]
    
     return ({
       id: e.id,
@@ -66,9 +66,9 @@ const cargoalDB =async()=>{
        const foundBrand = await Brand.findByPk(el.brand);
        const foundSize = el.size.map(s=>s.id)
        const foundCategories = await Category.findByPk(el.category);
-       await newProduct.setBrand(foundBrand);
+       await newProduct.addBrand(foundBrand);
        await newProduct.addSizes(foundSize);
-       await newProduct.setCategory(foundCategories);
+       await newProduct.addCategory(foundCategories);
        return newProduct;
      })
    );
@@ -88,8 +88,11 @@ const getDbCategories = async () => {
 };
 const getDbBrand = async () => {
   try {
-    const brands = await Brand.findAll({ include: { all: true } });
-
+    const brands = await Brand.findAll({
+      where:{name:{
+        [Op.and]:[{[Op.notILike]:`%sport%`},{[Op.notILike]:`%pampa%`}]}}
+    });
+    
     return brands;
 
   } catch (error) {
