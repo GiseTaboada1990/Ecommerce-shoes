@@ -26,7 +26,7 @@ import {
     combinationsFilter17,
     combinationsFilter18,
   } from "../../redux/actions";
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import Searchbar from '../SearchBar/SearchBar';
 
 
@@ -40,6 +40,7 @@ export default function Filters({setCurrentPage}) {
     const [priceMax, setPriceMax] = useState("");
 
     const dispatch = useDispatch()
+    const allBrands = useSelector(state=>state.brands)
 
 
     const handleInputPriceMin = (e) => {
@@ -197,25 +198,13 @@ export default function Filters({setCurrentPage}) {
 
     return (
         <div className={styles.filtersContainer}>
-        <select
-          onChange={(e) => handleFilterBrand(e)}
-          value={brandFilter}
-          className={styles.brandSelect}
-        >
-          <option value={"default"} disabled>
-            Marcas
-          </option>
-          <option value="Vans">Vans</option>
-          <option value="Converse">Converse</option>
-          <option value="Crocs">Crocs</option>
-          <option value="Nike">Nike</option>
-          <option value="Vizzano">Vizzano</option>
-          <option value="adidas">Adidas</option>
-          <option value="Caterpillar">Caterpillar</option>
-          <option value="Moleca">Moleca</option>
-          <option value="Faraon">Faraon</option>
-          <option value="Briganti">Briganti</option>
-        </select>
+            <select onChange={(e) => handleFilterBrand(e)} value={brandFilter} className={styles.brandSelect}>
+              {allBrands &&
+                allBrands.map((brand) => {
+                <option value={"default"} disabled>Marcas</option>
+                  return <option>{brand.name}</option>;
+                })}
+            </select>
         <select
           onChange={(e) => handleCategories(e)}
           value={categoryFilter}
@@ -252,8 +241,6 @@ export default function Filters({setCurrentPage}) {
           <option value={41}>41</option>
           <option value={42}>42</option>
           <option value={43}>43</option>
-          <option value={44}>44</option>
-          <option value={45}>45</option>
         </select>
         <form onSubmit={handleFilterByPrice}>
           <input
