@@ -46,7 +46,6 @@ export default function Cart() {
 
   const cartProducts = useSelector((state) => state.cart);
   const dispatch = useDispatch();
-  // console.log(cartProducts, "Soy el producto añadido al carrito")
 
   let precios = 0;
   for (let i = 0; i < cartProducts.length; i++) {

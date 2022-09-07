@@ -1,6 +1,6 @@
 const { Router } = require("express");
 const { Product, Brand, Category, Size } = require("../db.js");
-const { Op } = require("sequelize");
+const { Op, BOOLEAN } = require("sequelize");
 const {
   getByName,
   getByBrand,
@@ -74,13 +74,14 @@ router.get("/", async (req, res, next) => {
 router.get("/:id", async (req, res) => {
   try {
     const { id } = req.params;
+    const {edit} = req.query
     if (id) {
+      const sizeOption = edit==='true'?{ model: Size}:{model: Size, where:{isActive: true}}
       const foundProduct = await Product.findByPk(id, {
         include:[
           { model: Brand },
           { model: Category },
-          { model: Size, where:{isActive:true}},
-        ],
+          sizeOption]
       });
 
       if (foundProduct) {
@@ -112,10 +113,14 @@ router.post("/", async (req, res) => {
     const findCategories = await Category.findOne({
       where: { name: { [Op.iLike]: `%${category}%` } },
     });
-    const findBrand = await Brand.findOne({
-      where: { name: { [Op.iLike]: `%${brand}%` } },
+    const [findBrand, createdd] = await Brand.findOrCreate({
+      where: { name: brand},
+      defaults:{
+        id:`${Math.round(Math.random() * 1000000000)}`,
+        isActive: true,
+      }
     });
-   
+    
     for (let j = 0; j < size.length; j++) {
       let stock = size[j].stock
       const newSizes = await  Size.create({
@@ -128,8 +133,8 @@ router.post("/", async (req, res) => {
     }
 
     
-    newProduct.setCategory(findCategories);
-    newProduct.setBrand(findBrand);
+    newProduct.addCategory(findCategories);
+    newProduct.addBrand(findBrand);
 
     !created
       ? res.status(201).send("There is already a Product with that title")
@@ -147,14 +152,18 @@ router.put("/:id", async (req, res) => {
    
     const productUpdated = await Product.findOne({
       where: { id },
-      include: [{ all: true }],
+      include: [
+        { model: Brand },
+        { model: Category },
+        { model: Size}
+      ]
     });
-    const oldBrand = productUpdated.brand !==null && productUpdated.brand.id;
-    const oldCategory = productUpdated.category.id;
+    const oldBrand = productUpdated.brands.map(b=>b.id)
+    const oldCategory = productUpdated.categories.map(c=>c.id);
     const oldSizes = productUpdated.sizes.map(s=>s.id);
    
-    await productUpdated.update(oldBrand);
-    await productUpdated.update(oldCategory);
+    await productUpdated.removeBrand(oldBrand);
+    await productUpdated.removeCategory(oldCategory);
     await productUpdated.removeSizes(oldSizes)
    
     const brandDb = await Brand.findOne({
@@ -174,8 +183,8 @@ router.put("/:id", async (req, res) => {
       await productUpdated.addSizes(newSizes)
     }
     
-    await productUpdated.setBrand(brandDb);
-    await productUpdated.setCategory(categoryDb);
+    await productUpdated.addBrand(brandDb);
+    await productUpdated.addCategory(categoryDb);
     
     productUpdated.set({
       title,
