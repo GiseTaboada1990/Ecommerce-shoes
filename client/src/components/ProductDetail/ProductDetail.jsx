@@ -3,14 +3,16 @@ import { useDispatch, useSelector } from 'react-redux';
 import { addOneToCart, cleanDetails, getDetails } from '../../redux/actions';
 import { ToastContainer, toast } from "react-toastify";
 import styles from "./ProductDetail.module.css";
+import { useNavigate } from 'react-router-dom';
 
 
 function ProductDetail({ id, closeModal }) {
     const myShoes = useSelector((state) => state.details);
     console.log('myshoes -->',myShoes)
+    const navigate = useNavigate()
     const dispatch = useDispatch();
     useEffect(() => {
-        dispatch(getDetails(id));
+        dispatch(getDetails(id, false));
         return () => {
             dispatch(cleanDetails())
         }
@@ -56,6 +58,11 @@ function ProductDetail({ id, closeModal }) {
         }
 
     };
+    const handleEdit=()=>{
+        navigate('/post',{
+            state:myShoes
+        })
+    }    
 
     return (
         <div>
@@ -119,6 +126,7 @@ function ProductDetail({ id, closeModal }) {
                                 Añadir al carro
                             </button>{" "}
                         </div>
+                        <button onClick={() => handleEdit(myShoes.id)}>Editar Producto</button>
                     </div>
                 </div>
             ) : (

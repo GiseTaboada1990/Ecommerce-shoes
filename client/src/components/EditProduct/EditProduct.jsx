@@ -35,63 +35,49 @@ export default function EditProduct() {
 
   const [size35, setSize35] = useState({
     number: 35,
-    stock: prodDetail.sizes ? prodDetail.sizes.find(e => e.number === 35).stock : 0 
+    stock: prodDetail.length?  prodDetail.sizes?.find(e => e.number === 35).stock : 0
   })
-
+  console.log(size35)
   const [size36, setSize36] = useState({
     number: 36,
-    stock: prodDetail.sizes ? prodDetail.sizes.find(e => e.number === 36).stock : 1
+    stock: prodDetail.length && prodDetail.sizes?.find(e => e.number === 36).stock
   })
 
   const [size37, setSize37] = useState({
     number: 37,
-    stock: prodDetail.sizes ? prodDetail.sizes.find(e => e.number === 37).stock : 0
+    stock: prodDetail.length && prodDetail.sizes?.find(e => e.number === 37).stock
   })
 
   const [size38, setSize38] = useState({
     number: 38,
-    stock: prodDetail.sizes ? prodDetail.sizes.find(e => e.number === 38).stock : 0
+    stock: prodDetail.length && prodDetail.sizes?.find(e => e.number === 38).stock
   })
 
   const [size39, setSize39] = useState({
     number: 39,
-    stock: prodDetail.sizes ? prodDetail.sizes.find(e => e.number === 39).stock : 0
+    stock: prodDetail.length && prodDetail.sizes?.find(e => e.number === 39).stock
   })
 
   const [size40, setSize40] = useState({
     number: 40,
-    stock: prodDetail.sizes ? prodDetail.sizes.find(e => e.number === 40).stock : 0
+    stock: prodDetail.length && prodDetail.sizes?.find(e => e.number === 40).stock
   })
 
   const [size41, setSize41] = useState({
     number: 41,
-    stock: prodDetail.sizes ? prodDetail.sizes.find(e => e.number === 41).stock : 0
+    stock: prodDetail.length && prodDetail.sizes?.find(e => e.number === 41).stock
   })
 
   const [size42, setSize42] = useState({
     number: 42,
-    stock: prodDetail.sizes ? prodDetail.sizes.find(e => e.number === 42).stock : 0
+    stock: prodDetail.length && prodDetail.sizes?.find(e => e.number === 42).stock
   })
 
   const [size43, setSize43] = useState({
     number: 43,
-    stock: prodDetail.sizes ? prodDetail.sizes.find(e => e.number === 43).stock : 0
+    stock: prodDetail.length && prodDetail.sizes?.find(e => e.number === 43).stock
   })
 
-  useEffect(() => {
-    const aux = [size35, size36, size37, size38, size39, size40, size41, size42, size43]
-    if (prodDetail) {
-      setInput({
-        title: prodDetail.title,
-        model: prodDetail.model,
-        image: prodDetail.image,
-        price: prodDetail.price,
-        brand: prodDetail.brands && prodDetail.brands.map(b=>b.name),
-        category: prodDetail.categories && prodDetail.categories.map(c=>c.name),
-        size: aux,
-      });
-    }
-  }, [prodDetail, size35, size36, size37, size38, size39, size40, size41, size42, size43]);
   const handleOnChange = (e) => {
     e.preventDefault()
     setSize35({
@@ -232,7 +218,7 @@ export default function EditProduct() {
     }
     return errors;
   };
-
+  console.log(input.size)
   return (
     <div className={styles.Container}>
       <Link to="/admin/products">
