@@ -2,7 +2,11 @@ const { DataTypes } = require('sequelize')
 
 module.exports = (sequelize) => {
     sequelize.define('detailsOrder', {
-        productName:{
+        product_id:{
+            type: DataTypes.STRING,
+            allownull: false
+        },
+        product_name:{
             type: DataTypes.STRING,
             allownull: false
         },
@@ -14,7 +18,7 @@ module.exports = (sequelize) => {
             type: DataTypes.FLOAT,
             allownull: false
         },
-        sizeNumber:{
+        sizes_sold:{
             type: DataTypes.ARRAY(DataTypes.INTEGER),
             allownull: false
         },

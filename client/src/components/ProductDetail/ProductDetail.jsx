@@ -5,7 +5,7 @@ import { ToastContainer, toast } from "react-toastify";
 import styles from "./ProductDetail.module.css";
 
 
-function ProductDetail({ id }) {
+function ProductDetail({ id, closeModal }) {
     const myShoes = useSelector((state) => state.details);
     console.log('myshoes -->',myShoes)
     const dispatch = useDispatch();
@@ -43,7 +43,8 @@ function ProductDetail({ id }) {
             })
         } else {
             dispatch(addOneToCart(shoesAdd));
-            localStorage.setItem('cart' ,JSON.stringify([shoesAdd]))
+            const cartCurrent = JSON.parse(localStorage.getItem('cart'))
+            localStorage.setItem('cart' ,JSON.stringify([...cartCurrent, shoesAdd]))
 
             toast.success("Tu producto fue agregado al carrito!", {
                 className: "cart-toast",
@@ -51,7 +52,9 @@ function ProductDetail({ id }) {
                 position: toast.POSITION.TOP_CENTER,
             });
             setSize([]);
+            closeModal()
         }
+
     };
 
     return (

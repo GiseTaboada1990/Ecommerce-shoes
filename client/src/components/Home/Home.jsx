@@ -82,7 +82,7 @@ export default function HomePage() {
  
   return(
     <div>
-        <NavBar/>
+        {/* <NavBar/> */}
         <Banner/>
         <Pagination
         shoesPerPage={shoesPerPage}

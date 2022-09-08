@@ -14,7 +14,7 @@ import { getAllShoes } from "../../redux/actions";
 
 
 export default function NavBar() {
-  
+
   const user = JSON.parse(localStorage.getItem("user"))
   console.log(user)
   const { isAuthenticated } = useAuth0()
@@ -27,7 +27,7 @@ export default function NavBar() {
 
   return (
 
-    <Navbar style={{background: "#212121"}} expand="lg" className={styles.navbar}>
+    <Navbar style={{ background: "#212121" }} expand="lg" className={styles.navbar}>
       <Container fluid>
         <button onClick={(e) => handleReset(e)} className={styles.resetButton}>
           <Navbar.Brand className={styles.yourShoes}>
@@ -56,10 +56,21 @@ export default function NavBar() {
                 </Link>
               </Nav.Link>
             </div>
-            {isAuthenticated ? (
+
+            {
+              user && user.isAdmin === true ?
+                <Link to="/admin">
+                  <button className={styles.createProdButton}>
+                    <p className={styles.link}>Dashboard admin</p>
+                  </button>
+                </Link> : <p></p>
+            }
+          </Nav>
+          {
+            isAuthenticated ? (
               <div className={styles.containerLogout}>
                 <div className={styles.logout_button}>
-                  <LogoutButtonAuth0/>
+                  <LogoutButtonAuth0 />
                 </div>
                 <div>
                   <Link to="/datauser">
@@ -77,16 +88,10 @@ export default function NavBar() {
               </div>
             ) : (
               <div className={styles.containerLogout}>
-                <LoginButtonAuth0 className={styles.icon}/>
+                <LoginButtonAuth0 className={styles.icon} />
               </div>
-            )}
-            { user && user.isAdmin === true ?
-            <Link to="/admin">
-              <button className={styles.createProdButton}>
-                <p className={styles.link}>Dashboard admin</p>
-              </button>
-              </Link> : <p></p>}
-          </Nav>
+            )
+          }
         </Navbar.Collapse>
       </Container>
     </Navbar>

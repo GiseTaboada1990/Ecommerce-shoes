@@ -7,21 +7,15 @@ router.put("/", async (req, res) => {
   const { idOrden } = req.body
 
   try {
-    const idAll = req.body.cart;
     const order = await Order.findByPk(idOrden, { include: [{ all: true }] })
 
-    let productId = [];
-    let sizeId;
-    let productArray = [];
+    const idsOfProducts = order.detailsOrders.map(product => product.product_id)
+    const soldProducts = []
 
-    for (let i = 0; i < order.products.length; i++) {
-      productId.push(order.products[i].id)
-    }
-
-    for (let i = 0; i < productId.length; i++) {
+    for (let i = 0; i < idsOfProducts.length; i++) {
       const productCopy = await Product.findOne({
-        where: { id: productId[i] }, 
-        include: [{ model: Size, where: { number: { [Op.or]: order.detailsOrders[i].sizeNumber } } }]
+        where: { id: idsOfProducts[i] }, 
+        include: [{ model: Size, where: { number: { [Op.or]: order.detailsOrders[i].sizes_sold } } }]
       })
 
       const idSizes = productCopy.sizes.map(s => s.id)
@@ -40,18 +34,15 @@ router.put("/", async (req, res) => {
       }
       await productCopy.save();
 
-      productArray.push(productCopy);
+      soldProducts.push(productCopy);
     }
 
-    res.status(200).json(productArray)
+    res.status(200).json(soldProducts)
 
   } catch (error) {
     console.log(error)
     res.status(404).json(error)
   }
 });
-
-
-
 
 module.exports = router

@@ -16,9 +16,7 @@ router.post("/", async (req, res) => {
     let totalTotal = [];
     let totalTotal1 = 0;
 
-    const userId = await User.findOne({
-      where: { id: userBody}
-    });
+    const userId = await User.findByPk(userBody);
 
     for (let i = 0; i < idAll.length; i++) {
       productId.push(idAll[i].id) && quantity1.push(idAll[i].quantity);
@@ -51,10 +49,11 @@ router.post("/", async (req, res) => {
     const date = new Date();
     
     const detailsOrder = await DetailsOrder.bulkCreate(idAll.map(product => ({
-      productName: product.title,
+      product_id: product.id,
+      product_name: product.title,
       quantity: product.quantity,
       unit_price: product.price,
-      sizeNumber: product.sizeNumber
+      sizes_sold: product.sizeNumber
     })))
 
     const newOrder = await Order.create({
@@ -101,7 +100,7 @@ router.get("/", async (req, res) => {
 router.get("/:id", async (req, res) => {
   const { id } = req.params
   try {
-    const found = await Order.findByPk(id, { include:[{ all: true }] })
+    const found = await Order.findByPk(id, { include: [{ all: true }] })
     if (found) res.send(found)
     else res.status(404).send("ID not found")
   } catch (error) {

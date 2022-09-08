@@ -20,7 +20,7 @@ export default function Favorites() {
 
   return (
     <div>
-      <Navbar2></Navbar2>
+      {/* <Navbar2></Navbar2> */}
       <div className={styles.container}>
         <div className={styles.favoritosTitle}>
           <h3 className={styles.favoritosTitle2}>Tus productos favoritos</h3>

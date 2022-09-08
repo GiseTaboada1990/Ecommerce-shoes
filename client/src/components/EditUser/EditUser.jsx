@@ -35,7 +35,7 @@ export default function EditUser() {
 
   return (
     <div className={styles.contenedor}>
-    <Navbar2/>
+    {/* <Navbar2/> */}
       <Formik
         initialValues={{
           image: usuario?.image ? usuario.image : "",  

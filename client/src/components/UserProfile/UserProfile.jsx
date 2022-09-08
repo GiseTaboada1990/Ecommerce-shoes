@@ -9,7 +9,7 @@ export default function UserProfile() {
   console.log(infoUser)
   return (
     <div className={styles.container}>
-      <Navbar2></Navbar2>
+      {/* <Navbar2></Navbar2> */}
       <div>
         <Link to="/edituser">
           <button className={styles.editBtn}>Editar</button>

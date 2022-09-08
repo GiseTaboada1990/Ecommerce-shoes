@@ -102,33 +102,4 @@ router.get("/pending/:id", async (req, res) => {
   }
 });
 
-
-/*  const url = "https://api.mercadopago.com/checkout/preferences";
- const body = {
-   items: item,
-   back_urls: {
-     failure: `${API_URL}/payments/failure/${id}`,
-     pending: `${API_URL}/payments/pending/${id}`,
-     success: `${API_URL}/payments/success/${id}`,
-   }
- };
- const payment = await axios.post(url, body, {
-   headers: {
-     "Content-Type": "application/json",
-     Authorization: `Bearer ${process.env.ACCES_TOKEN}`,
-   },
- });
-////ACCES_TOKEN = APP_USR-7186342339590293-051403-1dd7693603cbe79be81d357b18b1a2cc-185162521
-
-   const result = [
-     payment.data.init_point,
-     payment.data.id,
-     payment.data.items.map((e) => {
-     return e;
-     }),
-   ];
-   console.log("Esto es payments ", payment);
-   return result; */
-
-
 module.exports = router;
