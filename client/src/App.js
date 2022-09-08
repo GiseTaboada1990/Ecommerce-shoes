@@ -12,7 +12,6 @@ import AboutUs from "./components/About/AboutUs"
 import SocialFollow from "./components/About/SocialFollow";
 import Community from "./components/About/Community";
 import CreateProduct from "./components/CreateProduct/CreateProduct";
-import EditProduct from "./components/EditProduct/EditProduct";
 import MercadoPago from "./components/MercadoPago/MercadoPago";
 import Cart from "./components/Cart/Cart";
 
@@ -59,7 +58,6 @@ function App() {
         <Route exact path="/contact" element={<SocialFollow/>}/>
         <Route exact path="/community" element={<Community/>}/>
         <Route exact path="/post" element={<CreateProduct/>}/>
-        <Route exact path="/edit/:id" element={<EditProduct/>}/>
         <Route exact path="/cart" element={<Cart />} />
         <Route exact path="/mercadopago" element={<MercadoPago />} />
       </Routes>
