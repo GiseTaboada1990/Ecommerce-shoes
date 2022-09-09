@@ -12,7 +12,7 @@ function ProductDetail({ id, closeModal }) {
     const navigate = useNavigate()
     const dispatch = useDispatch();
     useEffect(() => {
-        dispatch(getDetails(id, false));
+        dispatch(getDetails(id));
         return () => {
             dispatch(cleanDetails())
         }

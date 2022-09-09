@@ -54,7 +54,7 @@ const cargoalDB = async () => {
     });
   })
 
-  const shoesConflicts = ['MLA1142122158', 'MLA1120923058', 'MLA1122533893', 'MLA1148732023']
+  const shoesConflicts = ['MLA1142122158', 'MLA1120923058', 'MLA1122533893', 'MLA1148732023', 'MLA606762500']
   const cargoFinal = data.filter(e => !shoesConflicts.includes(e.id))
 
   return cargoFinal

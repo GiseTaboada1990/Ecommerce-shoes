@@ -60,7 +60,7 @@ export const getAllShoes = () => {
     });
   };
 }
-export const getDetails = (id, edit=true) => {
+export const getDetails = (id, edit=false) => {
   return async (dispatch) => {
     const res = await axios(`${URL}/shoes/${id}?edit=${edit}`);
     return dispatch({

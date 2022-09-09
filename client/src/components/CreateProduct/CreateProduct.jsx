@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Link, useLocation, useNavigate} from "react-router-dom";
-import { cleanDetails, URL } from "../../redux/actions";
+import { cleanDetails, getDetails, URL } from "../../redux/actions";
 import styles from "./CreateProduct.module.css";
 import { Widget } from "@uploadcare/react-widget";
 import { toast } from "react-toastify";
@@ -47,39 +47,39 @@ export default function CreateProduct() {
 
 const[size35, setSize35] = useState({
     number:35,
-    stock:productEdit ? productEdit.sizes.find(e=>e.number===35).stock : 0
+    stock:productEdit && productEdit.sizes.find(e=>e.number===35)?.stock || 0
 })
 const[size36, setSize36] = useState({
   number:36,
-  stock:productEdit ? productEdit.sizes.find(e=>e.number===36).stock : 0
+  stock:productEdit && productEdit.sizes.find(e=>e.number===36)?.stock || 0
 })
 const[size37, setSize37] = useState({
   number:37,
-  stock:productEdit ? productEdit.sizes.find(e=>e.number===37).stock : 0
+  stock:productEdit && productEdit.sizes.find(e=>e.number===37)?.stock || 0
 })
 const[size38, setSize38] = useState({
   number:38,
-    stock: productEdit? productEdit.sizes.find(e => e.number===38).stock : 0
+    stock: productEdit && productEdit.sizes.find(e => e.number===38)?.stock || 0
 })
 const[size39, setSize39] = useState({
   number:39,
-    stock:productEdit ? productEdit.sizes.find(e=>e.number===39).stock : 0
+    stock:productEdit && productEdit.sizes.find(e=>e.number===39)?.stock || 0
   })
 const[size40, setSize40] = useState({
   number:40,
-  stock:productEdit ? productEdit.sizes.find(e=>e.number===40).stock : 0
+  stock:productEdit && productEdit.sizes.find(e=>e.number===40)?.stock || 0
 })
 const[size41, setSize41] = useState({
   number:41,
-  stock:productEdit ? productEdit.sizes.find(e=>e.number===41).stock : 0
+  stock:productEdit && productEdit.sizes.find(e=>e.number===41)?.stock || 0
 })
 const[size42, setSize42] = useState({
   number:42,
-  stock:productEdit ? productEdit.sizes.find(e=>e.number===42).stock : 0
+  stock:productEdit && productEdit.sizes.find(e=>e.number===42)?.stock || 0
 })
 const[size43, setSize43] = useState({
   number:43,
-  stock:productEdit ? productEdit.sizes.find(e=>e.number===43).stock : 0
+  stock:productEdit && productEdit.sizes.find(e=>e.number===43)?.stock || 0
 })
 
 const handleOnChange = (e)=>{
@@ -145,6 +145,9 @@ const handleOnChange8 = (e)=>{
     stock: e.target.value
 })
 }
+useEffect(()=>{
+  if(productEdit && productEdit.id)dispatch(getDetails(productEdit.id, true))
+},[dispatch, productEdit])
 
 useEffect(()=>{
   const aux = [size35,size36,size37,size38,size39,size40,size41,size42,size43]
