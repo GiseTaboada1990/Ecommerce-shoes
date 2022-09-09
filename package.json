@@ -1,5 +1,6 @@
 {
   "dependencies": {
+    "node.js": "^0.0.1-security",
     "serve": "^14.0.1"
   }
 }
