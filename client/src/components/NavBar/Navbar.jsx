@@ -5,7 +5,7 @@ import Navbar from "react-bootstrap/Navbar";
 import { BsFillCartFill } from "react-icons/bs";
 import { FaHeart } from "react-icons/fa";
 import { Link } from "react-router-dom";
-import styles from "./NavBar.module.css";
+import styles from "./Navbar.module.css";
 import { useAuth0 } from "@auth0/auth0-react";
 import LogoutButtonAuth0 from "../authzero/LogoutButtonAuth0";
 import LoginButtonAuth0 from "../authzero/LoginButtonAuth0";
