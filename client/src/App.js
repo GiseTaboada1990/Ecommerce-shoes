@@ -15,7 +15,7 @@ import CreateProduct from "./components/CreateProduct/CreateProduct";
 import MercadoPago from "./components/MercadoPago/MercadoPago";
 import Cart from "./components/Cart/Cart";
 import NavBar from "./components/NavBar/Navbar";
-import Admin from "./components/Admin/Admin";
+
 
 function App() {
 
@@ -63,7 +63,6 @@ function App() {
         <Route exact path="/post" element={<CreateProduct/>}/>
         <Route exact path="/cart" element={<Cart />} />
         <Route exact path="/mercadopago" element={<MercadoPago />} />
-        <Route exact path="/admin" element={<Admin />} />
       </Routes>
     </Router>
   );
