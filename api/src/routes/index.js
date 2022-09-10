@@ -18,7 +18,7 @@ const user = require("./users")
 router.use("/user", user)
 router.use("/auth", authGoogle)
 router.use("/inactives", inactives)
-//router.use("/payments", paymants)
+router.use("/payments", paymants)
 router.use("/order", order)
 router.use("/stock", stock);
 router.use("/shoes", shoesRouter);
