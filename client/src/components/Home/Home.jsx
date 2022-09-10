@@ -8,10 +8,10 @@ import styles from "./Home.module.css";
 import NavBar from "../NavBar/Navbar";
 import Filters from "../Filters/Filters";
 import Modal from "react-modal";
-import Chatbot from "react-chatbot-kit";
+/* import Chatbot from "react-chatbot-kit";
 import config from "../Chatbot/chatbotConfig";
 import ActionProvider from "../Chatbot/ActionProvider";
-import MessageParser from "../Chatbot/MessageParser";
+import MessageParser from "../Chatbot/MessageParser"; */
 import Banner from "../Banner/Banner";
 import About from "../About/Footer";
 
@@ -121,11 +121,11 @@ export default function HomePage() {
         onRequestClose={closeModal}
         style={customStyles}
       > 
-        <Chatbot
+        {/* <Chatbot
           config={config}
           actionProvider={ActionProvider}
           messageParser={MessageParser}
-        ></Chatbot>
+        ></Chatbot> */}
       </Modal>
     </div>
   )
