@@ -1,4 +1,4 @@
-/* const { Router } = require("express");
+const { Router } = require("express");
 const router = Router();
 const axios = require("axios");
 const mercadopago = require("mercadopago");
@@ -102,4 +102,4 @@ router.get("/pending/:id", async (req, res) => {
   }
 });
 
-module.exports = router; */
+module.exports = router;
