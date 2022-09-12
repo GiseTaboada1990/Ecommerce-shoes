@@ -198,9 +198,6 @@ useEffect(()=>{
       if (respuesta === true) {
         dispatch(cleanDetails())
         axios.put(`${URL}/shoes/${id}`, input)
-          .then(res => {
-            alert(res)
-          })
       }
     }
     confirmacion()

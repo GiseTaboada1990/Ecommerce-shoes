@@ -20,8 +20,6 @@ import About from "../About/Footer";
 export default function HomePage() {
   const dispatch = useDispatch();
   const allProducts = useSelector((state) => state.products);
-  console.log(allProducts)
-
   const [modalIsOpen, setIsOpen] = useState(false);
   const openModal = () => {
     setIsOpen(true);
