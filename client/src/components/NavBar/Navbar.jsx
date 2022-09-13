@@ -4,7 +4,7 @@ import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
 import { BsFillCartFill } from "react-icons/bs";
 import { FaHeart } from "react-icons/fa";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import styles from "./NavBar.module.css";
 import { useAuth0 } from "@auth0/auth0-react";
 import LogoutButtonAuth0 from "../authzero/LogoutButtonAuth0";
@@ -14,6 +14,8 @@ import { getAllShoes } from "../../redux/actions";
 
 
 export default function NavBar() {
+
+  const { pathname } = useLocation()
 
   const user = JSON.parse(localStorage.getItem("user"))
   console.log(user)
@@ -27,13 +29,13 @@ export default function NavBar() {
 
   return (
 
-    <Navbar style={{ background: "#212121" }} expand="lg" className={styles.navbar}>
+    <Navbar expand="lg" className={`${styles.navbar} fixed-top navbar-dark`}>
       <Container fluid>
-        <button onClick={(e) => handleReset(e)} className={styles.resetButton}>
+        <Link to="/" className={styles.resetButton}>
           <Navbar.Brand className={styles.yourShoes}>
             Your<span>Shoes</span>
           </Navbar.Brand>
-        </button>
+        </Link>
         <Navbar.Toggle aria-controls="navbarScroll" />
         <Navbar.Collapse id="navbarScroll">
           <Nav
@@ -41,25 +43,32 @@ export default function NavBar() {
             style={{ maxHeight: "100px" }}
             navbarScroll
           >
-            <div className={styles.containerLogout}>
-              <Nav.Link className={styles.icon}>
-                <Link to="/cart" className={styles.Link}>
-                  {" "}
-                  <BsFillCartFill style={{ color: "#f87d2d" }} />
-                </Link>
-              </Nav.Link>
-            </div>
-            <div className={styles.containerLogout}>
-              <Nav.Link className={styles.icon}>
-                <Link to="/favorites">
-                  <FaHeart style={{ color: "#f87d2d" }} />
-                </Link>
-              </Nav.Link>
-            </div>
+            {
+              pathname.includes('admin') ?
+              'ADMIN' // Aquí pueden ir otras opcione para el admin
+              :
+              <>
+              <div className={styles.containerLogout}>
+                <Nav.Link className={styles.icon}>
+                  <Link to="/cart" className={styles.Link}>
+                    {" "}
+                    <BsFillCartFill style={{ color: "#f87d2d" }} />
+                  </Link>
+                </Nav.Link>
+              </div>
+              <div className={styles.containerLogout}>
+                <Nav.Link className={styles.icon}>
+                  <Link to="/favorites">
+                    <FaHeart style={{ color: "#f87d2d" }} />
+                  </Link>
+                </Nav.Link>
+              </div>
+              </>
+            }
 
             {
               user && user.isAdmin === true ?
-                <Link to="/admin">
+                <Link to="/admin/home">
                   <button className={styles.createProdButton}>
                     <p className={styles.link}>Dashboard admin</p>
                   </button>
@@ -78,7 +87,7 @@ export default function NavBar() {
                       <img
                         className={styles.img}
                         src="https://cdn4.iconfinder.com/data/icons/e-commerce-181/512/477_profile__avatar__man_-512.png"
-                        alt={user.image}
+                        alt={user.name}
                       />
                     ) : (
                       <img className={styles.img} src={user.image} alt={user.image} />

@@ -16,7 +16,7 @@ import EditProduct from "./components/EditProduct/EditProduct";
 import MercadoPago from "./components/MercadoPago/MercadoPago";
 import Cart from "./components/Cart/Cart";
 import NavBar from "./components/NavBar/Navbar";
-import Admin from "./components/Admin/Admin";
+import Dashboard from "./components/Admin/Dashboard";
 
 function App() {
 
@@ -65,7 +65,7 @@ function App() {
         <Route exact path="/edit/:id" element={<EditProduct/>}/>
         <Route exact path="/cart" element={<Cart />} />
         <Route exact path="/mercadopago" element={<MercadoPago />} />
-        <Route exact path="/admin" element={<Admin />} />
+        <Route exact path="/admin/*" element={<Dashboard />} />
       </Routes>
     </Router>
   );

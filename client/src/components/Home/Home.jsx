@@ -81,7 +81,7 @@ export default function HomePage() {
   //Paginado//
  
   return(
-    <div>
+    <div style={{ marginTop: '10px' }}>
         {/* <NavBar/> */}
         <Banner/>
         <Pagination
