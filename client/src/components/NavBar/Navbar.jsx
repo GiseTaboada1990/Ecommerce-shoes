@@ -18,7 +18,6 @@ export default function NavBar() {
   const { pathname } = useLocation()
 
   const user = JSON.parse(localStorage.getItem("user"))
-  console.log(user)
   const { isAuthenticated } = useAuth0()
   const dispatch = useDispatch()
 

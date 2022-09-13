@@ -1,12 +1,13 @@
 const { Router } = require("express");
 const router = Router();
-const { User, Order } = require('../db.js');
+const { User } = require('../db.js');
+const { mail } = require('../controllers/nodemailer');
 
 router.post('/', async (req, res) => {
     const { name, surname, image, username, email, phone_number, date_of_Birth, address } = req.body
 
     try {
-           await User.findOrCreate({
+          const [newUser, created] = await User.findOrCreate({
             where: { email },
             defaults: {
                 name,
@@ -19,8 +20,8 @@ router.post('/', async (req, res) => {
                 isAdmin: email === "isAdmin@gmail.com" ? true : false
             }
         })
-        const dataUser= await User.findOne({include:{all:true}})
-        res.status(200).json(dataUser)
+        if(created) await mail(email)
+        res.status(200).json(newUser)
     } catch (error) {
         console.log('AUTH_GOOGLE -->',error)
         res.status(500).json(error)

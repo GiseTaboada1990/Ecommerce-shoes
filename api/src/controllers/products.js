@@ -5,13 +5,14 @@ const { getAllProducts } = require('.');
 async function getByName(name) {
     try {
         const nameSearch = await Product.findAll({
-            where: {[Op.and]:[{ 
+            where: {[Op.or]:[{ 
               title: { [Op.iLike]: `%${name}%` }},
-              {isActive:true},
+              {id: { [Op.iLike]: `%${name}%` }},
             ]},
             include: [
               { model: Brand },
-              { model: Category }
+              { model: Category },
+              { model: Size, where:{isActive:true}}
             ]
           })
     
@@ -30,6 +31,7 @@ async function getByBrand(brand) {
           include: [
             { model: Brand, where: { name: { [Op.iLike]: `%${brand}%` } } },
             { model: Category },
+            { model: Size, where:{isActive:true}}
           ]
         })
         return results
@@ -46,6 +48,7 @@ async function getByCategory(category) {
           include: [
             { model: Brand },
             { model: Category, where: { name: { [Op.iLike]: `%${category}%` } } },
+            { model: Size, where:{isActive:true}}
           ]
         })
         
@@ -70,6 +73,7 @@ async function getByPrice(priceMin, priceMax) {
           include: [
             { model: Brand },
             { model: Category },
+            { model: Size, where:{isActive:true}}
           ]
         })
         results.sort((a, b) => b.price - a.price) // ordeno precio de mayor a menor

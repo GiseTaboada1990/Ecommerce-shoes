@@ -1,6 +1,6 @@
 const { Router } = require("express");
 const { Product, Brand, Category, Size } = require("../db.js");
-const { Op, BOOLEAN } = require("sequelize");
+const { Op } = require("sequelize");
 const {
   getByName,
   getByBrand,
@@ -13,7 +13,7 @@ const { getAllFilters } = require("../controllers/filtersCombinations");
 const router = Router();
 
 router.get("/", async (req, res, next) => {
-  const { name, priceMax, priceMin, brand, category, size } = req.query;
+  const { name, priceMax, priceMin, brand, category, size} = req.query;
   const options = getAllFilters(req.query);
   
   if (Object.keys(options).length) {

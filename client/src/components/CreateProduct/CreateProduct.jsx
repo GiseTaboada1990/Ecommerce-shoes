@@ -1,27 +1,34 @@
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
-import { URL } from "../../redux/actions";
+import { Link, useLocation, useNavigate} from "react-router-dom";
+import { cleanDetails, getDetails, URL } from "../../redux/actions";
 import styles from "./CreateProduct.module.css";
 import { Widget } from "@uploadcare/react-widget";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useEffect } from "react";
 import axios from "axios";
+import { useDispatch } from "react-redux";
 
 
 export default function CreateProduct() {
+  
+  const location = useLocation()
+  const productEdit = location.state
+  const dispatch = useDispatch()
+    
+  const inicialForm = {
+      title: productEdit? productEdit.title : "",
+      model: productEdit? productEdit.model : "",
+      image: productEdit? productEdit.image : "",
+      price: productEdit? productEdit.price: "",
+      brand: productEdit? productEdit.brands.map(b=>b.name):"",
+      category: productEdit? productEdit.categories.map(c=>c.name):""
+  }
+
   const navigate = useNavigate()
   const [errors, setErrors] = useState({ first: true });
   
-  const [input, setInput] = useState({
-    title: "",
-    model: "",
-    image: "",
-    price: 0,
-    size: [],
-    brand: "",
-    category: "",
-  });
+  const [input, setInput] = useState(inicialForm);
 
   const imgChange = (file) => {
     setInput({
@@ -39,39 +46,39 @@ export default function CreateProduct() {
 
 const[size35, setSize35] = useState({
     number:35,
-    stock:0
+    stock:productEdit && productEdit.sizes.find(e=>e.number===35)?.stock || 0
 })
 const[size36, setSize36] = useState({
   number:36,
-  stock:0
+  stock:productEdit && productEdit.sizes.find(e=>e.number===36)?.stock || 0
 })
 const[size37, setSize37] = useState({
   number:37,
-  stock:0
+  stock:productEdit && productEdit.sizes.find(e=>e.number===37)?.stock || 0
 })
 const[size38, setSize38] = useState({
   number:38,
-    stock:0
+    stock: productEdit && productEdit.sizes.find(e => e.number===38)?.stock || 0
 })
 const[size39, setSize39] = useState({
   number:39,
-    stock:0
+    stock:productEdit && productEdit.sizes.find(e=>e.number===39)?.stock || 0
   })
 const[size40, setSize40] = useState({
   number:40,
-  stock:0
+  stock:productEdit && productEdit.sizes.find(e=>e.number===40)?.stock || 0
 })
 const[size41, setSize41] = useState({
   number:41,
-  stock:0
+  stock:productEdit && productEdit.sizes.find(e=>e.number===41)?.stock || 0
 })
 const[size42, setSize42] = useState({
   number:42,
-  stock:0
+  stock:productEdit && productEdit.sizes.find(e=>e.number===42)?.stock || 0
 })
 const[size43, setSize43] = useState({
   number:43,
-  stock:0
+  stock:productEdit && productEdit.sizes.find(e=>e.number===43)?.stock || 0
 })
 
 const handleOnChange = (e)=>{
@@ -137,7 +144,9 @@ const handleOnChange8 = (e)=>{
     stock: e.target.value
 })
 }
-
+useEffect(()=>{
+  if(productEdit && productEdit.id)dispatch(getDetails(productEdit.id, true))
+},[dispatch, productEdit])
 
 useEffect(()=>{
   const aux = [size35,size36,size37,size38,size39,size40,size41,size42,size43]
@@ -146,6 +155,7 @@ useEffect(()=>{
     size:aux
   })
 },[size35,size36,size37,size38,size39,size40,size41,size42,size43])
+
   const handleChange = (e) => {
     e.preventDefault();
     setInput({
@@ -159,9 +169,9 @@ useEffect(()=>{
       })
       );
     };
+
     const handleSubmit = (e) => {
-      
-      e.preventDefault();
+       e.preventDefault();
       axios.post(`${URL}/shoes`, input);
       setInput({
         title: "",
@@ -177,8 +187,21 @@ useEffect(()=>{
         draggable: true,
         position: toast.POSITION.TOP_CENTER,
       });
-      navigate("/")
     };
+
+  const handleEdit = (e, id) => {
+    e.preventDefault()
+    function confirmacion() {
+      var respuesta = window.confirm('Are you sure you want to edit the activity?')
+      if (respuesta === true) {
+        dispatch(cleanDetails())
+        axios.put(`${URL}/shoes/${id}`, input)
+      }
+    }
+    confirmacion()
+    navigate("/")
+  }
+
     
     //Validaciones//
     const validations = (input) => {
@@ -199,14 +222,16 @@ useEffect(()=>{
 
   return (
     <div className={styles.Container}>
-      {/* <Link to="/">
+      <Link to="/">
         <button className={styles.homeButton}>
           YOUR<span className={styles.shoes}>SHOES</span>
         </button>
-      </Link> */}
+      </Link>
       <h1 className={styles.title}>Publicación de producto</h1>
       <div className={styles.allContainer}>
-        <form onSubmit={(e) => handleSubmit(e)} className={styles.form}>
+        <form onSubmit={productEdit ? (e)=>handleEdit(e, productEdit.id) :
+            (e) => { handleSubmit(e) }}
+             className={styles.form}>
           <div className={styles.infoContainer}>
             <label className={styles.label}>Título del producto </label>
             <input
@@ -359,7 +384,7 @@ useEffect(()=>{
           <div>
             {!Object.keys(errors).length ? (
               <button type="submit" className={styles.createButton}>
-                CREAR PRODUCTO
+                Enviar
               </button>
             ) : (
               <button
@@ -367,7 +392,7 @@ useEffect(()=>{
                 className={styles.createButton}
                 disabled={true}
               >
-                CREAR PRODUCTO
+                Enviar
               </button>
             )}
           </div>

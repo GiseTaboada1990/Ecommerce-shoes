@@ -202,7 +202,7 @@ export default function Filters({setCurrentPage}) {
               {allBrands &&
                 allBrands.map((brand) => {
                 <option value={"default"} disabled>Marcas</option>
-                  return <option>{brand.name}</option>;
+                  return <option key={brand.id}>{brand.name}</option>;
                 })}
             </select>
         <select
@@ -210,15 +210,11 @@ export default function Filters({setCurrentPage}) {
           value={categoryFilter}
           className={styles.brandSelect}
         >
-          <option value={"default"} disabled>
-            Categorías
-          </option>
+          <option value={"default"} disabled>Categorías</option>
           <option value="Zapatillas">Zapatillas</option>
           <option value="Botas y Botinetas">Botas y Botinetas</option>
           <option value="Sandalias y Ojotas">Sandalias y Ojotas</option>
-          <option value="Stilletos y Plataformas">
-            Stilletos y Plataformas
-          </option>
+          <option value="Stilletos y Plataformas">Stilletos y Plataformas</option>
           <option value="Mocasines y Oxfords">Mocasines y Oxfords</option>
           <option value="Pantuflas">Pantuflas</option>
           <option value="Chatitas">Chatitas</option>
@@ -260,10 +256,10 @@ export default function Filters({setCurrentPage}) {
           <button type="submit" className={styles.priceButton}>
             ➤
           </button>
+          </form>
           <Searchbar
             handleInputName={handleInputName}
             handleNameSubmit={handleNameSubmit}/>
-        </form>
       </div>
     )
 }

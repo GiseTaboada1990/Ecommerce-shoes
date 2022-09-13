@@ -59,7 +59,7 @@ sequelize.models = Object.fromEntries(capitalizadedEntries);
 
 // Destructuring models from sequelize.models
 // here -->
-const { Category, Product, Order, User, Brand, Role, Size, Review, DetailsOrder } = sequelize.models;
+const { Category, Product, Order, User, Brand, Size, Review, DetailsOrder } = sequelize.models;
 // Relations of models
 // here -->
 
