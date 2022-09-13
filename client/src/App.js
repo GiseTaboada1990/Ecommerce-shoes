@@ -50,7 +50,7 @@ function App() {
 
   return (
     <Router>
-      <NavBar />
+      <NavBar/>
       <Routes>
         <Route exact path="/" element={<HomePage/>} />
         <Route exact path="/shoes/:id" element={<ProductDetail/>} />

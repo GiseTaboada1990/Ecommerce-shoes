@@ -16,7 +16,6 @@ import { getAllShoes } from "../../redux/actions";
 export default function NavBar() {
 
   const user = JSON.parse(localStorage.getItem("user"))
-  console.log(user)
   const { isAuthenticated } = useAuth0()
   const dispatch = useDispatch()
 

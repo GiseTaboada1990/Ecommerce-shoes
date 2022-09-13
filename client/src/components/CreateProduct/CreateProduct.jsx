@@ -14,7 +14,6 @@ export default function CreateProduct() {
   
   const location = useLocation()
   const productEdit = location.state
-  console.log(productEdit)
   const dispatch = useDispatch()
     
   const inicialForm = {
@@ -188,7 +187,6 @@ useEffect(()=>{
         draggable: true,
         position: toast.POSITION.TOP_CENTER,
       });
-      navigate("/")
     };
 
   const handleEdit = (e, id) => {
@@ -201,6 +199,7 @@ useEffect(()=>{
       }
     }
     confirmacion()
+    navigate("/")
   }
 
     
@@ -220,7 +219,7 @@ useEffect(()=>{
       }
       return errors;
     };
-    console.log(input.size)
+
   return (
     <div className={styles.Container}>
       <Link to="/">

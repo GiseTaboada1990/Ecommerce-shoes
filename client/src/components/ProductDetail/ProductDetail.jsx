@@ -1,14 +1,14 @@
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import { addOneToCart, cleanDetails, getDetails } from '../../redux/actions';
-import { ToastContainer, toast } from "react-toastify";
+import { toast } from "react-toastify";
 import styles from "./ProductDetail.module.css";
 import { useNavigate } from 'react-router-dom';
 
 
 function ProductDetail({ id, closeModal }) {
     const myShoes = useSelector((state) => state.details);
-    console.log('myshoes -->',myShoes)
+    console.log('myshoes -->', myShoes)
     const navigate = useNavigate()
     const dispatch = useDispatch();
     useEffect(() => {
@@ -46,8 +46,7 @@ function ProductDetail({ id, closeModal }) {
         } else {
             dispatch(addOneToCart(shoesAdd));
             const cartCurrent = JSON.parse(localStorage.getItem('cart'))
-            localStorage.setItem('cart' ,JSON.stringify([...cartCurrent, shoesAdd]))
-
+            localStorage.setItem('cart', JSON.stringify([...cartCurrent, shoesAdd]))
             toast.success("Tu producto fue agregado al carrito!", {
                 className: "cart-toast",
                 draggable: true,
@@ -58,11 +57,11 @@ function ProductDetail({ id, closeModal }) {
         }
 
     };
-    const handleEdit=()=>{
-        navigate('/post',{
-            state:myShoes
+    const handleEdit = () => {
+        navigate('/post', {
+            state: myShoes
         })
-    }    
+    }
 
     return (
         <div>
@@ -111,7 +110,7 @@ function ProductDetail({ id, closeModal }) {
                                             <h4>
                                                 Cantidad: {size.length}
                                             </h4>
-                                            <h3 className={styles.price}>${myShoes.price}</h3>
+                                            <h3 className={styles.price}>${size.length? myShoes.price * size.length : myShoes.price}</h3>
                                         </div>
                                     </div>
                                 </div>
