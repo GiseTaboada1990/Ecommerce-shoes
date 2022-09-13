@@ -12,7 +12,10 @@ const order = require ("./order")
 const inactives = require("./inactives")
 const authGoogle = require("./authGoogle")
 const user = require("./users")
+const solds = require("./solds");
+
 //--------------------------ROUTES
+router.use("/solds", solds)
 router.use("/user", user)
 router.use("/auth", authGoogle)
 router.use("/inactives", inactives)
