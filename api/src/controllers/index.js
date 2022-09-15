@@ -38,8 +38,8 @@ const cargoalDB = async () => {
       id: e.id,
       title: e.title,
       image: e.thumbnail,
-      brand: e.attributes ? e.attributes[0].values[0].id : "Not found",
-      model: e.attributes && e.attributes.length === 3 ? e.attributes[2].value_name : "Not found",
+      brand: e.attributes ? e.attributes[0].values[0].id : "Your shoes",
+      model: e.attributes && e.attributes.length === 3 ? e.attributes[2].value_name : "Sin modelo",
       price: e.price, //parseInt(s.price)
       category: e.category_id,
       size: e.size ? e.size.map(s => {

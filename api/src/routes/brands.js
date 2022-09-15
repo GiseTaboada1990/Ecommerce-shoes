@@ -23,7 +23,7 @@ router.get("/", async (req, res) => {
         "MLA414674&BRAND=1088662",
         "MLA414610&BRAND=2658635",
         "MLA415192&BRAND=1088662",
-        "MLA414673&BRAND=238731",
+        // "MLA414673&BRAND=238731",
         // 'MLA455893', 'MLA414673' //---> NO TIENEN BRAND
       ].map((e) => url + e); // armo la url ej: "https://api.mercadolibre.com/sites/MLA/search?category=MLA109027&BRAND=14671"
       //console.log(ids)
@@ -41,11 +41,10 @@ router.get("/", async (req, res) => {
       const setBrands = [...new Set(brandsApi.map(JSON.stringify))].map(e => JSON.parse(e))
       //me la llevo para toda la vida
 
-
       setBrands.forEach(async (s) => {
         await Brand.findOrCreate({
           where: { id: s.id },
-          defaults: { name: s.brand === null? "YourShoes": s.brand }
+          defaults: { name: s.brand === null ? "YourShoes": s.brand }
         })
       })
       res.status(200).send(setBrands)

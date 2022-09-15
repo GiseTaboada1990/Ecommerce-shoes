@@ -3,9 +3,9 @@ import Container from "react-bootstrap/Container";
 import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
 import { BsFillCartFill } from "react-icons/bs";
-import { FaHeart } from "react-icons/fa";
+import { FaHeart, FaUserAlt } from "react-icons/fa";
 import { Link, useLocation } from "react-router-dom";
-import styles from "./NavBar.module.css";
+import styles from "./Navbar.module.css";
 import { useAuth0 } from "@auth0/auth0-react";
 import LogoutButtonAuth0 from "../authzero/LogoutButtonAuth0";
 import LoginButtonAuth0 from "../authzero/LoginButtonAuth0";
@@ -28,7 +28,7 @@ export default function NavBar() {
 
   return (
 
-    <Navbar expand="lg" className={`${styles.navbar} fixed-top navbar-dark`}>
+    <Navbar expand="lg" className={`${styles.navbar} fixed-top`}>
       <Container fluid>
         <Link to="/" className={styles.resetButton}>
           <Navbar.Brand className={styles.yourShoes}>
@@ -95,9 +95,16 @@ export default function NavBar() {
                 </div>
               </div>
             ) : (
-              <div className={styles.containerLogout}>
-                <LoginButtonAuth0 className={styles.icon} />
-              </div>
+              // <div className={styles.containerLogout}>
+              //   <LoginButtonAuth0 className={styles.icon} />
+              // </div>
+                <div className="nav-item d-flex align-items-center">
+                  <a href="#" className="nav-link text-body font-weight-bold px-0">
+                    {/* <i className="fa fa-user me-sm-1" aria-hidden="true"></i> */}
+                    <FaUserAlt className="me-sm-2" aria-hidden="true" color="f87d2d "/>
+                    <span className="d-sm-inline d-none">Sign In</span>
+                  </a>
+                </div>
             )
           }
         </Navbar.Collapse>

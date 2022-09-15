@@ -57,11 +57,6 @@ function ProductDetail({ id, closeModal }) {
         }
 
     };
-    const handleEdit = () => {
-        navigate('/post', {
-            state: myShoes
-        })
-    }
 
     return (
         <div>
@@ -125,7 +120,6 @@ function ProductDetail({ id, closeModal }) {
                                 Añadir al carro
                             </button>{" "}
                         </div>
-                        <button onClick={() => handleEdit(myShoes.id)}>Editar Producto</button>
                     </div>
                 </div>
             ) : (

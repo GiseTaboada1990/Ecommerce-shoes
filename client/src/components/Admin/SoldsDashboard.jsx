@@ -1,45 +1,22 @@
+import axios from 'axios'
 import React from 'react'
-
-const solds = [
-    {
-        id: 1,
-        product: 'Zapatillas Nike Vapor Lite 0453 Nike',
-        status: 'realizada',
-        date: '01/01/2022'
-    },
-    {
-        id: 2,
-        product: 'Zapatillas Nike Vapor Lite 0453 Nike',
-        status: 'realizada',
-        date: '01/01/2022'
-    },
-    {
-        id: 3,
-        product: 'Zapatillas Nike Vapor Lite 0453 Nike',
-        status: 'cancelada',
-        date: '01/01/2022'
-    },
-    {
-        id: 4,
-        product: 'Zapatillas Nike Vapor Lite 0453 Nike',
-        status: 'pendiente',
-        date: '01/01/2022'
-    },
-    {
-        id: 5,
-        product: 'Zapatillas Nike Vapor Lite 0453 Nike',
-        status: 'realizada',
-        date: '01/01/2022'
-    },
-    {
-        id: 6,
-        product: 'Zapatillas Nike Vapor Lite 0453 Nike',
-        status: 'realizada',
-        date: '01/01/2022'
-    },
-]
+import { useState } from 'react'
+import { useEffect } from 'react'
+import { URL } from '../../redux/actions'
 
 export default function SoldsDashboard() {
+
+    const [ solds, setSolds ] = useState([])
+
+    useEffect(() => {
+        axios(`${URL}/solds`)
+            .then(res => {
+                console.log(res.data)
+                setSolds(res.data)
+            })
+            .catch(error => console.log(error))
+    }, [])
+
   return (
     <div className="container-fluid py-4">
       <div className="row">
@@ -53,11 +30,11 @@ export default function SoldsDashboard() {
             <div className="card-body px-0 pb-2">
               <div className="table-responsive p-0">
                 <table className="table align-items-center justify-content-center mb-0">
-                  <thead>
+                  <thead className=' position-absolute'>
                     <tr>
                       <th className="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Id</th>
                       <th className="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Producto</th>
-                      <th className="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Status</th>
+                      <th className="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Talles</th>
                       <th className="text-uppercase text-secondary text-xxs font-weight-bolder text-center opacity-7 ps-2">Fecha</th>
                       <th className="text-uppercase text-secondary text-xxs font-weight-bolder text-center opacity-7 ps-2">Acciones</th>
                       <th></th>
@@ -75,10 +52,16 @@ export default function SoldsDashboard() {
                                     </div>
                                 </td>
                                 <td>
-                                    <p className="text-sm font-weight-bold mb-0">{sold.product}</p>
+                                    <p className="text-sm font-weight-bold mb-0">{sold.title}</p>
                                 </td>
                                 <td>
-                                    <span className="text-xs font-weight-bold">{sold.status}</span>
+                                    <ul className="text-xs font-weight-bold">
+                                        {
+                                            sold.sizes.map(s => (
+                                                <li >{s.number} | {s.solds}</li>
+                                            ))
+                                        }
+                                    </ul>
                                 </td>
                                 <td className="align-middle text-center">
                                     <div className="d-flex align-items-center justify-content-center">

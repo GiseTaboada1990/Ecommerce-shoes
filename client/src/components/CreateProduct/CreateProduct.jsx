@@ -227,7 +227,7 @@ useEffect(()=>{
           YOUR<span className={styles.shoes}>SHOES</span>
         </button>
       </Link>
-      <h1 className={styles.title}>Publicación de producto</h1>
+      <h1 className={styles.title}>{productEdit ? 'Editar' : 'Crear'} producto</h1>
       <div className={styles.allContainer}>
         <form onSubmit={productEdit ? (e)=>handleEdit(e, productEdit.id) :
             (e) => { handleSubmit(e) }}
