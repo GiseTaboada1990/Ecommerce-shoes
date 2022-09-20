@@ -11,6 +11,7 @@ import {
     REMOVER_TODO,
     ID_PAYMENT,
     LOGIN_USER,
+    GET_ALL_USER,
     FILTER_BY_NAME,
     FILTER_BY_CATEGORY,
     FILTER_BY_SIZE,
@@ -45,7 +46,8 @@ const initialState = {
     user: [],
     brands: [],
     cart: [],
-    idPayment: ''
+    idPayment: '',
+    users:[]
 };
 
 export default function rootReducer(state = initialState, action) {
@@ -54,6 +56,11 @@ export default function rootReducer(state = initialState, action) {
             return {
                 ...state,
                 products: action.payload
+            }
+        case GET_ALL_USER:
+            return{
+                ...state,
+                users: action.payload
             }
         case GET_DETAILS:
             return {

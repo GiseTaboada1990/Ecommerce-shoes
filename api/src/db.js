@@ -69,8 +69,11 @@ Product.belongsToMany(Category, {through: "category_product",timestamps: false})
 Brand.belongsToMany(Product, { through: "brand_product", timestamps: false });
 Product.belongsToMany(Brand, { through: "brand_product", timestamps: false });
 
-Review.belongsTo(User, { as: "author", allowNull: false });
-Review.belongsTo(Product, { as: "product", allowNull: false });
+Product.belongsToMany(Review, {through: 'review_product',timestamps: false})
+Review.belongsTo(Product)
+
+User.belongsToMany(Review, {through: 'user_review',timestamps: false})
+Review.belongsTo(User)
 
 User.belongsToMany(Order, { through: "user_order", timestamps: false });
 Order.belongsTo(User);

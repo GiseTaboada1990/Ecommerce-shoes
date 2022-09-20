@@ -40,6 +40,7 @@ export const ADD_ONE_TO_CART = 'ADD_ONE_TO_CART'
 export const DELETE_ONE_FROM_CART = 'DELETE_ONE_FROM_CART'
 export const REMOVER_TODO = "REMOVER_TODO"
 export const ID_PAYMENT = "ID_PAYMENT"
+export const GET_ALL_USER = 'GET_ALL_USER'
 
 
 export const URL = process.env.REACT_APP_URL;
@@ -60,6 +61,17 @@ export const getAllShoes = () => {
     });
   };
 }
+
+export const getAllUsers = () => {
+  return async (dispatch) => {
+    const results = await axios(`${URL}/user`);
+    return dispatch({
+      type: GET_ALL_USER,
+      payload: results.data,
+    });
+  };
+}
+
 export const getDetails = (id, edit=false) => {
   return async (dispatch) => {
     const res = await axios(`${URL}/shoes/${id}?edit=${edit}`);

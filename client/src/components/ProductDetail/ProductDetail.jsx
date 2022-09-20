@@ -4,9 +4,13 @@ import { addOneToCart, cleanDetails, getDetails } from '../../redux/actions';
 import { toast } from "react-toastify";
 import styles from "./ProductDetail.module.css";
 import { useNavigate } from 'react-router-dom';
+import Reviews from '../Reviews/Reviews';
+import { useAuth0 } from '@auth0/auth0-react'
 
 
 function ProductDetail({ id, closeModal }) {
+
+    const {isAuthenticated } = useAuth0()
     const myShoes = useSelector((state) => state.details);
     console.log('myshoes -->', myShoes)
     const navigate = useNavigate()
@@ -127,6 +131,7 @@ function ProductDetail({ id, closeModal }) {
                         </div>
                         <button onClick={() => handleEdit(myShoes.id)}>Editar Producto</button>
                     </div>
+                    {isAuthenticated && <Reviews myShoes = {myShoes}/>}
                 </div>
             ) : (
                 <div>
