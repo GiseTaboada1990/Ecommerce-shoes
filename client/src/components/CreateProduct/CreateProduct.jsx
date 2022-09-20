@@ -194,9 +194,10 @@ useEffect(()=>{
     e.preventDefault()
     swal({
       title:'Editar',
-      text:'Estás seguro de que deseas editar este producto',
+      text:'¿ Estás seguro de que deseas editar este producto ?',
       icon:'warning',
-      buttons:['No','Si']
+      buttons:['No','Si'],
+      timer:'3000'
     }).then(res=>{
       if(res){
       dispatch(cleanDetails())

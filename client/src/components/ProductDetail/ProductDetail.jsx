@@ -57,9 +57,8 @@ function ProductDetail({ id, closeModal }) {
                 position: toast.POSITION.TOP_CENTER,
             });
             setSize([]);
-            closeModal()
         }
-
+        closeModal()
     };
     const handleEdit = () => {
         navigate('/post', {
@@ -131,7 +130,9 @@ function ProductDetail({ id, closeModal }) {
                         </div>
                         <button onClick={() => handleEdit(myShoes.id)}>Editar Producto</button>
                     </div>
-                    {isAuthenticated && <Reviews myShoes = {myShoes}/>}
+                    {isAuthenticated && <Reviews 
+                    myShoes = {myShoes}
+                    closeModal={closeModal}/>}
                 </div>
             ) : (
                 <div>
