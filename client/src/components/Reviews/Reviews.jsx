@@ -89,7 +89,8 @@ function Reviews({myShoes}) {
       <span className={styles.error}>{error.rating}</span>
     )}
               <br/>
-              <input
+              <textarea
+              className={styles.inputConteiner}
               type='text'
               name='description'
               value={input.description}
@@ -104,7 +105,7 @@ function Reviews({myShoes}) {
                     ...input,
                     description: e.target.value
                   })
-                )}}></input>
+                )}}></textarea>
                 {error.length && !error.description ? null : (
               <span className={styles.error}>{error.description}</span>
             )}

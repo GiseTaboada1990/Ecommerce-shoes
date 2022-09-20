@@ -1,16 +1,19 @@
-input[type="radio"]{
+input[type="radio"] {
   display: none;
 }
+
 .star {
   cursor: pointer;
   transition: color 200ms;
 }
-.error{
+
+.error {
   font-size: 11px;
   color: #f8f9fa;
   display: flex;
 }
-.createButton{
+
+.createButton {
   margin-top: -1px;
   margin-left: 288px;
   width: 100px;
@@ -20,7 +23,8 @@ input[type="radio"]{
   background: black;
   color: white;
 }
-.createButton2{
+
+.createButton2 {
   margin-top: -1px;
   margin-left: 288px;
   width: 100px;
@@ -29,4 +33,11 @@ input[type="radio"]{
   font-size: 15px;
   background: gray;
   color: black;
+}
+
+.inputConteiner {
+  height: 150px;
+  padding: 8px;
+  width: 85%;
+  margin: 20px 10px 10px 10px;
 }
