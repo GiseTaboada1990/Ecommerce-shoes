@@ -7,6 +7,7 @@ import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useEffect } from "react";
 import axios from "axios";
+import swal from 'sweetalert';
 import { useDispatch } from "react-redux";
 
 
@@ -191,15 +192,23 @@ useEffect(()=>{
 
   const handleEdit = (e, id) => {
     e.preventDefault()
-    function confirmacion() {
-      var respuesta = window.confirm('Are you sure you want to edit the activity?')
-      if (respuesta === true) {
-        dispatch(cleanDetails())
-        axios.put(`${URL}/shoes/${id}`, input)
-      }
+    swal({
+      title:'Editar',
+      text:'Estás seguro de que deseas editar este producto',
+      icon:'warning',
+      buttons:['No','Si']
+    }).then(res=>{
+      if(res){
+      dispatch(cleanDetails())
+      axios.put(`${URL}/shoes/${id}`, input)
+      swal({
+      text:'El producto se ha editado con éxito',
+      icon:'success',
+      timer:'2000'
+      })
+      navigate("/")
     }
-    confirmacion()
-    navigate("/")
+    })
   }
 
     

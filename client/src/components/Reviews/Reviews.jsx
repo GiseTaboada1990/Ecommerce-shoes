@@ -4,6 +4,8 @@ import { useEffect } from 'react';
 import { URL } from '../../redux/actions';
 import {FaStar} from 'react-icons/fa'
 import styles from './Reviews.module.css';
+import swal from 'sweetalert';
+import { useNavigate } from 'react-router-dom'
 
 function Reviews({myShoes}) {
 
@@ -15,6 +17,7 @@ function Reviews({myShoes}) {
   const [reviews, setReviews] = useState([]);
   const [openSnack, setSnack] = useState(false)
   const [hover, setHover] = useState(-1);
+  const navigate = useNavigate()
   const infoUser = JSON.parse(localStorage.getItem("user"))
   console.log(myShoes)
 
@@ -50,6 +53,16 @@ function Reviews({myShoes}) {
       })
     })
     .catch((err) => console.log(err));
+    swal({
+      title:'Tu reseña se envió correctamente',
+      icon:'success',
+      timer:'2000'
+    })
+    setInput({
+      rating: null,
+      description: ''
+    })
+    navigate('/')
   };
   console.log(error, 'soy errores')
 
