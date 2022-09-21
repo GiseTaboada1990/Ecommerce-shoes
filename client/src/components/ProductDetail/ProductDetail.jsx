@@ -1,16 +1,17 @@
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
-import { addOneToCart, cleanDetails, getDetails } from '../../redux/actions';
-import { toast } from "react-toastify";
+import { addOneToCart, cleanDetails, getDetails, getIdPayment } from '../../redux/actions';
 import styles from "./ProductDetail.module.css";
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 import Reviews from '../Reviews/Reviews';
-import { FaStar } from 'react-icons/fa'
-
+import { FaStar } from 'react-icons/fa';
+import swal from 'sweetalert'
+import { useAuth0 } from '@auth0/auth0-react';
+import axios from 'axios'
 
 function ProductDetail({ id, closeModal }) {
 
-
+    const { isAuthenticated } = useAuth0()
     const myShoes = useSelector((state) => state.details);
     console.log('myshoes -->', myShoes)
     const navigate = useNavigate()
@@ -26,15 +27,11 @@ function ProductDetail({ id, closeModal }) {
     let contador = 0
     for (let i = 0; i < myShoes.reviews?.length; i++) {
         contador = contador + myShoes.reviews[i].value
-        console.log(myShoes.reviews[i].value, 'for')
     }
     const divisor = myShoes && myShoes.reviews?.length === 0 ? 1 : myShoes.reviews?.length
     const promedio = contador / divisor
- 
-  console.log(contador, 'contador') 
-    console.log(promedio, 'promedio')
-//---------------------------------------------------------------------------------------
-  
+    //---------------------------------------------------------------------------------------
+
     const [size, setSize] = useState([]);
     const shoesAdd = {
         id: id,
@@ -55,30 +52,48 @@ function ProductDetail({ id, closeModal }) {
 
     const addToCart = () => {
         if (size.length === 0) {
-            toast.error("Debes elegir al menos 1 talle!", {
-                className: "cart-toast",
-                draggable: true,
-                position: toast.POSITION.TOP_CENTER,
+            swal({
+                text: 'Debes delegir al menos un talle para poder añadir este producto al carrito',
+                icon: 'error',
+                timer: '3000'
             })
         } else {
-            dispatch(addOneToCart(shoesAdd));
-            const cartCurrent = JSON.parse(localStorage.getItem('cart'))
-            localStorage.setItem('cart', JSON.stringify([...cartCurrent, shoesAdd]))
-            toast.success("Tu producto fue agregado al carrito!", {
-                className: "cart-toast",
-                draggable: true,
-                position: toast.POSITION.TOP_CENTER,
-            });
-            setSize([]);
+            if (isAuthenticated) {
+                dispatch(addOneToCart(shoesAdd));
+                swal({
+                    text: 'El producto se añadió correctamente al carrito de compras',
+                    icon: 'success',
+                    timer: '3000'
+                })
+                closeModal()
+                
+                setSize([]);
+            } else {
+                swal({
+                    text: 'Debes estar logueado para poder añadir al carrito',
+                    icon: 'error',
+                    timer: '3000'
+                })
+            }
         }
-        closeModal()
     };
+
     const handleEdit = () => {
         navigate('/post', {
             state: myShoes
         })
     }
+    const user = JSON.parse(localStorage.getItem('user'))
 
+    const handlePayment = () => {
+        addToCart()
+        axios.post(`${process.env.REACT_APP_URL}/payments`, { userId: user.id, cart: [shoesAdd] })
+            .then((res) => {
+                console.log(res.data)
+                dispatch(getIdPayment(res.data.id))
+            })
+            .catch((err) => console.log(err))
+    }
     return (
         <div>
             {myShoes ? (
@@ -88,13 +103,13 @@ function ProductDetail({ id, closeModal }) {
                         alt="imgShoes not found"
                         className={styles.imagen}
                     />
-                    <br/>
+                    <br />
                     {[...Array(5)].map((star, i) => {
-                  const ratingValue = i + 1
-                  return <FaStar
-                    color={ratingValue <= promedio ? '#ffc107' : '#e4e5e9'} 
-                    size={30}/>
-                })}
+                        const ratingValue = i + 1
+                        return <FaStar
+                            color={ratingValue <= promedio ? '#ffc107' : '#e4e5e9'}
+                            size={30} />
+                    })}
                     <div className={styles.divContent}>
                         <h1 className={styles.title}>{myShoes.title}</h1>
                         <div className={styles.sizePriceCont}>
@@ -133,7 +148,7 @@ function ProductDetail({ id, closeModal }) {
                                             <h4>
                                                 Cantidad: {size.length}
                                             </h4>
-                                            <h3 className={styles.price}>${size.length? myShoes.price * size.length : myShoes.price}</h3>
+                                            <h3 className={styles.price}>${size.length ? myShoes.price * size.length : myShoes.price}</h3>
                                         </div>
                                     </div>
                                 </div>
@@ -145,14 +160,20 @@ function ProductDetail({ id, closeModal }) {
                                 onClick={addToCart}
                                 id={myShoes.id}
                             >
-                                Añadir al carro
+                                Añadir al carrito
                             </button>{" "}
                         </div>
                         <button onClick={() => handleEdit(myShoes.id)}>Editar Producto</button>
+                        <Link to="/mercadopago" className={styles.mpLinkBtn}>
+                            <button onClick={(e) => handlePayment()}
+                                className={styles.buttonsContainer}>
+                                Ir a comprar
+                            </button>
+                        </Link>
                     </div>
-                    <Reviews 
-                    myShoes = {myShoes}
-                    closeModal={closeModal}/>
+                    <Reviews
+                        myShoes={myShoes}
+                        closeModal={closeModal} />
                 </div>
             ) : (
                 <div>

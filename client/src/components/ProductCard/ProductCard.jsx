@@ -81,7 +81,7 @@ export default function ProductCard({ image, title, price, id }) {
         onRequestClose={closeModal}
         style={customStyles}
       >
-        <ProductDetail id={id} closeModal={closeModal} />
+        <ProductDetail id={id} closeModal={closeModal}  />
       </Modal>
     </div>
   );

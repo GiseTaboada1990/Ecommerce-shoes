@@ -51,8 +51,6 @@ export default function EditUser() {
         onSubmit={(valores, { resetForm }) => {
           resetForm();
           dispatch(editUser(valores.email, valores));
-          console.log("formulario enviado");
-          console.log("post", valores);
           setformularioEnviado(true);
           setTimeout(() => setformularioEnviado(false), 5000);
           navigate('/')

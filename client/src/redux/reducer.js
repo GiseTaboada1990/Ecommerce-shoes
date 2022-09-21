@@ -105,7 +105,6 @@ export default function rootReducer(state = initialState, action) {
         case DELETE_ONE_FROM_FAV:
             const { FavId } = action.payload;
             let itemToDeleteFAv = state.favorites.find((item) => item.id === FavId);
-            console.log(FavId, "id del producto en fav");
             if (itemToDeleteFAv) {
                 return {
                     ...state,

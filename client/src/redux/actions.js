@@ -126,7 +126,6 @@ export const addOneToFav = (payload) => {
     return async (dispatch)=>{
       try {
         const json = await axios.post(`${URL}/login/signin`, payload);
-        console.log("json -->", json);
         localStorage.setItem('user', JSON.stringify(json.user))
   
         return dispatch({

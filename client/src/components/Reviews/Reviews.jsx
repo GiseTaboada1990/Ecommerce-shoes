@@ -28,8 +28,6 @@ function Reviews({ myShoes, closeModal }) {
       .catch((error) => console.log(error))
   }, [myShoes.id])
 
-  console.log(reviews, 'soy reviews')
-
   const validationReviews = (input) => {
     let errores = {}
     if (input.rating === null && input.description === '') error.form = 'Debe agragar una puntuacion con estrellas y un comentario para enviar la reseña'
@@ -55,7 +53,6 @@ function Reviews({ myShoes, closeModal }) {
         closeModal()
       })
       .catch((err) => {
-        console.log(err)
         if (err.response.status === 401) {
           swal({
             title: 'Yas has escrito una reseña para este producto',
@@ -76,7 +73,7 @@ function Reviews({ myShoes, closeModal }) {
       description: ''
     })
   };
-  console.log(error, 'soy errores')
+
 
   return (
     <div className="container mt-5 mb-5">
