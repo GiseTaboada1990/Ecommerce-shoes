@@ -6,10 +6,11 @@ import { FaStar } from 'react-icons/fa'
 import styles from './Reviews.module.css';
 import swal from 'sweetalert';
 import { useNavigate } from 'react-router-dom'
-import { toast } from 'react-toastify';
+import { useAuth0 } from '@auth0/auth0-react';
 
 function Reviews({ myShoes, closeModal }) {
-
+  
+  const {isAuthenticated } = useAuth0()
   const [error, setError] = useState({})
   const [input, setInput] = useState({
     rating: null,
@@ -20,8 +21,7 @@ function Reviews({ myShoes, closeModal }) {
   const [hover, setHover] = useState(-1);
   const navigate = useNavigate()
   const infoUser = JSON.parse(localStorage.getItem("user"))
-  console.log(myShoes)
-
+  
   useEffect(() => {
     axios(`${URL}/reviews/product/${myShoes.id}`)
       .then((data) => setReviews(data.data))
@@ -82,7 +82,7 @@ function Reviews({ myShoes, closeModal }) {
     <div className="container mt-5 mb-5">
       <div className="row g-2">
         <div className="ratings">
-          <form onSubmit={handleAddReview}>
+          {isAuthenticated && <form onSubmit={handleAddReview}>
             {[...Array(5)].map((star, i) => {
               const ratingValue = i + 1
               return (
@@ -145,7 +145,7 @@ function Reviews({ myShoes, closeModal }) {
                 <span className={styles.error}>{error.form}</span>
               )}
             </div>
-          </form>
+          </form>}
         </div>
         {reviews.length > 0 ? reviews.map((r) => (
           <div className="col-md-4">

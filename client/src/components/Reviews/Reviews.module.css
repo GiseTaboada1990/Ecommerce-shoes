@@ -8,8 +8,8 @@ input[type="radio"] {
 }
 
 .error {
-  font-size: 11px;
-  color: #f8f9fa;
+  font-size: 15px;
+  color: #bd1717;
   display: flex;
 }
 

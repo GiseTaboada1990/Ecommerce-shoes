@@ -5,23 +5,36 @@ import { toast } from "react-toastify";
 import styles from "./ProductDetail.module.css";
 import { useNavigate } from 'react-router-dom';
 import Reviews from '../Reviews/Reviews';
-import { useAuth0 } from '@auth0/auth0-react'
+import { FaStar } from 'react-icons/fa'
 
 
 function ProductDetail({ id, closeModal }) {
 
-    const {isAuthenticated } = useAuth0()
+
     const myShoes = useSelector((state) => state.details);
     console.log('myshoes -->', myShoes)
     const navigate = useNavigate()
     const dispatch = useDispatch();
+
     useEffect(() => {
         dispatch(getDetails(id));
         return () => {
             dispatch(cleanDetails())
         }
     }, [dispatch, id]);
-
+    //Promedio de reviews
+    let contador = 0
+    for (let i = 0; i < myShoes.reviews?.length; i++) {
+        contador = contador + myShoes.reviews[i].value
+        console.log(myShoes.reviews[i].value, 'for')
+    }
+    const divisor = myShoes && myShoes.reviews?.length === 0 ? 1 : myShoes.reviews?.length
+    const promedio = contador / divisor
+ 
+  console.log(contador, 'contador') 
+    console.log(promedio, 'promedio')
+//---------------------------------------------------------------------------------------
+  
     const [size, setSize] = useState([]);
     const shoesAdd = {
         id: id,
@@ -75,6 +88,13 @@ function ProductDetail({ id, closeModal }) {
                         alt="imgShoes not found"
                         className={styles.imagen}
                     />
+                    <br/>
+                    {[...Array(5)].map((star, i) => {
+                  const ratingValue = i + 1
+                  return <FaStar
+                    color={ratingValue <= promedio ? '#ffc107' : '#e4e5e9'} 
+                    size={30}/>
+                })}
                     <div className={styles.divContent}>
                         <h1 className={styles.title}>{myShoes.title}</h1>
                         <div className={styles.sizePriceCont}>
@@ -130,9 +150,9 @@ function ProductDetail({ id, closeModal }) {
                         </div>
                         <button onClick={() => handleEdit(myShoes.id)}>Editar Producto</button>
                     </div>
-                    {isAuthenticated && <Reviews 
+                    <Reviews 
                     myShoes = {myShoes}
-                    closeModal={closeModal}/>}
+                    closeModal={closeModal}/>
                 </div>
             ) : (
                 <div>
