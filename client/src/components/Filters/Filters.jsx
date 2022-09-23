@@ -26,6 +26,7 @@ import {
     combinationsFilter17,
     combinationsFilter18,
     combinationsFilter19,
+    searchBar,
   } from "../../redux/actions";
 import { useDispatch, useSelector } from 'react-redux';
 import Searchbar from '../SearchBar/SearchBar';
@@ -41,7 +42,8 @@ export default function Filters({setCurrentPage}) {
     const [brandFilter, setBrandFilter] = useState("default");
     const [categoryFilter, setCategoryFilter] = useState("default");
     const [sizeFilter, setSizeFilter] = useState("default");
-    const [nameFilter, setNameFilter] = useState("");
+    // const [nameFilter, setNameFilter] = useState("");
+    const nameFilter = useSelector(state => state.searchBarValue)
     const [priceMin, setPriceMin] = useState("");
     const [priceMax, setPriceMax] = useState("");
 
@@ -58,7 +60,8 @@ export default function Filters({setCurrentPage}) {
     };
     const handleInputName = (e) => {
         e.preventDefault();
-        setNameFilter(e.target.value);
+        // setNameFilter(e.target.value);
+        dispatch(searchBar(e.target.value))
     };
 
     const handleNameSubmit = (e) => {
@@ -213,7 +216,8 @@ export default function Filters({setCurrentPage}) {
     const toggleMenu = () => {
         setMenu( !menu )
         if(menu){
-            setNameFilter('')
+            // setNameFilter('')
+            dispatch(searchBar(''))
             setBrandFilter('default')
             setCategoryFilter('default')
             setSizeFilter('default')

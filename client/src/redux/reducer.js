@@ -37,6 +37,7 @@ import {
     COMBINATION_FILTERS17,
     COMBINATION_FILTERS18,
     COMBINATION_FILTERS19,
+    SEARCH_BAR
 } from './actions'
 
 const initialState = {
@@ -48,11 +49,18 @@ const initialState = {
     brands: [],
     cart: [],
     idPayment: '',
-    users:[]
+    users:[],
+    searchBarValue: ''
 };
 
 export default function rootReducer(state = initialState, action) {
     switch (action.type) {
+        case SEARCH_BAR:
+            return {
+                ...state,
+                searchBarValue: action.payload
+            }
+
         case GET_ALL_SHOES:
             return {
                 ...state,

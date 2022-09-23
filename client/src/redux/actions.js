@@ -42,9 +42,17 @@ export const DELETE_ONE_FROM_CART = 'DELETE_ONE_FROM_CART'
 export const REMOVER_TODO = "REMOVER_TODO"
 export const ID_PAYMENT = "ID_PAYMENT"
 export const GET_ALL_USER = 'GET_ALL_USER'
+export const SEARCH_BAR = 'SEARCH_BAR'
 
 
 export const URL = process.env.REACT_APP_URL;
+
+export const searchBar = (value) => {
+  return {
+    type: SEARCH_BAR,
+    payload: value
+  }
+}
 
 export const cleanDetails = () => {
   return ({
