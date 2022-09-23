@@ -14,6 +14,7 @@ import Banner from "../Banner/Banner";
 import About from "../About/Footer";
 import { useCallback } from "react";
 import Filters from "../Filters/Filters";
+import SearchBar2 from "../SearchBar2/SearchBar2";
 
 function HomePage() {
   const dispatch = useDispatch();
@@ -89,8 +90,11 @@ function HomePage() {
         prevPageButton={prevPageButton}
         currentPage={currentPage}
       />
+      <SearchBar2/>
+      <div className={styles.menuFilters}>
+        <Filters setCurrentPage={setCurrentPage}/>
+      </div>
       <div className={styles.cardContainer}>
-      <Filters setCurrentPage={setCurrentPage}/>
         <div>
           {currentShoes ? (
             <ProductCards allProducts={currentShoes} />

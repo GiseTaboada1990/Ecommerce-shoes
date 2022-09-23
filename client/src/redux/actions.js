@@ -36,6 +36,7 @@ export const COMBINATION_FILTERS15 = 'COMBINATION_FILTERS15'
 export const COMBINATION_FILTERS16 = 'COMBINATION_FILTERS16'
 export const COMBINATION_FILTERS17 = 'COMBINATION_FILTERS17'
 export const COMBINATION_FILTERS18 = 'COMBINATION_FILTERS18'
+export const COMBINATION_FILTERS19 = 'COMBINATION_FILTERS19'
 export const ADD_ONE_TO_CART = 'ADD_ONE_TO_CART'
 export const DELETE_ONE_FROM_CART = 'DELETE_ONE_FROM_CART'
 export const REMOVER_TODO = "REMOVER_TODO"
@@ -522,14 +523,7 @@ export const addOneToFav = (payload) => {
       }
     };
   }
-  export const combinationsFilter18=(
-    size,
-    category,
-    brand,
-    name,
-    priceMin,
-    priceMax
-  )=> {
+  export const combinationsFilter18=(size,category,brand,name,priceMin,priceMax)=> {
     return async(dispatch)=> {
       try {
         const results = await axios(
@@ -537,6 +531,22 @@ export const addOneToFav = (payload) => {
         );
         dispatch({
           type: COMBINATION_FILTERS18,
+          payload: results.data,
+        });
+        return results.data;
+      } catch (err) {
+        throw err;
+      }
+    };
+  }
+  export const combinationsFilter19=(size,category,brand, priceMin,priceMax)=> {
+    return async(dispatch)=> {
+      try {
+        const results = await axios(
+          `${URL}/shoes?size=${size}&category=${category}&brand=${brand}&priceMin=${priceMin}&priceMax=${priceMax}`
+        );
+        dispatch({
+          type: COMBINATION_FILTERS19,
           payload: results.data,
         });
         return results.data;

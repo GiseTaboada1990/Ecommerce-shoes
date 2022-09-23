@@ -25,6 +25,7 @@ function ProductDetail({ id, closeModal }) {
             dispatch(cleanDetails())
         }
     }, [dispatch, id]);
+
     //Promedio de reviews
     let contador = 0
     for (let i = 0; i < myShoes.reviews?.length; i++) {
@@ -55,7 +56,7 @@ function ProductDetail({ id, closeModal }) {
     const addToCart = () => {
         if (size.length === 0) {
             swal({
-                text: 'Debes delegir al menos un talle para poder añadir este producto al carrito',
+                text: 'Debes delegir al menos un talle',
                 icon: 'error',
                 timer: '3000'
             })

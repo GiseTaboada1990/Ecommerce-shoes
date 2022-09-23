@@ -25,19 +25,18 @@ import {
     combinationsFilter16,
     combinationsFilter17,
     combinationsFilter18,
+    combinationsFilter19,
   } from "../../redux/actions";
 import { useDispatch, useSelector } from 'react-redux';
 import Searchbar from '../SearchBar/SearchBar';
-import {DropdownMenu, Dropdown, DropdownToggle, DropdownItem} from 'reactstrap'
+import {DropdownMenu, Dropdown, DropdownToggle} from 'reactstrap'
 
 
 export default function Filters({setCurrentPage}) {
 
     const [menu, setMenu] = useState(false)
 
-    const toggleMenu = () => {
-        setMenu( !menu )
-    }
+    
 
     const [brandFilter, setBrandFilter] = useState("default");
     const [categoryFilter, setCategoryFilter] = useState("default");
@@ -98,6 +97,8 @@ export default function Filters({setCurrentPage}) {
             dispatch(combinationsFilter14(sizeFilter,e.target.value,nameFilter,priceMin,priceMax))
         } else if (categoryFilter !== "default" && nameFilter !== "" &&priceMin !== "" && priceMax !== "") {
             dispatch(combinationsFilter10(categoryFilter, nameFilter, priceMax, priceMin, e.target.value))
+        } else if (categoryFilter!== "default" && sizeFilter !== "default" && priceMin !== "" && priceMax !== "" ) {     
+            dispatch(combinationsFilter19(sizeFilter, categoryFilter, e.target.value, priceMin, priceMax))
         } else if (priceMin !== "" && priceMax !== "" && sizeFilter !== "default") {
             dispatch(combinationsFilter11(e.target.value, priceMin, priceMax, sizeFilter))
         } else if (priceMax !== "" && priceMin !== "" && nameFilter !== "") {
@@ -128,6 +129,8 @@ export default function Filters({setCurrentPage}) {
             dispatch(combinationsFilter18(sizeFilter,e.target.value,brandFilter,nameFilter,priceMin,priceMax))
         } else if (brandFilter !== "default" &&nameFilter !== "" &&priceMin !== "" &&priceMax !== "") {
             dispatch(combinationsFilter10(e.target.value,nameFilter,priceMax,priceMin,brandFilter))
+        } else if (sizeFilter!== "default" && brandFilter !== "default" && priceMin !== "" && priceMax !== "" ) {     
+            dispatch(combinationsFilter19(sizeFilter, e.target.value, brandFilter, priceMin, priceMax))
         } else if (priceMax !== "" && priceMin !== " " && brandFilter !== "default") {
             dispatch(combinationsFilter8(e.target.value,nameFilter,brandFilter,priceMin,priceMax))
         } else if (nameFilter !== "default" && priceMin !== "" && priceMax !== "") {
@@ -156,6 +159,8 @@ export default function Filters({setCurrentPage}) {
             dispatch(combinationsFilter18(sizeFilter,categoryFilter,brandFilter,nameFilter,priceMin,priceMax))
         } else if (nameFilter !== "" &&sizeFilter !== "default" &&brandFilter !== "default") {
             dispatch(combinationsFilter14(sizeFilter,brandFilter,nameFilter,priceMin,priceMax))
+        } else if (categoryFilter!== "default" && brandFilter !== "default" && sizeFilter !== "default" ) {     
+            dispatch(combinationsFilter19(sizeFilter, categoryFilter, brandFilter, priceMin, priceMax))
         } else if (brandFilter !== "default" && nameFilter !== "" && categoryFilter !== "default") {
             dispatch(combinationsFilter10(categoryFilter,nameFilter,priceMax,priceMin,brandFilter))
         } else if (brandFilter !== "default" && nameFilter !== "") {
@@ -184,7 +189,9 @@ export default function Filters({setCurrentPage}) {
         if ( nameFilter !== "" && brandFilter !== "default" && priceMin !== "" && priceMax !== "" && categoryFilter !== "default" ) {
             dispatch(combinationsFilter18( e.target.value, categoryFilter, brandFilter, nameFilter, priceMin, priceMax))
         } else if (nameFilter !== "" &&brandFilter !== "default" &&priceMin !== "" &&priceMax !== "") {
-            dispatch(combinationsFilter14(e.target.value,brandFilter,nameFilter,priceMin,priceMax))     
+            dispatch(combinationsFilter14(e.target.value,brandFilter,nameFilter,priceMin,priceMax))
+        } else if (categoryFilter!== "default" && brandFilter !== "default" && priceMin !== "" && priceMax !== "" ) {     
+            dispatch(combinationsFilter19(e.target.value, categoryFilter, brandFilter, priceMin, priceMax))
         } else if (priceMin !== "" && priceMax !== "" && brandFilter !== "default") {
             dispatch(combinationsFilter11(brandFilter, priceMin, priceMax, e.target.value))
         } else if (brandFilter !== "default" && categoryFilter !== "default") {
@@ -202,6 +209,18 @@ export default function Filters({setCurrentPage}) {
         }
         setCurrentPage(1);
     };
+
+    const toggleMenu = () => {
+        setMenu( !menu )
+        if(menu){
+            setNameFilter('')
+            setBrandFilter('default')
+            setCategoryFilter('default')
+            setSizeFilter('default')
+            setPriceMin('')
+            setPriceMax('')
+        }
+    }
 
     return (
         <div className={styles.filtersContainer}>

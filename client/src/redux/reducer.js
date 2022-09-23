@@ -36,6 +36,7 @@ import {
     COMBINATION_FILTERS16,
     COMBINATION_FILTERS17,
     COMBINATION_FILTERS18,
+    COMBINATION_FILTERS19,
 } from './actions'
 
 const initialState = {
@@ -231,6 +232,11 @@ export default function rootReducer(state = initialState, action) {
                 ...state,
                 products: action.payload,
             };
+        case COMBINATION_FILTERS19:
+            return {
+                ...state,
+                products: action.payload,
+            }
 
         case ADD_ONE_TO_CART:
             const newItem =
