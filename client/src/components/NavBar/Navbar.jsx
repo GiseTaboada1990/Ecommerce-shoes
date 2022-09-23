@@ -89,22 +89,13 @@ export default function NavBar() {
                         alt={user.name}
                       />
                     ) : (
-                      <img className={styles.img} src={user.image} alt={user.image} />
+                      <img className={styles.img} src={user.image} alt={user.name} />
                     )}
                   </Link>
                 </div>
               </div>
             ) : (
-              // <div className={styles.containerLogout}>
-              //   <LoginButtonAuth0 className={styles.icon} />
-              // </div>
-                <div className="nav-item d-flex align-items-center">
-                  <a href="#" className="nav-link text-body font-weight-bold px-0">
-                    {/* <i className="fa fa-user me-sm-1" aria-hidden="true"></i> */}
-                    <FaUserAlt className="me-sm-2" aria-hidden="true" color="f87d2d "/>
-                    <span className="d-sm-inline d-none">Sign In</span>
-                  </a>
-                </div>
+              <LoginButtonAuth0 className={styles.icon} />
             )
           }
         </Navbar.Collapse>

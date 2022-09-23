@@ -7,8 +7,11 @@ export default function LoginButtonAuth0() {
     const { loginWithRedirect } = useAuth0()
 
     return (
-        <button onClick={() => loginWithRedirect()}>
-            <FaUserAlt style={{ color: "#f87d2d" }} />
-        </button>
+        <div className="nav-item d-flex align-items-center">
+            <a href='#' onClick={() => loginWithRedirect()} className="nav-link text-body font-weight-bold px-0">
+                <FaUserAlt className="me-sm-2" aria-hidden="true" color="f87d2d " />
+                <span className="d-sm-inline d-none">Sign In</span>
+            </a>
+        </div>
     )
 }

@@ -1,16 +1,8 @@
-import axios from 'axios'
 import React from 'react'
 import { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { Link, useNavigate } from 'react-router-dom'
 import { getAllBrands, getAllCategories, getAllShoes, getAllSizes } from '../../redux/actions'
-
-const styleTbody = {
-  display: 'block',
-  height: '70vh',
-  overflowY: 'auto',
-  width: '80vw'
-}
 
 export default function ProductsDashboard() {
   const navigate = useNavigate()

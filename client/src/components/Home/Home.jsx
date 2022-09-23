@@ -20,6 +20,7 @@ export default function HomePage() {
   const dispatch = useDispatch();
   const allProducts = useSelector((state) => state.products);
   const [modalIsOpen, setIsOpen] = useState(false);
+  
   const openModal = () => {
     setIsOpen(true);
   };
