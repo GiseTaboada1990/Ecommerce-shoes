@@ -5,13 +5,11 @@ import {
     faGithub,
     faLinkedin,
   } from "@fortawesome/free-brands-svg-icons";
-import NavBar2 from "../Navbar2/Navbar2"
 
 
 export default function SocialFollow() {
   return (
     <div>
-        <NavBar2/>
     <div className="social-container">
         <div className="name-icon-container">
             <h3>Ramiro Hernandez</h3>

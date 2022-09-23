@@ -9,8 +9,10 @@ import swal from 'sweetalert'
 import { useAuth0 } from '@auth0/auth0-react';
 import axios from 'axios'
 
+
 function ProductDetail({ id, closeModal }) {
 
+    const { loginWithRedirect } = useAuth0()
     const { isAuthenticated } = useAuth0()
     const myShoes = useSelector((state) => state.details);
     console.log('myshoes -->', myShoes)
@@ -66,7 +68,7 @@ function ProductDetail({ id, closeModal }) {
                     timer: '3000'
                 })
                 closeModal()
-                
+
                 setSize([]);
             } else {
                 swal({
@@ -86,13 +88,22 @@ function ProductDetail({ id, closeModal }) {
     const user = JSON.parse(localStorage.getItem('user'))
 
     const handlePayment = () => {
-        addToCart()
-        axios.post(`${process.env.REACT_APP_URL}/payments`, { userId: user.id, cart: [shoesAdd] })
-            .then((res) => {
-                console.log(res.data)
-                dispatch(getIdPayment(res.data.id))
+        if(size.length > 0){
+            navigate('/mercadopago')
+            addToCart()
+            axios.post(`${process.env.REACT_APP_URL}/payments`, { userId: user.id, cart: [shoesAdd] })
+                .then((res) => {
+                    console.log(res.data)
+                    dispatch(getIdPayment(res.data.id))
+                })
+                .catch((err) => console.log(err))
+        }else{
+            swal({
+                text:'Debes elegir al menos un talle',
+                icon: 'warning',
+                timer:'3000'
             })
-            .catch((err) => console.log(err))
+        }
     }
     return (
         <div>
@@ -164,12 +175,16 @@ function ProductDetail({ id, closeModal }) {
                             </button>{" "}
                         </div>
                         <button onClick={() => handleEdit(myShoes.id)}>Editar Producto</button>
-                        <Link to="/mercadopago" className={styles.mpLinkBtn}>
+                        {isAuthenticated ? (
                             <button onClick={(e) => handlePayment()}
-                                className={styles.buttonsContainer}>
+                                className={styles.cart}>
                                 Ir a comprar
-                            </button>
-                        </Link>
+                            </button>) : (
+                        <button onClick={() => loginWithRedirect()}
+                            className={styles.cart}>
+                            Logueate para comprar
+                        </button>
+                        )}
                     </div>
                     <Reviews
                         myShoes={myShoes}
@@ -188,4 +203,4 @@ function ProductDetail({ id, closeModal }) {
     )
 }
 
-export default ProductDetail
+export default React.memo(ProductDetail)

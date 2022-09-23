@@ -1,11 +1,8 @@
 import styles from "./AboutUs.module.css";
-import NavBar2 from "../Navbar2/Navbar2"
-
 
 export default function AboutUs() {
   return (
     <div>
-      <NavBar2/>
       <div className={styles.container}>
         <div className={styles.hijo}>
           <img src="https://assets.soyhenry.com/henry-landing/assets/Henry/logo-white.png" className={styles.henryImg} alt='img not found'/>

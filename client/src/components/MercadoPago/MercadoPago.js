@@ -1,7 +1,6 @@
 import "./App.css";
 import { useEffect } from "react";
 import { useSelector } from "react-redux";
-import { getAllUsers, postOrder, putProductStock } from "../../redux/actions";
 import s from "./Checkout.module.css";
 
 function MercadoPago() {

@@ -28,9 +28,16 @@ import {
   } from "../../redux/actions";
 import { useDispatch, useSelector } from 'react-redux';
 import Searchbar from '../SearchBar/SearchBar';
+import {DropdownMenu, Dropdown, DropdownToggle, DropdownItem} from 'reactstrap'
 
 
 export default function Filters({setCurrentPage}) {
+
+    const [menu, setMenu] = useState(false)
+
+    const toggleMenu = () => {
+        setMenu( !menu )
+    }
 
     const [brandFilter, setBrandFilter] = useState("default");
     const [categoryFilter, setCategoryFilter] = useState("default");
@@ -198,14 +205,20 @@ export default function Filters({setCurrentPage}) {
 
     return (
         <div className={styles.filtersContainer}>
-            <select onChange={(e) => handleFilterBrand(e)} value={brandFilter} className={styles.brandSelect}>
+            <Dropdown isOpen ={menu} toggle = {toggleMenu}>
+            <DropdownToggle caret>
+                Filtrar
+            </DropdownToggle>
+            <DropdownMenu>
+                
+                <select onChange={(e) => handleFilterBrand(e)} value={brandFilter} className={styles.brandSelect}>
               {allBrands &&
                 allBrands.map((brand) => {
                 <option value={"default"} disabled>Marcas</option>
                   return <option key={brand.id}>{brand.name}</option>;
                 })}
             </select>
-        <select
+                <select
           onChange={(e) => handleCategories(e)}
           value={categoryFilter}
           className={styles.brandSelect}
@@ -220,7 +233,8 @@ export default function Filters({setCurrentPage}) {
           <option value="Chatitas">Chatitas</option>
           <option value="Alpargatas">Alpargatas</option>
         </select>
-        <select
+                
+                <select
           onChange={(e) => handleSize(e)}
           value={sizeFilter}
           className={styles.brandSelect}
@@ -238,7 +252,7 @@ export default function Filters({setCurrentPage}) {
           <option value={42}>42</option>
           <option value={43}>43</option>
         </select>
-        <form onSubmit={handleFilterByPrice}>
+                <form onSubmit={handleFilterByPrice}>
           <input
             value={priceMin}
             type="search"
@@ -257,9 +271,11 @@ export default function Filters({setCurrentPage}) {
             ➤
           </button>
           </form>
-          <Searchbar
+                <Searchbar
             handleInputName={handleInputName}
             handleNameSubmit={handleNameSubmit}/>
+            </DropdownMenu>
+            </Dropdown>
       </div>
     )
 }

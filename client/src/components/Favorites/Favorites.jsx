@@ -3,12 +3,12 @@ import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import FavItem from "./FavoritesItem";
 import { deleteOneToFav } from "../../redux/actions";
-import Navbar2 from "../Navbar2/Navbar2";
 
 export default function Favorites() {
   const dispatch = useDispatch();
 
   const favProducts = useSelector((state) => state.favorites);
+  
   useEffect(() => {
     localStorage.setItem("favProducts", JSON.stringify(favProducts));
   }, [favProducts]);
@@ -32,7 +32,9 @@ export default function Favorites() {
               {favProducts.length ? (
                 <div className={styles.containerCards}>
                   {favProducts.map((item, index) => (
+
                     <FavItem key={index} data={item} deleteProduct={deleteProduct} />
+                    
                   ))}
                 </div>
               ) : (

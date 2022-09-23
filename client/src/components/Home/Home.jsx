@@ -1,11 +1,10 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react";
-import { getAllBrands, getAllCategories, getAllShoes, getAllSizes } from "../../redux/actions";
+import { filterByCategory, filterByName, getAllBrands, getAllCategories, getAllShoes, getAllSizes } from "../../redux/actions";
 import Pagination from "../Pagination/Pagination";
 import ProductCards from "../ProductCards/ProductCards";
 import styles from "./Home.module.css";
-import Filters from "../Filters/Filters";
 import Modal from "react-modal";
 import Chatbot from "react-chatbot-kit";
 import config from "../Chatbot/chatbotConfig";
@@ -13,22 +12,23 @@ import ActionProvider from "../Chatbot/ActionProvider";
 import MessageParser from "../Chatbot/MessageParser";
 import Banner from "../Banner/Banner";
 import About from "../About/Footer";
+import { useCallback } from "react";
+import Filters from "../Filters/Filters";
 
-
-
-export default function HomePage() {
+function HomePage() {
   const dispatch = useDispatch();
   const allProducts = useSelector((state) => state.products);
   const [modalIsOpen, setIsOpen] = useState(false);
-  const openModal = () => {
+ 
+  const openModal = useCallback(() => {
     setIsOpen(true);
-  };
+  },[setIsOpen]);
 
-  const closeModal = () => {
+  const closeModal = useCallback(() => {
     setIsOpen(false);
-  };
+  },[setIsOpen]);
   
-    useEffect(() => {
+    useEffect(() => { 
       dispatch(getAllSizes())
       dispatch(getAllBrands())
       dispatch(getAllCategories())
@@ -39,6 +39,7 @@ export default function HomePage() {
         document.body.style.overflow = "unset";
       }
     }, [dispatch, modalIsOpen]);
+
     const customStyles = {
       content: {
         top: "50%",
@@ -79,7 +80,6 @@ export default function HomePage() {
  
   return(
     <div style={{ marginTop: '10px' }}>
-        {/* <NavBar/> */}
         <Banner/>
         <Pagination
         shoesPerPage={shoesPerPage}
@@ -89,8 +89,8 @@ export default function HomePage() {
         prevPageButton={prevPageButton}
         currentPage={currentPage}
       />
-        <Filters setCurrentPage={setCurrentPage}/>
       <div className={styles.cardContainer}>
+      <Filters setCurrentPage={setCurrentPage}/>
         <div>
           {currentShoes ? (
             <ProductCards allProducts={currentShoes} />
@@ -127,3 +127,4 @@ export default function HomePage() {
     </div>
   )
 }
+export default React.memo(HomePage)

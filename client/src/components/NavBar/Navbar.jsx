@@ -11,6 +11,7 @@ import LogoutButtonAuth0 from "../authzero/LogoutButtonAuth0";
 import LoginButtonAuth0 from "../authzero/LoginButtonAuth0";
 import { useDispatch } from "react-redux";
 import { getAllShoes } from "../../redux/actions";
+import Searchbar from "../SearchBar/SearchBar";
 
 
 export default function NavBar() {

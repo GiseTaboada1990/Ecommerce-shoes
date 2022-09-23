@@ -6,7 +6,6 @@ import styles from "./EditUser.module.css";
 import { useNavigate } from "react-router-dom";
 import {FcDownLeft} from "react-icons/fc";
 import { Link } from "react-router-dom";
-import Navbar2 from "../Navbar2/Navbar2";
 
 
 export default function EditUser() {

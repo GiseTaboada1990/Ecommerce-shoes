@@ -11,10 +11,8 @@ mercadopago.configure({
 
 router.post("/", async (req, res) => {
   const { cart, userId } = req.body;
-
-  const orden = (await axios.post(`${API_URL}/order`, { cart, userId })).data
-
-  try {
+try {
+    const orden = (await axios.post(`${API_URL}/order`, { cart, userId })).data
     const items_ml = cart.map((p) => ({
       name: p.title,
       quantity: p.quantity,
