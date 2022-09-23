@@ -14,7 +14,7 @@ import MercadoPago from "./components/MercadoPago/MercadoPago";
 import Cart from "./components/Cart/Cart";
 import NavBar from "./components/NavBar/Navbar";
 import Dashboard from "./components/Admin/Dashboard";
-import { UserLogin } from "./components/UserLogin";
+import UserLogin  from "./components/UserLogin";
 
 function App() {
 

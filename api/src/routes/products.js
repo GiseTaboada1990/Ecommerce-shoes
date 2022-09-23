@@ -17,8 +17,13 @@ router.get("/", async (req, res, next) => {
   const options = getAllFilters(req.query);
   
   if (Object.keys(options).length) {
-    const resulTs = await Product.findAll(options);
-    res.status(200).json(resulTs);
+    try {
+      const resulTs = await Product.findAll(options);
+      res.status(200).json(resulTs);
+      
+    } catch (error) {
+      next(error)
+    }
 
   } else if (name) {
     try {
