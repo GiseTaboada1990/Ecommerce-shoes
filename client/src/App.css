@@ -41,15 +41,11 @@
   display: flex;
   flex-direction: column;
   min-height: 100vh;
-  background: #0e0a0a;
+  background: #f2f5f3;
 }
 
 select{
   cursor: pointer;
-}
-
-Body{
-  background: #212121;
 }
 
 .react-chatbot-kit-chat-input {

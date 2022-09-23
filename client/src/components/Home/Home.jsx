@@ -14,49 +14,49 @@ import Banner from "../Banner/Banner";
 import About from "../About/Footer";
 import { useCallback } from "react";
 import Filters from "../Filters/Filters";
-import SearchBar2 from "../SearchBar2/SearchBar2";
+import SearchBar from "../SearchBar/SearchBar";
 
 function HomePage() {
   const dispatch = useDispatch();
   const allProducts = useSelector((state) => state.products);
   const [modalIsOpen, setIsOpen] = useState(false);
- 
+
   const openModal = useCallback(() => {
     setIsOpen(true);
-  },[setIsOpen]);
+  }, [setIsOpen]);
 
   const closeModal = useCallback(() => {
     setIsOpen(false);
-  },[setIsOpen]);
-  
-    useEffect(() => { 
-      dispatch(getAllSizes())
-      dispatch(getAllBrands())
-      dispatch(getAllCategories())
-      dispatch(getAllShoes()); 
-      if (modalIsOpen) {
-        document.body.style.overflow = "hidden";
-      } else {
-        document.body.style.overflow = "unset";
-      }
-    }, [dispatch, modalIsOpen]);
+  }, [setIsOpen]);
 
-    const customStyles = {
-      content: {
-        top: "50%",
-        left: "50%",
-        right: "auto",
-        bottom: "auto",
-        transform: "translate(-50%, -50%)",
-        width: "610px",
-        height: "650px",
-        "border-radius": "10px",
-        background: "#212121",
-        color:"white",
-      },
-      
-    };
-   
+  useEffect(() => {
+    dispatch(getAllSizes())
+    dispatch(getAllBrands())
+    dispatch(getAllCategories())
+    dispatch(getAllShoes());
+    if (modalIsOpen) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "unset";
+    }
+  }, [dispatch, modalIsOpen]);
+
+  const customStyles = {
+    content: {
+      top: "50%",
+      left: "50%",
+      right: "auto",
+      bottom: "auto",
+      transform: "translate(-50%, -50%)",
+      width: "610px",
+      height: "650px",
+      "border-radius": "10px",
+      background: "#212121",
+      color: "white",
+    },
+
+  };
+
   //Paginado//
   const [currentPage, setCurrentPage] = useState(1);
   const [shoesPerPage, /* setShoesPerPage */] = useState(12);
@@ -78,11 +78,11 @@ function HomePage() {
     setCurrentPage(currentPage - 1);
   };
   //Paginado//
- 
-  return(
+
+  return (
     <div style={{ marginTop: '10px' }}>
-        <Banner/>
-        <Pagination
+      <Banner />
+      <Pagination
         shoesPerPage={shoesPerPage}
         allProducts={allProducts && allProducts.length}
         pagination={pagination}
@@ -90,38 +90,41 @@ function HomePage() {
         prevPageButton={prevPageButton}
         currentPage={currentPage}
       />
-      <SearchBar2/>
-      <div className={styles.menuFilters}>
-        <Filters setCurrentPage={setCurrentPage}/>
-      </div>
-      <div className={styles.cardContainer}>
-        <div>
+      
+      <div style={{ display: 'flex' }}>
+        <div className={styles.cardContainer}>
           {currentShoes ? (
             <ProductCards allProducts={currentShoes} />
           ) : (
             <ProductCards allProducts={allProducts} />
           )}
+          <Pagination
+            shoesPerPage={shoesPerPage}
+            allProducts={allProducts && allProducts.length}
+            pagination={pagination}
+            nextPageButton={nextPageButton}
+            prevPageButton={prevPageButton}
+            currentPage={currentPage}
+          />
         </div>
-        <Pagination
-          shoesPerPage={shoesPerPage}
-          allProducts={allProducts && allProducts.length}
-          pagination={pagination}
-          nextPageButton={nextPageButton}
-          prevPageButton={prevPageButton}
-          currentPage={currentPage}
-        />
+        <div>
+          <SearchBar />
+          <div className={styles.menuFilters}>
+            <Filters setCurrentPage={setCurrentPage} />
+          </div>
+        </div>
       </div>
       <div className={styles.divChatbot}>
-      <button onClick={(e) => openModal(e)} className={styles.buttonChatbot}>
-      <img className={styles.imgChatbot} src="https://st3.depositphotos.com/8950810/17657/v/380/depositphotos_176577870-stock-illustration-cute-smiling-funny-robot-chat.jpg?forcejpeg=true" alt="no se encuentra"></img>
-      </button>
+        <button onClick={(e) => openModal(e)} className={styles.buttonChatbot}>
+          <img className={styles.imgChatbot} src="https://st3.depositphotos.com/8950810/17657/v/380/depositphotos_176577870-stock-illustration-cute-smiling-funny-robot-chat.jpg?forcejpeg=true" alt="no se encuentra"></img>
+        </button>
       </div>
-      <About/>
+      <About />
       <Modal
         isOpen={modalIsOpen}
         onRequestClose={closeModal}
         style={customStyles}
-      > 
+      >
         <Chatbot
           config={config}
           actionProvider={ActionProvider}

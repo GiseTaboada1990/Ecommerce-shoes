@@ -1,5 +1,6 @@
 import React from "react";
 import styles from "./Pagination.module.css";
+import { GrLinkNext } from 'react-icons/gr'
 
 export default function Pagination({
   shoesPerPage,
@@ -28,7 +29,7 @@ export default function Pagination({
             disabled={currentPage === 1}
             className={styles.button}
           >
-            {"ᐊ"}
+            <GrLinkNext />
           </button>
           <p className={styles.currentPage}>
             {" "}
@@ -40,7 +41,7 @@ export default function Pagination({
               disabled={currentPage === pageNumber}
               className={styles.button}
             >
-              {" ᐅ"}
+              <GrLinkNext />
             </button>
             <button
               onClick={(e) => pagination(pageNumber)}
