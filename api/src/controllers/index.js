@@ -54,7 +54,38 @@ const cargoalDB = async () => {
     });
   })
 
-  const shoesConflicts = ['MLA1142122158', 'MLA1120923058', 'MLA1122533893', 'MLA1148732023', 'MLA606762500']
+  const shoesConflicts = [
+    'MLA1135417355',
+    'MLA1160359872',
+    'MLA849507795',
+    'MLA1147968701',
+    'MLA1154507412',
+    'MLA1142122158',
+    'MLA1120923058',
+    'MLA1122533893',
+    'MLA1148732023',
+    'MLA606762500',
+    'MLA1135417355',
+    'MLA1148475140',
+    'MLA1146249155',
+    'MLA1146399820',
+    'MLA1111142687',
+    'MLA1154507412',
+    'MLA836299811',
+    'MLA916487208',
+    'MLA1140538027',
+    'MLA1145304649',
+    'MLA1162613337',
+    'MLA919369897',
+    'MLA1106755965',
+    'MLA1109864480',
+    'MLA868481718',
+    'MLA837498804',
+    'MLA837363851',
+    'MLA837514130',
+    'MLA836858892',
+
+  ]
   const cargoFinal = data.filter(e => !shoesConflicts.includes(e.id))
 
   return cargoFinal

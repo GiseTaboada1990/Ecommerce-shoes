@@ -3,7 +3,7 @@ import axios from "axios"
 import { useAuth0 } from "@auth0/auth0-react";
 import { useEffect } from "react";
 
-export const UserLogin = () => {
+const UserLogin = () => {
     const { user } = useAuth0()
 
     useEffect(() => {
@@ -35,3 +35,5 @@ export const UserLogin = () => {
     <div></div>
   )
 }
+
+export default React.memo(UserLogin)

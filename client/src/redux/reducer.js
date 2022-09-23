@@ -48,7 +48,8 @@ const initialState = {
     brands: [],
     cart: [],
     idPayment: '',
-    users:[]
+    users:[],
+    searcheBarValue:''
 };
 
 export default function rootReducer(state = initialState, action) {
