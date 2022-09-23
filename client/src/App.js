@@ -1,6 +1,4 @@
-import axios from "axios"
-import { useAuth0 } from "@auth0/auth0-react";
-import { useEffect, useMemo } from "react";
+import React from "react";
 import { BrowserRouter as Router, Routes, Route} from "react-router-dom";
 import './App.css';
 import HomePage from "./components/Home/Home";
@@ -16,40 +14,13 @@ import MercadoPago from "./components/MercadoPago/MercadoPago";
 import Cart from "./components/Cart/Cart";
 import NavBar from "./components/NavBar/Navbar";
 import Dashboard from "./components/Admin/Dashboard";
+import { UserLogin } from "./components/UserLogin";
 
 function App() {
 
-  const { user } = useAuth0()
-
-  const userToBackend = {
-    name: user && user.given_name,
-    surname: user && user.family_name,
-    email: user && user.email,
-    username: user && user.nickname,
-    image: user && user.picture,
-    password: user && user.password ? user.password : null,
-    address: user && user.address ? user.address : null,
-    date_of_Birth: user && user.date_of_Birth ? user.date_of_Birth : null,
-    phone_number: user && user.phone_number ? user.phone_number : null,
-  }
-  const userBackend = useMemo(()=>userToBackend,[user])
-  useEffect(() => {
-    if(user) {
-      axios.post(`${process.env.REACT_APP_URL}/auth`, userBackend)
-      .then( res => {
-        localStorage.setItem("user", JSON.stringify(res.data));
-      })
-    } 
-
-    if (localStorage.length === 0) {
-      localStorage.setItem("products", JSON.stringify([]));
-      localStorage.setItem("favProducts", JSON.stringify([]));
-      localStorage.setItem("user", JSON.stringify([]));
-    }
-  }, [userBackend, user]);
-
   return (
     <Router>
+      <UserLogin/>
       <NavBar/>
       <Routes>
         <Route exact path="/" element={<HomePage/>} />
@@ -69,4 +40,4 @@ function App() {
   );
 }
 
-export default App;
+export default React.memo(App);

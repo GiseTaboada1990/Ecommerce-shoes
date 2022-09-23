@@ -1,6 +1,5 @@
 import React from "react";
 import styles from "./UserProfile.module.css";
-import Navbar2 from "../Navbar2/Navbar2";
 import { Link } from "react-router-dom"
 
 export default function UserProfile() {

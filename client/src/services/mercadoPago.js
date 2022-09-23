@@ -6,7 +6,6 @@ export const mercadoPago = (cart) => {
 
     const user = JSON.parse(localStorage.getItem('user'))
 
-    console.log('USER_FROM_LOCAL_STORAGE', user)
 
     if (cart.length > 0) {
         axios

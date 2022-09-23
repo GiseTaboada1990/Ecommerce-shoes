@@ -3,7 +3,7 @@ import ProductCard from "../ProductCard/ProductCard";
 import styles from "./ProductCards.module.css";
 
 
-export default function ProductCards({ allProducts }) {
+function ProductCards({ allProducts }) {
   return (
     <div className={styles.container}>
       {allProducts?.length ? (
@@ -28,3 +28,4 @@ export default function ProductCards({ allProducts }) {
     </div>
   );
 }
+export default React.memo(ProductCards)

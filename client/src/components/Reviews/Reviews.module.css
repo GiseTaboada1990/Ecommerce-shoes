@@ -1,0 +1,43 @@
+input[type="radio"] {
+  display: none;
+}
+
+.star {
+  cursor: pointer;
+  transition: color 200ms;
+}
+
+.error {
+  font-size: 15px;
+  color: #bd1717;
+  display: flex;
+}
+
+.createButton {
+  margin-top: -1px;
+  margin-left: 288px;
+  width: 100px;
+  height: 30px;
+  border-radius: 10px;
+  font-size: 15px;
+  background: black;
+  color: white;
+}
+
+.createButton2 {
+  margin-top: -1px;
+  margin-left: 288px;
+  width: 100px;
+  height: 30px;
+  border-radius: 10px;
+  font-size: 15px;
+  background: gray;
+  color: black;
+}
+
+.inputConteiner {
+  height: 150px;
+  padding: 8px;
+  width: 85%;
+  margin: 20px 10px 10px 10px;
+}

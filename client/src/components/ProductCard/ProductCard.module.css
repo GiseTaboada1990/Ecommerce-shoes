@@ -44,20 +44,14 @@
 }
 
 .container {
-  background: #f87d2d;
-  padding-bottom: 18%;
-  height: 117px;
-  padding: 0.5rem;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
+  background:#8b5c61;
+  height: 100px;
+  width: 430;
 }
 
 .cardImg {
-  /* width: 100%; */
-  max-width: 100%;
-  max-height: 80%;
-  /* height: 80%; */
+  max-width: 150%;
+  max-height: 90%;
 }
 .containerImg {
   display: flex;
@@ -65,13 +59,11 @@
   text-align: center;
   align-items: center;
   padding: none;
-  /* margin: 2rem; */
 }
 
 .infoContainer {
   display: flex;
   flex-direction: column;
-  /* justify-content: space-between; */
   height: 100%;
   align-items: baseline;
   display: flex;

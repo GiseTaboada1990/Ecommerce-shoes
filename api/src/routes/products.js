@@ -1,5 +1,5 @@
 const { Router } = require("express");
-const { Product, Brand, Category, Size } = require("../db.js");
+const { Product, Brand, Category, Size, Review } = require("../db.js");
 const { Op } = require("sequelize");
 const {
   getByName,
@@ -81,7 +81,8 @@ router.get("/:id", async (req, res) => {
         include:[
           { model: Brand },
           { model: Category },
-          sizeOption]
+          sizeOption,
+          {model: Review }]
       });
 
       if (foundProduct) {

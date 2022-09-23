@@ -11,6 +11,7 @@ import {
     REMOVER_TODO,
     ID_PAYMENT,
     LOGIN_USER,
+    GET_ALL_USER,
     FILTER_BY_NAME,
     FILTER_BY_CATEGORY,
     FILTER_BY_SIZE,
@@ -35,6 +36,7 @@ import {
     COMBINATION_FILTERS16,
     COMBINATION_FILTERS17,
     COMBINATION_FILTERS18,
+    COMBINATION_FILTERS19,
 } from './actions'
 
 const initialState = {
@@ -45,7 +47,8 @@ const initialState = {
     user: [],
     brands: [],
     cart: [],
-    idPayment: ''
+    idPayment: '',
+    users:[]
 };
 
 export default function rootReducer(state = initialState, action) {
@@ -54,6 +57,11 @@ export default function rootReducer(state = initialState, action) {
             return {
                 ...state,
                 products: action.payload
+            }
+        case GET_ALL_USER:
+            return{
+                ...state,
+                users: action.payload
             }
         case GET_DETAILS:
             return {
@@ -98,7 +106,6 @@ export default function rootReducer(state = initialState, action) {
         case DELETE_ONE_FROM_FAV:
             const { FavId } = action.payload;
             let itemToDeleteFAv = state.favorites.find((item) => item.id === FavId);
-            console.log(FavId, "id del producto en fav");
             if (itemToDeleteFAv) {
                 return {
                     ...state,
@@ -225,6 +232,11 @@ export default function rootReducer(state = initialState, action) {
                 ...state,
                 products: action.payload,
             };
+        case COMBINATION_FILTERS19:
+            return {
+                ...state,
+                products: action.payload,
+            }
 
         case ADD_ONE_TO_CART:
             const newItem =

@@ -114,14 +114,6 @@ export default function Cart() {
           </div>
         )}
       </div>
-
-      {/* <Modal
-        isOpen={modalIsOpen}
-        onRequestClose={closeModal}
-        style={customStyles}
-      >
-        <MercadoPago dataPayment={dataPayment} />
-      </Modal> */}
     </div>
     </div>
   );

@@ -6,7 +6,6 @@ import styles from "./EditUser.module.css";
 import { useNavigate } from "react-router-dom";
 import {FcDownLeft} from "react-icons/fc";
 import { Link } from "react-router-dom";
-import Navbar2 from "../Navbar2/Navbar2";
 
 
 export default function EditUser() {
@@ -51,8 +50,6 @@ export default function EditUser() {
         onSubmit={(valores, { resetForm }) => {
           resetForm();
           dispatch(editUser(valores.email, valores));
-          console.log("formulario enviado");
-          console.log("post", valores);
           setformularioEnviado(true);
           setTimeout(() => setformularioEnviado(false), 5000);
           navigate('/')

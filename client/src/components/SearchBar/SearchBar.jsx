@@ -4,6 +4,7 @@ import Button from "react-bootstrap/Button";
 import { FaSearch } from "react-icons/fa";
 
 
+
 export default function Searchbar({ handleInputName, handleNameSubmit }) {
 
   return (
