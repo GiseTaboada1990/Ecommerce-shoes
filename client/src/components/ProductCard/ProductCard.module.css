@@ -32,26 +32,28 @@
   text-transform: uppercase;
   text-decoration: none;
   color: black;
+  margin-top: 5%;
 }
 
 .price {
   font-family: "Inter";
   font-style: normal;
-  font-weight: 400;
+  font-weight: bold;
   font-size: 16.5258px;
-  /* line-height: 100%; */
   color: black;
 }
 
 .container {
   background:#8b5c61;
   height: 100px;
-  width: 430;
 }
 
 .cardImg {
   max-width: 150%;
   max-height: 90%;
+  width: 400px;
+  height: 250px;
+  object-fit: contain;
 }
 .containerImg {
   display: flex;

@@ -117,8 +117,6 @@
 }
 
 .sizePriceCont{
-  display: flex;
-  flex-direction: column;
   width: 100%;
   align-items: flex-end;
   color: white;
@@ -133,7 +131,7 @@
   border-bottom-style: solid;
   margin-right: 10px;
   outline: 0px;
-  width: 40px;
+  width: 60px;
   background: #212121;
   color: white;
   height: 36px;

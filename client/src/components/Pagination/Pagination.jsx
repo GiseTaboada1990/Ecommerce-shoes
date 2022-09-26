@@ -1,6 +1,6 @@
 import React from "react";
 import styles from "./Pagination.module.css";
-import { GrLinkNext } from 'react-icons/gr'
+import { GrLinkNext, GrLinkPrevious } from 'react-icons/gr'
 
 export default function Pagination({
   shoesPerPage,
@@ -17,21 +17,23 @@ export default function Pagination({
     <nav>
       <ul className={styles.contenedor}>
         <div className={styles.contenedor1}>
-          <button
-            onClick={(e) => pagination(1)}
-            disabled={currentPage === 1}
-            className={styles.button}
-          >
-            Primera
-          </button>
-          <button
-            onClick={(e) => prevPageButton(e)}
-            disabled={currentPage === 1}
-            className={styles.button}
-          >
-            <GrLinkNext />
-          </button>
-          <p className={styles.currentPage}>
+          <div>
+            <button
+              onClick={(e) => pagination(1)}
+              disabled={currentPage === 1}
+              className={`btn btn-outline-dark rounded-5`}
+            >
+              Primera
+            </button>
+            <button
+              onClick={(e) => prevPageButton(e)}
+              disabled={currentPage === 1}
+              className={`btn border border-0 fs-4 px-3 py-1 mx-2`}
+            >
+              <GrLinkPrevious />
+            </button>
+          </div>
+          <p className={`text-black`}>
             {" "}
             {currentPage} de {pageNumber}{" "}
           </p>
@@ -39,14 +41,14 @@ export default function Pagination({
             <button
               onClick={(e) => nextPageButton(e)}
               disabled={currentPage === pageNumber}
-              className={styles.button}
+              className={`btn border border-0 fs-4 px-3 py-1 mx-2`}
             >
               <GrLinkNext />
             </button>
             <button
               onClick={(e) => pagination(pageNumber)}
               disabled={currentPage === pageNumber}
-              className={styles.button}
+              className={`btn btn-outline-dark rounded-5`}
             >
               Ultima
             </button>

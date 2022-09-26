@@ -1,5 +1,4 @@
 import React, { useState } from 'react'
-import styles from './Filters.module.css'
 import {
     filterByBrand,
     filterByPrice,
@@ -30,7 +29,6 @@ import {
 } from "../../redux/actions";
 import { useDispatch, useSelector } from 'react-redux';
 import { DropdownMenu, Dropdown, DropdownToggle } from 'reactstrap'
-import 'bootstrap/dist/css/bootstrap.min.css'
 
 
 export default function Filters({ setCurrentPage }) {
@@ -189,25 +187,26 @@ export default function Filters({ setCurrentPage }) {
     }
 
     return (
-        <div className={styles.filtersContainer}>
-            <Dropdown isOpen={menu} toggle={toggleMenu}>
-                <DropdownToggle caret style={{ width: '250px' }}>
+            <Dropdown isOpen={menu} toggle={toggleMenu} className='w-25 px-2'>
+                <DropdownToggle color='indigo' className={`btn-outline-dark`}>
                     Filtrar
                 </DropdownToggle>
-                <DropdownMenu style={{ backgroundColor: 'rgba(0, 0, 0, 0.2)' }}>
-
-                    <select onChange={(e) => handleFilterBrand(e)} value={brandFilter} className={styles.brandSelect}>
-                        {allBrands &&
-                            allBrands.map((brand) => {
-                                <option value={"default"} disabled>Marcas</option>
-                                return <option key={brand.id}>{brand.name}</option>;
-                            })}
+                <DropdownMenu className={`w-100 bg-light px-2 fs-5`}>
+                    {menu &&
+                    <>
+                    <select 
+                        onChange={(e) => handleFilterBrand(e)} 
+                        value={brandFilter} 
+                        className={`w-100 border-1 rounded-4 px-3 py-3 my-1 bg-pink-800  `}
+                    >
+                        <option value={"default"} disabled>Marcas</option>
+                        { allBrands && allBrands.map((brand) => <option key={brand.id}>{ brand.name }</option> )}
                     </select>
                     <br />
                     <select
                         onChange={(e) => handleCategories(e)}
                         value={categoryFilter}
-                        className={styles.brandSelect}
+                        className={`w-100 border-1 rounded-4 px-3 py-3 my-1 `}
                     >
                         <option value={"default"} disabled>Categorías</option>
                         <option value="Zapatillas">Zapatillas</option>
@@ -223,7 +222,7 @@ export default function Filters({ setCurrentPage }) {
                     <select
                         onChange={(e) => handleSize(e)}
                         value={sizeFilter}
-                        className={styles.brandSelect}
+                        className={`w-100 border-1 rounded-4 px-3 py-3 my-1 `}
                     >
                         <option value={"default"} disabled>
                             Talles
@@ -245,21 +244,22 @@ export default function Filters({ setCurrentPage }) {
                             type="search"
                             onChange={(e) => handleInputPriceMin(e)}
                             placeholder="Precio min."
-                            className={styles.priceFilter}
+                            className={`w-35 form-control-sm fs-5 border-1 rounded-3 me-1 py-2`}
                         />
                         <input
                             value={priceMax}
                             type="search"
                             onChange={(e) => handleInputPriceMax(e)}
                             placeholder="Precio max."
-                            className={styles.priceFilter}
+                            className={`w-35 form-control-sm fs-5 border-1 rounded-3 me-1 py-2`}
                         />
-                        <button type="submit" className={styles.priceButton}>
+                        <button type="submit" className={`rounded-circle px-3 py-2 ms-3`}>
                             ➤
                         </button>
                     </form>
+                    </>
+                    }
                 </DropdownMenu>
             </Dropdown>
-        </div>
     )
 }

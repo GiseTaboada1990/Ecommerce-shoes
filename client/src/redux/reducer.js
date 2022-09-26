@@ -98,9 +98,7 @@ export default function rootReducer(state = initialState, action) {
                 sizes: action.payload,
             };
         case ADD_ONE_TO_FAV:
-            const newItemFav = state.products.find(
-                (product) => product.id === action.payload
-            );
+            const newItemFav = state.products.find((product) => product.id === action.payload)
             let itemInFav = state.favorites.find((item) => item.id === newItemFav.id);
 
             return itemInFav
@@ -112,14 +110,10 @@ export default function rootReducer(state = initialState, action) {
                     favorites: [...state.favorites, { ...newItemFav }],
                 };
         case DELETE_ONE_FROM_FAV:
-            const { FavId } = action.payload;
-            let itemToDeleteFAv = state.favorites.find((item) => item.id === FavId);
-            if (itemToDeleteFAv) {
-                return {
-                    ...state,
-                    favorites: state.favorites.filter((item) => item.id !== FavId),
-                };
-            }break
+            return {
+                ...state,
+                favorites: state.favorites.filter((item) => item.id !== action.payload),
+            };
         case FILTER_BY_NAME:
             return {
                 ...state,

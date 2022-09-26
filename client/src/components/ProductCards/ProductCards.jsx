@@ -5,11 +5,10 @@ import styles from "./ProductCards.module.css";
 
 function ProductCards({ allProducts }) {
   return (
-    <div className={styles.container}>
+    <div className='w-80 d-flex flex-wrap justify-content-center align-items-center'>
       {allProducts?.length ? (
         allProducts.map((product) => {
           return (
-            <div key={product.id} className={styles.card}>
               <ProductCard
                 image={product.image}
                 title={product.title}
@@ -17,7 +16,6 @@ function ProductCards({ allProducts }) {
                 id={product.id}
                 key={product.id}
               />
-            </div>
           );
         })
       ) : (

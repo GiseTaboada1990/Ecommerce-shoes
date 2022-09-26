@@ -107,63 +107,59 @@ function ProductDetail({ id, closeModal }) {
         }
     }
     return (
-        <div>
+        <>
             {myShoes ? (
                 <div className={styles.divCard}>
                     <img
                         src={myShoes.image}
                         alt="imgShoes not found"
-                        className={styles.imagen}
+                        className={`w-100 rounded-4`}
                     />
                     <br />
+                    <div>
                     {[...Array(5)].map((star, i) => {
                         const ratingValue = i + 1
                         return <FaStar
                             color={ratingValue <= promedio ? '#ffc107' : '#e4e5e9'}
                             size={30} />
                     })}
-                    <div className={styles.divContent}>
+                    </div>
+                    <div className={`w-100 ${styles.divContent}`}>
                         <h1 className={styles.title}>{myShoes.title}</h1>
                         <div className={styles.sizePriceCont}>
-                            <div className={styles.sizeContainer}>
-                                <div className={styles.sizeYSelect}>
-                                    <div className={styles.tallesContainer}>
-                                        <div className={styles.talleDetails}>
-                                            <h1 className={styles.size}>Talle: </h1>
-                                            <select
-                                                className={styles.selectSize}
-                                                onChange={(e) => {
-                                                    handleOnChangeSize(e);
-                                                }}
-                                            >
-                                                {myShoes.sizes &&
-                                                    myShoes.sizes.map((s, i) => (
-                                                        <option key={i} value={s.number}>
-                                                            {s.number}
-                                                        </option>
-                                                    ))}
-                                            </select>
-                                            {size.length ?
-                                                size.map((sn, i) => (
-                                                    <span
-                                                        className={styles.selectedSize}
-                                                        key={i}
-                                                        onClick={(e) => {
-                                                            handleDeleteSizes(e, sn);
-                                                        }}
-                                                    >
-                                                        {sn}
-                                                    </span>
-                                                )) : null}
-                                        </div>
-                                        <div className={styles.cantYPrecio}>
-                                            <h4>
-                                                Cantidad: {size.length}
-                                            </h4>
-                                            <h3 className={styles.price}>${size.length ? myShoes.price * size.length : myShoes.price}</h3>
-                                        </div>
-                                    </div>
-                                </div>
+                            <div className={`w-100 d-flex mb-3`}>
+                                <h1 className={styles.size}>Talle: </h1>
+                                <select
+                                    className={styles.selectSize}
+                                    onChange={(e) => {handleOnChangeSize(e)}}
+                                >
+                                    <option value="" disabled>Seleccione un talle</option>
+                                    {myShoes.sizes &&
+                                        myShoes.sizes.map((s, i) => (
+                                            <option key={i} value={s.number}>
+                                                {s.number}
+                                            </option>
+                                        ))
+                                    }
+                                </select>
+                                {size.length ?
+                                    size.map((sn, i) => (
+                                        <span
+                                            className={styles.selectedSize}
+                                            key={i}
+                                            onClick={(e) => {
+                                                handleDeleteSizes(e, sn);
+                                            }}
+                                        >
+                                            {sn}
+                                        </span>
+                                    )) : null}
+                            </div>
+                            <div className={styles.cantYPrecio}>
+                                <h4>
+                                    Cantidad: {size.length}
+                                </h4>
+                                <h3 className={styles.price}>${size.length ? myShoes.price * size.length : myShoes.price}</h3>
                             </div>
                         </div>
                         <div className={styles.buttons}>
@@ -174,18 +170,18 @@ function ProductDetail({ id, closeModal }) {
                             >
                                 Añadir al carrito
                             </button>{" "}
-                        </div>
-                        <button onClick={() => handleEdit(myShoes.id)}>Editar Producto</button>
-                        {isAuthenticated ? (
-                            <button onClick={(e) => handlePayment()}
+                            {isAuthenticated ? (
+                                <button onClick={(e) => handlePayment()}
+                                    className={styles.cart}>
+                                    Ir a comprar
+                                </button>) : (
+                            <button onClick={() => loginWithRedirect()}
                                 className={styles.cart}>
-                                Ir a comprar
-                            </button>) : (
-                        <button onClick={() => loginWithRedirect()}
-                            className={styles.cart}>
-                            Logueate para comprar
-                        </button>
-                        )}
+                                Logueate para comprar
+                            </button>
+                            )}
+                        </div>
+                        {/* <button onClick={() => handleEdit(myShoes.id)}>Editar Producto</button> */}
                     </div>
                     <Reviews
                         myShoes={myShoes}
@@ -200,7 +196,7 @@ function ProductDetail({ id, closeModal }) {
                     <p>Loading...</p>
                 </div>
             )}
-        </div>
+        </>
     )
 }
 

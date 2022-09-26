@@ -92,28 +92,21 @@ function HomePage() {
       />
       
       <div style={{ display: 'flex' }}>
-        <div className={styles.cardContainer}>
-          {currentShoes ? (
-            <ProductCards allProducts={currentShoes} />
-          ) : (
-            <ProductCards allProducts={allProducts} />
-          )}
-          <Pagination
-            shoesPerPage={shoesPerPage}
-            allProducts={allProducts && allProducts.length}
-            pagination={pagination}
-            nextPageButton={nextPageButton}
-            prevPageButton={prevPageButton}
-            currentPage={currentPage}
-          />
-        </div>
-        <div>
-          <SearchBar />
-          <div className={styles.menuFilters}>
-            <Filters setCurrentPage={setCurrentPage} />
-          </div>
-        </div>
+        <Filters setCurrentPage={setCurrentPage} />
+        {currentShoes ? (
+          <ProductCards allProducts={currentShoes} />
+        ) : (
+          <ProductCards allProducts={allProducts} />
+        )}
       </div>
+      <Pagination
+        shoesPerPage={shoesPerPage}
+        allProducts={allProducts && allProducts.length}
+        pagination={pagination}
+        nextPageButton={nextPageButton}
+        prevPageButton={prevPageButton}
+        currentPage={currentPage}
+      />
       <div className={styles.divChatbot}>
         <button onClick={(e) => openModal(e)} className={styles.buttonChatbot}>
           <img className={styles.imgChatbot} src="https://st3.depositphotos.com/8950810/17657/v/380/depositphotos_176577870-stock-illustration-cute-smiling-funny-robot-chat.jpg?forcejpeg=true" alt="no se encuentra"></img>
