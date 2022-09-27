@@ -7,8 +7,7 @@ function MercadoPago() {
   const  cart  = JSON.parse(localStorage.getItem('products'))
 
   useEffect(() => {
-    let script = document.createElement("script");
-  
+    let script 
     if (idPayment) {
       script = document.createElement("script"); //Crea un elemento html script
       //Agrega atributos al elemento script
