@@ -39,7 +39,7 @@ function ProductDetail({ id, closeModal }) {
     const shoesAdd = {
         id: id,
         title: myShoes.title,
-        size: size.map((e) => parseInt(e)),
+        sizeNumber: size.map((e) => parseInt(e)),
         price: myShoes.price,
         quantity: size.length,
     };
