@@ -1,15 +1,14 @@
-import { useEffect } from "react";
-import { useSelector } from "react-redux";
+import React,{ useEffect } from "react";
 import s from "./Checkout.module.css";
 
 function MercadoPago() {
-  const { idPayment } = useSelector(state => state)
+  const  idPayment  = localStorage.getItem('idPayment')
 
-  const { cart } = useSelector(state => state)
+  const  cart  = JSON.parse(localStorage.getItem('products'))
 
   useEffect(() => {
     let script = document.createElement("script");
-
+  
     if (idPayment) {
       script = document.createElement("script"); //Crea un elemento html script
       //Agrega atributos al elemento script
@@ -18,15 +17,8 @@ function MercadoPago() {
       script.src = "https://www.mercadopago.com.ar/integrations/v1/web-payment-checkout.js";
       script.setAttributeNode(attr_data_preference);
     }
-
-    //Agrega el script como nodo hijo del elemento form
-    document.getElementById("form1").appendChild(script);
-
-    return () => {
-      //Elimina el script como nodo hijo del elemento form
-      document.getElementById("form1").removeChild(script);
-    }
-  }, [idPayment])
+    if(!document.getElementById("form1").contains(script))document.getElementById("form1").appendChild(script)
+  }, [])
 
 
   let precios = 0;
@@ -61,4 +53,4 @@ function MercadoPago() {
     </div>
   );
 }
-export default MercadoPago;
+export default React.memo(MercadoPago);

@@ -244,7 +244,7 @@ export default function rootReducer(state = initialState, action) {
             const newItem =
                 state.products &&
                 state.products.find((product) => product.id === action.payload.id);
-            const newItemSize = action.payload.size;
+            const newItemSize = action.payload.sizeNumber;
             const newQuantity = action.payload.quantity;
 
             let itemInCart = state.cart && state.cart.find((item) => item.id === newItem.id);

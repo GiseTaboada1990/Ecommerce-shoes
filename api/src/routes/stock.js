@@ -3,12 +3,10 @@ const { Product, Size, Order } = require("../db");
 const { Op } = require("sequelize")
 const router = Router();
 
-router.put("/", async (req, res) => {
-  const { idOrden } = req.body
-
+const stock =async (idOrden) => {
   try {
     const order = await Order.findByPk(idOrden, { include: [{ all: true }] })
-
+    console.log(order,'order')
     const idsOfProducts = order.detailsOrders.map(product => product.product_id)
     const soldProducts = []
 
@@ -17,7 +15,7 @@ router.put("/", async (req, res) => {
         where: { id: idsOfProducts[i] }, 
         include: [{ model: Size, where: { number: { [Op.or]: order.detailsOrders[i].sizes_sold } } }]
       })
-
+      
       const idSizes = productCopy.sizes.map(s => s.id)
 
       productCopy.removeSizes(idSizes)
@@ -37,12 +35,12 @@ router.put("/", async (req, res) => {
       soldProducts.push(productCopy);
     }
 
-    res.status(200).json(soldProducts)
+    return soldProducts
 
   } catch (error) {
     console.log(error)
-    res.status(404).json(error)
+    throw error
   }
-});
+};
 
-module.exports = router
+module.exports = {stock}

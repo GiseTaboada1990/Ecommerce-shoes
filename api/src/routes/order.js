@@ -85,10 +85,10 @@ router.get("/", async (req, res) => {
   const { email } = req.body; 
   try {
     if (!email) {
-      const result = await Order.findAll({where:{isActive:true}},{ include: [{ all: true }] })
+      const result = await Order.findAll({where:{isActive:true}},{ include: { all: true } })
       res.send(result)
     } else {
-      const result = await Order.findAll({ where: { email: email }, include: [{ all: true }] })
+      const result = await Order.findAll({ where: { email: email }, include: { all: true } })
       res.send(result)
     }
 

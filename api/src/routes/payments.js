@@ -3,7 +3,8 @@ const router = Router();
 const axios = require("axios");
 const mercadopago = require("mercadopago");
 const { ACCESS_TOKEN, API_URL, CLIENT_URL } = process.env;
-const { Order } = require('../db')
+const { Order } = require('../db');
+const { stock } = require("./stock");
 
 mercadopago.configure({
   access_token: ACCESS_TOKEN,
@@ -11,7 +12,7 @@ mercadopago.configure({
 
 router.post("/", async (req, res) => {
   const { cart, userId } = req.body;
-try {
+  try {
     const orden = (await axios.post(`${API_URL}/order`, { cart, userId })).data
     const items_ml = cart.map((p) => ({
       name: p.title,
@@ -61,8 +62,7 @@ router.get("/success/:id", async (req, res) => {
     const order = await Order.findOne({ where: { id } })
     await order.update({ status: 'realizada' })
     
-    await axios.put(`${API_URL}/stock`,{ idOrden: id })
-
+    await stock(id)
     res.redirect(`${CLIENT_URL}`);
 
   } catch (error) {
