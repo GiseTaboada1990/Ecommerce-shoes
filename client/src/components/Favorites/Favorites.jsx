@@ -14,7 +14,7 @@ export default function Favorites() {
   }, [favProducts]);
 
   const deleteProduct = (id) => {
-    dispatch(deleteOneToFav({ FavId: id}));
+    dispatch(deleteOneToFav(id));
   };
   const usuario = JSON.parse(localStorage.getItem('user'))
 
