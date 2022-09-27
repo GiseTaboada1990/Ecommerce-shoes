@@ -12,7 +12,7 @@ mercadopago.configure({
 
 router.post("/", async (req, res) => {
   const { cart, userId } = req.body;
-try {
+  try {
     const orden = (await axios.post(`${API_URL}/order`, { cart, userId })).data
     const items_ml = cart.map((p) => ({
       name: p.title,
@@ -62,10 +62,7 @@ router.get("/success/:id", async (req, res) => {
     const order = await Order.findOne({ where: { id } })
     await order.update({ status: 'realizada' })
     
-    const stock = await stock(id)
-
-    console.log('STOCK --->',stock)
-
+    await stock(id)
     res.redirect(`${CLIENT_URL}`);
 
   } catch (error) {

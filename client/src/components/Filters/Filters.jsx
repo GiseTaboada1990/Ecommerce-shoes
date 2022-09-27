@@ -4,7 +4,6 @@ import {
     filterByPrice,
     filterByCategory,
     filterBySize,
-    filterByName,
     combinationsFilter,
     combinationsFilter1,
     combinationsFilter2,
@@ -54,12 +53,7 @@ export default function Filters({ setCurrentPage }) {
     const handleInputPriceMax = (e) => {
         setPriceMax(e.target.value);
     };
-    const handleInputName = (e) => {
-        e.preventDefault();
-        // setNameFilter(e.target.value);
-        dispatch(searchBar(e.target.value))
-    };
-
+   
     const handleFilterBrand = (e) => {
         setBrandFilter(e.target.value);
         if (nameFilter !== "" && sizeFilter !== "default" && priceMin !== "" && priceMax !== "" && categoryFilter !== "default") {

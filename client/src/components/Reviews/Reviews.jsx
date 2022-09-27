@@ -5,11 +5,12 @@ import { URL } from '../../redux/actions';
 import { FaStar } from 'react-icons/fa'
 import styles from './Reviews.module.css';
 import swal from 'sweetalert';
-import { useNavigate } from 'react-router-dom'
 import { useAuth0 } from '@auth0/auth0-react';
+import { DropdownMenu, Dropdown, DropdownToggle } from 'reactstrap'
 
 function Reviews({ myShoes, closeModal }) {
   
+  const [menu, setMenu] = useState(false)
   const {isAuthenticated } = useAuth0()
   const [error, setError] = useState({})
   const [input, setInput] = useState({
@@ -17,9 +18,7 @@ function Reviews({ myShoes, closeModal }) {
     description: ''
   });
   const [reviews, setReviews] = useState([]);
-  const [openSnack, setSnack] = useState(false)
   const [hover, setHover] = useState(-1);
-  const navigate = useNavigate()
   const infoUser = JSON.parse(localStorage.getItem("user"))
   
   useEffect(() => {
@@ -74,12 +73,19 @@ function Reviews({ myShoes, closeModal }) {
     })
   };
 
-
+  const toggleMenu = () => {
+    setMenu(!menu)
+  }
   return (
     <div className="container mt-5 mb-5">
       <div className="row g-2">
         <div className="ratings">
-          {isAuthenticated && <form onSubmit={handleAddReview}>
+        {isAuthenticated && <Dropdown isOpen={menu} toggle={toggleMenu}>
+      <DropdownToggle >
+                    Añadir Reseña
+      </DropdownToggle>
+      <DropdownMenu >
+          <form onSubmit={handleAddReview}>
             {[...Array(5)].map((star, i) => {
               const ratingValue = i + 1
               return (
@@ -142,7 +148,9 @@ function Reviews({ myShoes, closeModal }) {
                 <span className={styles.error}>{error.form}</span>
               )}
             </div>
-          </form>}
+          </form>
+          </DropdownMenu>
+    </Dropdown>}
         </div>
         {reviews.length > 0 ? reviews.map((r) => (
           <div className="col-md-4">
@@ -168,6 +176,7 @@ function Reviews({ myShoes, closeModal }) {
 
       </div>
     </div>
+    
   );
 }
 export default Reviews

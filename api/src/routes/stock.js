@@ -7,7 +7,7 @@ const stock = async (idOrden) => {
 
   try {
     const order = await Order.findByPk(idOrden, { include: [{ all: true }] })
-
+    console.log(order,'order')
     const idsOfProducts = order.detailsOrders.map(product => product.product_id)
     const soldProducts = []
 
@@ -16,7 +16,7 @@ const stock = async (idOrden) => {
         where: { id: idsOfProducts[i] }, 
         include: [{ model: Size, where: { number: { [Op.or]: order.detailsOrders[i].sizes_sold } } }]
       })
-
+      
       const idSizes = productCopy.sizes.map(s => s.id)
 
       productCopy.removeSizes(idSizes)

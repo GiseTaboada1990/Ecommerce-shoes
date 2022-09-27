@@ -39,7 +39,7 @@ function ProductDetail({ id, closeModal }) {
     const shoesAdd = {
         id: id,
         title: myShoes.title,
-        size: size.map((e) => parseInt(e)),
+        sizeNumber: size.map((e) => parseInt(e)),
         price: myShoes.price,
         quantity: size.length,
     };
@@ -94,7 +94,7 @@ function ProductDetail({ id, closeModal }) {
             axios.post(`${process.env.REACT_APP_URL}/payments`, { userId: user.id, cart: [shoesAdd] })
                 .then((res) => {
                     console.log(res.data)
-                    dispatch(getIdPayment(res.data.id))
+                    localStorage.setItem('idPayment', JSON.stringify(res.data.id))
                 })
                 .catch((err) => console.log(err))
         }else{
