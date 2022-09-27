@@ -3,8 +3,7 @@ const { Product, Size, Order } = require("../db");
 const { Op } = require("sequelize")
 const router = Router();
 
-router.put("/", async (req, res) => {
-  const { idOrden } = req.body
+const stock = async (idOrden) => {
 
   try {
     const order = await Order.findByPk(idOrden, { include: [{ all: true }] })
@@ -37,12 +36,12 @@ router.put("/", async (req, res) => {
       soldProducts.push(productCopy);
     }
 
-    res.status(200).json(soldProducts)
+    return soldProducts
 
   } catch (error) {
     console.log(error)
-    res.status(404).json(error)
+    throw error
   }
-});
+}
 
-module.exports = router
+module.exports = { stock }

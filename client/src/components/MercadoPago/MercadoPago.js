@@ -38,9 +38,9 @@ function MercadoPago() {
     }
   }
   return (
-    <div>
-      <div className={s.container}>
-        <form id="form1" className={s.allContainer}>
+    <div className="mt-7">
+      <div className='d-flex flex-column justify-content-center align-items-center'>
+        <form id="form1" className='mh-50 border border-2 rounded-4 p-3 shadow-sm overflow-auto bg-white'>
           <div className={s.hijo}>
             {cart && cart.map((producto, i) => {
               return (
@@ -56,7 +56,7 @@ function MercadoPago() {
             })}
           </div>
         </form>
-        <h4 className={s.totalAPagar}>Total a pagar: ${precios}</h4>
+        <h4 className='mt-3'>Total a pagar: ${precios}</h4>
       </div>
     </div>
   );

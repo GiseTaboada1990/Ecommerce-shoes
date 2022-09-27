@@ -10,6 +10,13 @@ import ProductDetail from "../ProductDetail/ProductDetail";
 import { useAuth0 } from '@auth0/auth0-react';
 import swal from "sweetalert";
 
+Modal.defaultStyles.overlay = {
+  position: 'fixed',
+  inset: '0px',
+  zIndex: 5,
+  backdropFilter: 'blur(10px)',
+}
+
 function ProductCard({ image, title, price, id }) {
   const dispatch = useDispatch();
   const { isAuthenticated } = useAuth0()
@@ -39,10 +46,11 @@ function ProductCard({ image, title, price, id }) {
       right: "auto",
       bottom: "auto",
       transform: "translate(-50%, -50%)",
-      width: "610px",
+      width: "710px",
       height: "650px",
-      "border-radius": "10px",
-      "background": "#212121",
+      border: '2px solid #000',
+      borderRadius: "10px",
+      backgroundColor: "#fff",
     },
   };
 

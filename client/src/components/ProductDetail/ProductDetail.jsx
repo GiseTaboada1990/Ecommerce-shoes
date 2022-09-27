@@ -4,7 +4,7 @@ import { addOneToCart, cleanDetails, getDetails, getIdPayment } from '../../redu
 import styles from "./ProductDetail.module.css";
 import { useNavigate, Link } from 'react-router-dom';
 import Reviews from '../Reviews/Reviews';
-import { FaStar } from 'react-icons/fa';
+import { BsStar } from 'react-icons/bs';
 import swal from 'sweetalert'
 import { useAuth0 } from '@auth0/auth0-react';
 import axios from 'axios'
@@ -15,7 +15,7 @@ function ProductDetail({ id, closeModal }) {
     const { loginWithRedirect } = useAuth0()
     const { isAuthenticated } = useAuth0()
     const myShoes = useSelector((state) => state.details);
-    console.log('myshoes -->', myShoes)
+    // console.log('myshoes -->', myShoes)
     const navigate = useNavigate()
     const dispatch = useDispatch();
 
@@ -45,8 +45,7 @@ function ProductDetail({ id, closeModal }) {
     };
 
     const handleOnChangeSize = (e) => {
-        e.preventDefault();
-        setSize(size.concat(e.target.value));
+        setSize(size.concat(e.target.value))
     };
     const handleDeleteSizes = (e, el) => {
         e.preventDefault();
@@ -113,27 +112,29 @@ function ProductDetail({ id, closeModal }) {
                     <img
                         src={myShoes.image}
                         alt="imgShoes not found"
-                        className={`w-100 rounded-4`}
+                        className={`w-100 rounded-4 ${styles.productImage}`}
                     />
                     <br />
-                    <div>
+                    <div className='d-flex justify-content-center'>
                     {[...Array(5)].map((star, i) => {
                         const ratingValue = i + 1
-                        return <FaStar
-                            color={ratingValue <= promedio ? '#ffc107' : '#e4e5e9'}
+                        return <BsStar
+                            key={i}
+                            className='mx-1'
+                            color={ratingValue <= promedio ? '#ffc107' : '#000'}
                             size={30} />
                     })}
                     </div>
-                    <div className={`w-100 ${styles.divContent}`}>
+                    <div className={`w-100 h-100 d-flex flex-wrap justify-content-around align-items-end border border-2 mt-2 p-3`}>
                         <h1 className={styles.title}>{myShoes.title}</h1>
-                        <div className={styles.sizePriceCont}>
+                        <div className={`w-100 text-black ${styles.fontFamily}`}>
                             <div className={`w-100 d-flex mb-3`}>
-                                <h1 className={styles.size}>Talle: </h1>
+                                <h1 className={`me-2 fs-3 text-black`}>Talle: </h1>
                                 <select
                                     className={styles.selectSize}
                                     onChange={(e) => {handleOnChangeSize(e)}}
                                 >
-                                    <option value="" disabled>Seleccione un talle</option>
+                                    <option value={"Seleccione un talle"} disabled>...</option>
                                     {myShoes.sizes &&
                                         myShoes.sizes.map((s, i) => (
                                             <option key={i} value={s.number}>
@@ -156,10 +157,8 @@ function ProductDetail({ id, closeModal }) {
                                     )) : null}
                             </div>
                             <div className={styles.cantYPrecio}>
-                                <h4>
-                                    Cantidad: {size.length}
-                                </h4>
-                                <h3 className={styles.price}>${size.length ? myShoes.price * size.length : myShoes.price}</h3>
+                                <h4 className='mt-2 mb-4 text-black'>Cantidad: {size.length}</h4>
+                                <h3 className={`text-black ${styles.fontFamily}`}>${size.length ? myShoes.price * size.length : myShoes.price}</h3>
                             </div>
                         </div>
                         <div className={styles.buttons}>

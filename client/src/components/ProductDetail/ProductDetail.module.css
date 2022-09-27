@@ -41,16 +41,14 @@
   font-weight: 400;
   font-size: 2rem;
   line-height: 100%;
-  padding-left: 5px;
+  margin: 10px 0 20px;
   text-transform: uppercase;
-  color: white;
+  color: black;
 }
 
-.imagen {
-  left: 2rem;
-  border-radius: 10px;
-  width: 400px;
-  height: 210px;
+.productImage {
+  object-fit: contain;
+  height: 300px;
 }
 
 .select {
@@ -91,8 +89,11 @@
   appearance: none;
 }
 
+.fontFamily {
+  font-family: "Inter" !important;
+}
+
 .price {
-  font-family: "Inter";
   font-style: normal;
   font-weight: 600;
   font-size: 30.0714px;
@@ -127,14 +128,13 @@
 }
 
 .selectSize{
-  border: none;
+  border: 1px solid #000000;
   border-bottom-style: solid;
   margin-right: 10px;
   outline: 0px;
   width: 60px;
-  background: #212121;
-  color: white;
   height: 36px;
+  color: #000000;
 }
 
 .sizeYSelect{
