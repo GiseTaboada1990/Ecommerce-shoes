@@ -73,7 +73,8 @@ export default function Cart() {
   const handlePayment = () => {
     axios.post(`${process.env.REACT_APP_URL}/payments`, { userId: user.id, cart })
       .then((res) => {
-        localStorage.setItem('idPayment', JSON.stringify(res.data.id))
+        //localStorage.setItem('idPayment', JSON.stringify(res.data.id))
+        dispatch(getIdPayment(res.data.id))
       })
       .catch((err) => console.log(err))
     

@@ -94,7 +94,8 @@ function ProductDetail({ id, closeModal }) {
             axios.post(`${process.env.REACT_APP_URL}/payments`, { userId: user.id, cart: [shoesAdd] })
                 .then((res) => {
                     console.log(res.data)
-                    localStorage.setItem('idPayment', JSON.stringify(res.data.id))
+                    //localStorage.setItem('idPayment', JSON.stringify(res.data.id))
+                    dispatch(getIdPayment(res.data.id))
                 })
                 .catch((err) => console.log(err))
         }else{
