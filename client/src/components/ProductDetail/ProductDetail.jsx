@@ -5,6 +5,7 @@ import styles from "./ProductDetail.module.css";
 import { useNavigate, Link } from 'react-router-dom';
 import Reviews from '../Reviews/Reviews';
 import { BsStar } from 'react-icons/bs';
+import { FaStar } from 'react-icons/fa';
 import swal from 'sweetalert'
 import { useAuth0 } from '@auth0/auth0-react';
 import axios from 'axios'
@@ -118,11 +119,19 @@ function ProductDetail({ id, closeModal }) {
                     <div className='d-flex justify-content-center'>
                     {[...Array(5)].map((star, i) => {
                         const ratingValue = i + 1
-                        return <BsStar
-                            key={i}
-                            className='mx-1'
-                            color={ratingValue <= promedio ? '#ffc107' : '#000'}
-                            size={30} />
+                        return ratingValue <= promedio ? 
+                            <FaStar
+                                key={i}
+                                className='mx-1'
+                                color='#ffc107'
+                                size={30} />
+                            :
+                            <BsStar
+                                key={i}
+                                className='mx-1'
+                                color='#000'
+                                size={30} />
+                            
                     })}
                     </div>
                     <div className={`w-100 h-100 d-flex flex-wrap justify-content-around align-items-end border border-2 mt-2 p-3`}>

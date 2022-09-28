@@ -181,17 +181,17 @@ export default function Filters({ setCurrentPage }) {
     }
 
     return (
-            <Dropdown isOpen={menu} toggle={toggleMenu} className='w-25 px-2'>
-                <DropdownToggle color='indigo' className={`btn-outline-dark`}>
+            <div className={`${menu ? 'w-20' : 'w-10' } px-3`}>
+                <button className={`btn-outline-dark`} onClick={() => toggleMenu()}>
                     Filtrar
-                </DropdownToggle>
-                <DropdownMenu className={`w-100 bg-light px-2 fs-5`}>
+                </button>
+                <div className={`${menu ? 'd-block' : 'd-none'} w-100 bg-light  fs-6`}>
                     {menu &&
                     <>
                     <select 
                         onChange={(e) => handleFilterBrand(e)} 
                         value={brandFilter} 
-                        className={`w-100 border-1 rounded-4 px-3 py-3 my-1 bg-pink-800  `}
+                        className={`w-100 border-1 rounded-4 px-3 py-2 my-1 bg-pink-800  `}
                     >
                         <option value={"default"} disabled>Marcas</option>
                         { allBrands && allBrands.map((brand) => <option key={brand.id}>{ brand.name }</option> )}
@@ -200,7 +200,7 @@ export default function Filters({ setCurrentPage }) {
                     <select
                         onChange={(e) => handleCategories(e)}
                         value={categoryFilter}
-                        className={`w-100 border-1 rounded-4 px-3 py-3 my-1 `}
+                        className={`w-100 border-1 rounded-4 px-3 py-2 my-1 `}
                     >
                         <option value={"default"} disabled>Categorías</option>
                         <option value="Zapatillas">Zapatillas</option>
@@ -216,7 +216,7 @@ export default function Filters({ setCurrentPage }) {
                     <select
                         onChange={(e) => handleSize(e)}
                         value={sizeFilter}
-                        className={`w-100 border-1 rounded-4 px-3 py-3 my-1 `}
+                        className={`w-100 border-1 rounded-4 px-3 py-2 my-1 `}
                     >
                         <option value={"default"} disabled>
                             Talles
@@ -232,28 +232,28 @@ export default function Filters({ setCurrentPage }) {
                         <option value={43}>43</option>
                     </select>
                     <br />
-                    <form onSubmit={handleFilterByPrice}>
+                    <form onSubmit={handleFilterByPrice} className='d-flex justify-content-between'>
                         <input
                             value={priceMin}
                             type="search"
                             onChange={(e) => handleInputPriceMin(e)}
                             placeholder="Precio min."
-                            className={`w-35 form-control-sm fs-5 border-1 rounded-3 me-1 py-2`}
+                            className={`w-40 form-control-sm fs-6 border-1 rounded-3 py-0`}
                         />
                         <input
                             value={priceMax}
                             type="search"
                             onChange={(e) => handleInputPriceMax(e)}
                             placeholder="Precio max."
-                            className={`w-35 form-control-sm fs-5 border-1 rounded-3 me-1 py-2`}
+                            className={`w-40 form-control-sm fs-6 border-1 rounded-3 py-0`}
                         />
-                        <button type="submit" className={`rounded-circle px-3 py-2 ms-3`}>
+                        <button type="submit" className={`rounded-circle px-2 py-1`}>
                             ➤
                         </button>
                     </form>
                     </>
                     }
-                </DropdownMenu>
-            </Dropdown>
+                </div>
+            </div>
     )
 }
